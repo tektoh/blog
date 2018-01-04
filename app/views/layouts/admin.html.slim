@@ -3,6 +3,9 @@ html
   head
     meta[charset="utf-8"]
     meta[name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"]
+    - if current_site.favicon.attached?
+      link[rel="icon" type="#{current_site.favicon.content_type}" href="#{current_site.favicon_url('16x16')}" sizes="16x16"]
+      link[rel="icon" type="#{current_site.favicon.content_type}" href="#{current_site.favicon_url('32x32')}" sizes="32x32"]
     title = current_site.name
     = stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'
     = stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
@@ -55,25 +58,45 @@ html
                 = current_user.role_i18n
 
           ul.sidebar-menu[data-widget="tree"]
-            li.treeview
-              a[href="#"]
-                i.fa.fa-users
-                '
-                span ユーザー
-                span.pull-right-container
-                  i.fa.fa-angle-left.pull-right
-              ul.treeview-menu
-                li
-                  = link_to admin_users_path do
-                    i.fa.fa-circle-o
-                    '
-                    | ユーザー
-                - if policy(:invitation).index?
+            - if policy(:taxonomy).edit?
+              li
+                = link_to admin_categories_path do
+                  i.fa.fa-folder-open
+                  '
+                  span カテゴリー
+
+            - if policy(:invitation).index?
+              li.treeview
+                a[href="#"]
+                  i.fa.fa-users
+                  '
+                  span ユーザー
+                  span.pull-right-container
+                    i.fa.fa-angle-left.pull-right
+                ul.treeview-menu
+                  li
+                    = link_to admin_users_path do
+                      i.fa.fa-circle-o
+                      '
+                      | ユーザー
                   li
                     = link_to admin_invitations_path do
                       i.fa.fa-circle-o
                       '
                       | 招待
+            - else
+              li
+                = link_to admin_users_path do
+                  i.fa.fa-circle-o
+                  '
+                  | ユーザー
+
+            - if policy(:site).edit?
+              li
+                = link_to edit_admin_site_path do
+                  i.fa.fa-cog
+                  '
+                  span 設定
 
       main.content-wrapper
         section.content-header

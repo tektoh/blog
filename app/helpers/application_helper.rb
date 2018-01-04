@@ -1,17 +1,17 @@
 module ApplicationHelper
   def default_meta_tags(site = nil)
-    @site = site || current_site
+    @_site = site || current_site
     {
-      site: @site.name,
+      site: @_site.name,
       reverse: true,
       title: nil,
-      description: @site.description,
+      description: @_site.description,
       canonical: request.original_url,
       og: {
         title: :title,
         type: 'website',
         url: request.original_url,
-        image: @site.og_image.variant(resize: '1200x630'),
+        image: @_site.og_image.variant(resize: '1200x630'),
         site_name: :site,
         description: :description,
         locale: 'ja_JP'
