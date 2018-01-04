@@ -1,0 +1,12 @@
+ja:
+  enums:
+    user:
+      role:
+        writer: 'ライター'
+        editor: '編集者'
+        admin: '管理者'
+    invitation:
+      role:
+        writer: 'ライター'
+        editor: '編集者'
+        admin: '管理者'

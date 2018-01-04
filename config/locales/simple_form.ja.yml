@@ -31,4 +31,6 @@ ja:
     #     age: 'Select your age'
     labels:
       defaults:
+        avatar: 'アバター'
         name: '名前'
+        role: '役割'

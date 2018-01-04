@@ -4,17 +4,23 @@ ja:
       user: 'ユーザー'
     attributes:
       user:
-        email: 'Eメール'
+        id: 'ID'
+        name: '名前'
         password: 'パスワード'
         password_confirmation: 'パスワード再入力'
+        role: '役割'
+        created_at: '登録日'
+      invitation:
+        id: 'ID'
+        name: '名前'
+        role: '役割'
+        created_at: '作成日'
+        expires_at: '期限'
+        user_name: '招待者'
     errors:
       models:
         user:
           attributes:
-            email:
-              blank: 'メールアドレスを入力してください'
-              invalid_email_address: 'メールアドレスが正しくありません'
-              not_found: 'メールアドレスが登録されていません'
             password:
               blank: 'パスワードを入力してください'
               invalid: 'パスワードに誤りがあります'

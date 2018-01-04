@@ -1,0 +1,90 @@
+doctype html
+html
+  head
+    meta[charset="utf-8"]
+    meta[name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"]
+    title = current_site.name
+    = stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'
+    = stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
+    = stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.2/css/AdminLTE.min.css'
+    = stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.2/css/skins/skin-black.min.css'
+    = stylesheet_link_tag 'admin'
+    = csrf_meta_tags
+
+  body.hold-transition.skin-black.sidebar-mini
+    .wrapper
+      header.main-header
+        = link_to admin_dashboard_path, class: 'logo' do
+          span.logo-lg
+            b = current_site.name
+          span.logo-mini
+            b = current_site.name[0]
+
+        nav.navbar.navbar-static-top
+          = link_to '#', class: 'sidebar-toggle', data: { toggle: 'push-menu' } do
+            span.sr-only Toggle navigation
+
+          .navbar-custom-menu
+            ul.nav.navbar-nav
+              li.dropdown.user-menu
+                = link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do
+                  = image_tag current_user.avatar_url(:icon), class: 'user-image'
+                  span.hidden-xs = current_user.name
+                ul.dropdown-menu
+                  li.user-header
+                    = image_tag current_user.avatar_url(:icon), class: 'img-circle'
+                    p
+                      = current_user.name
+                      small = current_user.role_i18n
+                  li.user-body
+                    .row
+                      .col-xs-12.text-center
+                        = link_to 'プロフィール', admin_user_path(current_user)
+                  li.user-footer
+                    = link_to 'ログアウト', admin_logout_path, class: %w[btn btn-default btn-flat], method: :delete
+
+      aside.main-sidebar
+        section.sidebar
+          .user-panel
+            .pull-left.image
+              = image_tag current_user.avatar_url(:icon), class: 'img-circle'
+            .pull-left.info
+              p = current_user.name
+              = link_to admin_user_path(current_user) do
+                i.fa.fa-circle.text-success
+                = current_user.role_i18n
+
+          ul.sidebar-menu[data-widget="tree"]
+            li.treeview
+              a[href="#"]
+                i.fa.fa-users
+                '
+                span ユーザー
+                span.pull-right-container
+                  i.fa.fa-angle-left.pull-right
+              ul.treeview-menu
+                li
+                  = link_to admin_users_path do
+                    i.fa.fa-circle-o
+                    '
+                    | ユーザー
+                - if policy(:invitation).index?
+                  li
+                    = link_to admin_invitations_path do
+                      i.fa.fa-circle-o
+                      '
+                      | 招待
+
+      main.content-wrapper
+        section.content-header
+          h1
+            = yield 'content-header'
+          == breadcrumbs style: :ol, class: 'breadcrumb'
+
+        section.content
+          = yield
+
+    = javascript_include_tag 'admin'
+    = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'
+    = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.2/js/adminlte.min.js'
+    = yield 'scripts'

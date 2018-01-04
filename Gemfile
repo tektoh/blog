@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '5.1.3'
+gem 'rails', '5.2.0.beta2'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'therubyracer'
 
@@ -35,16 +35,9 @@ gem 'redis-rails'
 # Seeds
 gem 'seed-fu'
 
-# Upload
-gem 'carrierwave'
-gem 'carrierwave-data-uri'
-gem 'fog', require: 'fog/aws'
-gem 'mini_magick'
-
-# Search/Pagination
+# Pagination
 gem 'kaminari'
 gem 'kaminari-i18n'
-gem 'ransack'
 
 # Breadcrumbs
 gem 'gretel'
@@ -59,6 +52,7 @@ gem 'paranoia_uniqueness_validator'
 
 # Model
 gem 'active_hash'
+gem 'enum_help'
 gem 'virtus'
 
 # Validation
@@ -67,6 +61,10 @@ gem 'validates_email_format_of'
 
 # Decorator
 gem 'active_decorator'
+
+# Storage
+gem 'aws-sdk-s3', require: false
+gem 'mini_magick'
 
 # Application server
 gem 'puma'
@@ -120,7 +118,7 @@ group :development, :test do
   gem 'tapp'
 
   # Table/Schema
-  gem 'annotate'
+  gem 'annotate', github: 'ctran/annotate_models', branch: 'develop'
   gem 'migration_comments'
 
   # Deploy

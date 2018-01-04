@@ -1,7 +1,6 @@
-User.seed(:id,
-  { id: 1,
-    name: 'テスト太郎',
-    email: 'user@example.com',
-    crypted_password: User.encrypt('12345678')
-  },
+User.seed(
+  :id,
+  { id: 1, name: 'admin', crypted_password: User.encrypt('password'), role: :admin },
+  { id: 2, name: 'editor', crypted_password: User.encrypt('password'), role: :editor },
+  { id: 3, name: 'writer', crypted_password: User.encrypt('password'), role: :writer },
 )

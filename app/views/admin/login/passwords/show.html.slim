@@ -1,0 +1,7 @@
+p.login-box-msg Sign in to start your session
+= simple_form_for @user, url: admin_login_password_path do |f|
+  = f.input :name, as: :hidden
+  = f.input :password, label: false, placeholder: 'Password'
+  .row
+    .col-xs-offset-8.col-xs-4
+      = f.button :submit, 'ログイン', class: %w[btn btn-primary btn-block btn-flat]

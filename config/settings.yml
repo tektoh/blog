@@ -1,28 +1,13 @@
-sitename: Start Dash
+sitename: Blog
 site:
-  name: Start Dash
-  page_title: Start Dash
-  page_description: Ruby on Rails 雛形
-  page_keywords:
-    - Ruby
-    - Rails
+  name: Blog
+  page_title: Blog
+  page_description: Blog
   meta:
     ogp:
       type: website
       image_path: https://dummyimage.com/1200x630/888/fff
-carrierwave:
-  fog_credentials:
-    provider: 'AWS'
-    aws_access_key_id: <%= ENV.fetch('AWS_ACCESS_KEY_ID') { '' } %>
-    aws_secret_access_key: <%= ENV.fetch('AWS_SECRET_ACCESS_KEY') { '' } %>
-    region: ap-northeast-1
-  fog_public: true
-  fog_directory: start-dash-backet
-  fog_attributes:
-    Cache-Control: max-age=<%= 365.days %>
-  #asset_host:
 session_store:
-  servers: <%= ENV.fetch('REDIS_URL') { '' } %>
   key: _session
   expire_after: <%= 1.day %>
 sorcery:

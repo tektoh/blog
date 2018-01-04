@@ -1,0 +1,42 @@
+= content_for 'content-header' do
+  | ユーザー
+
+- breadcrumb :admin_users
+
+.row
+  .col-md-9
+    .box.box-primary
+      .box-body.table-responsive.no-padding
+        table.table.table-hover
+          thead
+            tr
+              th = User.human_attribute_name(:id)
+              th = User.human_attribute_name(:name)
+              th = User.human_attribute_name(:role)
+              th = User.human_attribute_name(:created_at)
+              th
+          tbody
+            - @users.each do |user|
+              tr
+                td = user.id
+                td = link_to user.name, admin_user_path(user)
+                td = user.role
+                td = l(user.created_at)
+                td
+                  - if policy(user).destroy?
+                    = link_to admin_user_path(user), method: :delete, data: { confirm: "#{user.name}を削除してもよろしいですか？" } do
+                      i.fa.fa-trash
+                      '
+                      | 削除
+
+  - if policy(:user).new?
+    .col-md-3
+      .box
+        .box-header
+          h3.box-title 新規作成
+        .box-body
+          = link_to new_admin_user_path, class: %w[btn btn-primary btn-block] do
+            i.fa.fa-user
+            '
+            | ユーザーを作成する
+

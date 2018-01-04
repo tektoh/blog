@@ -1,19 +1,25 @@
 Rails.application.routes.draw do
+  namespace :admin do
+  end
   if Rails.env.development?
     get '/login_as/:user_id', to: 'development/sessions#login_as'
     mount LetterOpenerWeb::Engine, at: '/letter_opener'
   end
 
-  resource :users do
-    resource :sign_up, controller: 'users/sign_up', only: %i[show create]
-    resource :sign_in, controller: 'users/sign_in', only: %i[show create]
-    resource :sign_out, controller: 'users/sign_out', only: %i[destroy]
-    resources :authentications, path: 'auth', param: :provider, controller: 'users/authentications', only: %i[show destroy] do
-      member do
-        get :callback
-      end
+  namespace :admin do
+    namespace :login do
+      resource :identifier, only: %i[show create]
+      resource :password, only: %i[show create]
+    end
+    resource :logout, only: %i[destroy]
+    resource :dashboard, only: %i[show]
+    resources :users
+    resources :invitations, param: :uuid, only: %i[index new create destroy] do
+      resource :register, only: %i[show create]
     end
   end
+
+  get '/admin' => redirect('/admin/login/identifier')
 
   root 'home#index'
 end

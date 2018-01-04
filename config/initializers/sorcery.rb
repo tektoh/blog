@@ -104,13 +104,13 @@ Rails.application.config.sorcery.configure do |config|
   # config.twitter.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=twitter"
   # config.twitter.user_info_mapping = {:email => "screen_name"}
   #
-  config.facebook.key = Settings.sorcery.facebook.key
-  config.facebook.secret = Settings.sorcery.facebook.secret
-  config.facebook.callback_url = Settings.sorcery.facebook.callback_url
-  config.facebook.user_info_mapping = { name: 'name', email: 'email' }
-  config.facebook.access_permissions = %w[public_profile email]
-  config.facebook.display = 'page'
-  config.facebook.api_version = 'v2.8'
+  # config.facebook.key = Settings.sorcery.facebook.key
+  # config.facebook.secret = Settings.sorcery.facebook.secret
+  # config.facebook.callback_url = Settings.sorcery.facebook.callback_url
+  # config.facebook.user_info_mapping = { name: 'name', email: 'email' }
+  # config.facebook.access_permissions = %w[public_profile email]
+  # config.facebook.display = 'page'
+  # config.facebook.api_version = 'v2.8'
   #
   # config.github.key = ""
   # config.github.secret = ""
@@ -390,7 +390,7 @@ Rails.application.config.sorcery.configure do |config|
     # Default: `nil`
     #
     # user.authentications_class =
-    user.authentications_class = Authentication
+    # user.authentications_class = Authentication
 
     # User's identifier in authentications class.
     # Default: `:user_id`
