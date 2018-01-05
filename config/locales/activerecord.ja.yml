@@ -27,6 +27,13 @@ ja:
         name: 'タグ名'
         slug: 'スラッグ'
         created_at: '作成日'
+      author:
+        id: 'ID'
+        name: '著者名'
+        slug: 'スラッグ'
+        description: 'プロフィール'
+        avatar: 'アバター'
+        created_at: '作成日'
     errors:
       models:
         user:

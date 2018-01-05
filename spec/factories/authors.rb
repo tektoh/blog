@@ -16,5 +16,8 @@
 #  index_taxonomies_on_type  (type)
 #
 
-class Tag < Taxonomy
+FactoryBot.define do
+  factory :author do
+    
+  end
 end

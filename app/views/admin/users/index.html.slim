@@ -11,6 +11,7 @@
           thead
             tr
               th = User.human_attribute_name(:id)
+              th
               th = User.human_attribute_name(:name)
               th = User.human_attribute_name(:role)
               th = User.human_attribute_name(:created_at)
@@ -19,6 +20,7 @@
             - @users.each do |user|
               tr
                 td = user.id
+                td = image_tag user.avatar_url(:icon), class: 'image-icon-xs'
                 td = link_to user.name, admin_user_path(user)
                 td = user.role
                 td = l(user.created_at)

@@ -45,3 +45,8 @@ ja:
       tag:
         name: 'タグ名'
         slug: 'スラッグ'
+      author:
+        name: '著者名'
+        slug: 'スラッグ'
+        description: 'プロフィール'
+        avatar: 'アバター'

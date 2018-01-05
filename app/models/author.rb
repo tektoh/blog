@@ -16,5 +16,8 @@
 #  index_taxonomies_on_type  (type)
 #
 
-class Tag < Taxonomy
+class Author < Taxonomy
+  has_one_attached :avatar
+
+  validates :avatar, attachment: { purge: true, content_type: %r{\Aimage/(png|jpeg)\Z}, maximum: 10485760 }
 end

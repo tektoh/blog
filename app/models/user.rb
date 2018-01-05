@@ -13,7 +13,7 @@
 # Indexes
 #
 #  index_users_on_deleted_at  (deleted_at)
-#  index_users_on_name        (name) UNIQUE
+#  index_users_on_name        (name)
 #
 
 class User < ApplicationRecord

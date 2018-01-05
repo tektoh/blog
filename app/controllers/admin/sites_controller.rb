@@ -10,13 +10,9 @@ class Admin::SitesController < ApplicationController
   def update
     authorize(@site)
 
-    @site.attributes = site_params
-
-    if @site.valid?
-      @site.save!
+    if @site.update(site_params)
       redirect_to edit_admin_site_path
     else
-      ap @site.errors
       render :edit
     end
   end

@@ -69,6 +69,11 @@ html
                   i.fa.fa-tag
                   '
                   span タグ
+              li
+                = link_to admin_authors_path do
+                  i.fa.fa-pencil
+                  '
+                  span 著者
 
             - if policy(:invitation).index?
               li.treeview

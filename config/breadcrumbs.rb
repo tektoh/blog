@@ -76,3 +76,13 @@ crumb :edit_admin_tag do |tag|
   link 'タグ編集', edit_admin_tag_path(tag)
   parent :admin_tags
 end
+
+crumb :admin_authors do
+  link '著者', admin_authors_path
+  parent :admin_dashboard
+end
+
+crumb :edit_admin_author do |author|
+  link '著者編集', edit_admin_author_path(author)
+  parent :admin_authors
+end

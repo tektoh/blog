@@ -36,7 +36,6 @@ ActiveRecord::Schema.define(version: 2018_01_04_142338) do
   create_table "invitations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "uuid", null: false
     t.string "name", null: false
-    t.string "crypted_password"
     t.integer "role", default: 0
     t.bigint "user_id"
     t.datetime "expires_at", null: false
@@ -59,6 +58,7 @@ ActiveRecord::Schema.define(version: 2018_01_04_142338) do
     t.string "type"
     t.string "name"
     t.string "slug"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_taxonomies_on_slug"
@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 2018_01_04_142338) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
-    t.index ["name"], name: "index_users_on_name", unique: true
+    t.index ["name"], name: "index_users_on_name"
   end
 
 end

@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resource :site, only: %i[edit update]
     resources :categories, only: %i[index create edit update destroy]
     resources :tags, only: %i[index create edit update destroy]
+    resources :authors, only: %i[index create edit update destroy]
   end
 
   get '/admin' => redirect('/admin/login/identifier')
