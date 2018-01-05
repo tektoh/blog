@@ -72,7 +72,7 @@ crumb :admin_tags do
   parent :admin_dashboard
 end
 
-crumb :edit_admin_tags do |tag|
-  link 'タグ', edit_admin_tag_path(tag)
+crumb :edit_admin_tag do |tag|
+  link 'タグ編集', edit_admin_tag_path(tag)
   parent :admin_tags
 end

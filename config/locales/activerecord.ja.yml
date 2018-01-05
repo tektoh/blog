@@ -22,6 +22,11 @@ ja:
         name: 'カテゴリー名'
         slug: 'スラッグ'
         created_at: '作成日'
+      tag:
+        id: 'ID'
+        name: 'タグ名'
+        slug: 'スラッグ'
+        created_at: '作成日'
     errors:
       models:
         user:

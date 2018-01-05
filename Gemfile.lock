@@ -85,8 +85,6 @@ GEM
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
     bindex (0.5.0)
-    binding_of_caller (0.7.3)
-      debug_inspector (>= 0.0.1)
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
@@ -157,7 +155,6 @@ GEM
       dry-validation (>= 0.10.4)
     crass (1.0.3)
     database_cleaner (1.6.2)
-    debug_inspector (0.0.3)
     deep_merge (1.1.1)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
@@ -315,9 +312,6 @@ GEM
       yard (~> 0.9)
     pry-rails (0.3.6)
       pry (>= 0.10.4)
-    pry-stack_explorer (0.4.9.2)
-      binding_of_caller (>= 0.7)
-      pry (>= 0.9.11)
     public_suffix (3.0.1)
     puma (3.11.0)
     pundit (1.1.0)
@@ -606,7 +600,6 @@ DEPENDENCIES
   pry-byebug
   pry-doc
   pry-rails
-  pry-stack_explorer
   puma
   pundit
   rails (= 5.2.0.beta2)

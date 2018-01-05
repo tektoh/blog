@@ -42,3 +42,6 @@ ja:
       category:
         name: 'カテゴリー名'
         slug: 'スラッグ'
+      tag:
+        name: 'タグ名'
+        slug: 'スラッグ'

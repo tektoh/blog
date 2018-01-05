@@ -17,5 +17,5 @@
 
 class Taxonomy < ApplicationRecord
   validates :name, presence: true, uniqueness: { scope: :type }, length: { maximum: 16 }
-  validates :slug, presence: true, uniqueness: { scope: :type }, length: { maximum: 16 }, format: { with: /\A(?=.*[a-z])[a-z\d_]+\Z/i, message: '英数字で入力してください' }
+  validates :slug, presence: true, uniqueness: { scope: :type }, length: { maximum: 16 }, slug_format: true
 end

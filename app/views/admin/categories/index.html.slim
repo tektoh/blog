@@ -4,12 +4,6 @@
 - breadcrumb :admin_categories
 
 .row
-  .col-md-3
-    .box
-      .box-header
-        h3.box-title 新規作成
-      = render 'form', category: @category
-
   .col-md-9
     .box.box-primary
       .box-body.table-responsive.no-padding
@@ -36,3 +30,9 @@
                     i.fa.fa-trash
                     '
                     | 削除
+
+  .col-md-3
+    .box
+      .box-header
+        h3.box-title 新規作成
+      = render 'form', category: @category

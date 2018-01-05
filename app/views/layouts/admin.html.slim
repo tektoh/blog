@@ -64,6 +64,11 @@ html
                   i.fa.fa-folder-open
                   '
                   span カテゴリー
+              li
+                = link_to admin_tags_path do
+                  i.fa.fa-tag
+                  '
+                  span タグ
 
             - if policy(:invitation).index?
               li.treeview
