@@ -1,0 +1,40 @@
+= content_for 'content-header' do
+  = @article.title
+
+- breadcrumb :edit_admin_article, @article
+
+.row
+  .col-md-8
+    ruby:
+      level = 0
+    = render 'admin/articles/insert_block', level: 0
+
+  .col-md-4
+    .box.box-solid.box-info
+      .box-header
+        h3.box-title 情報
+
+      = simple_form_for @article, url: admin_article_path(@article.uuid) do |f|
+        .box-body
+          - if @article.draft?
+            .form-group
+              label.control-label = Article.human_attribute_name(:state)
+              .form-control = @article.state_i18n
+          - else
+            = f.input :state, collect: Article.states_i18n.invert, include_blank: false
+
+          = f.input :published_at, as: :date_time_picker
+          = f.input :title
+          = f.input :slug
+          = f.input :eye_cache, as: :file
+          - if @article.eye_cache.attached?
+            = image_tag @article.eye_cache_url(:thumb), class: 'img-thumbnail'
+            br
+            br
+          = f.input :description, input_html: { class: 'js-autosize' }
+          = f.input :author_id, as: :select2, collection: Author.pluck(:name, :id)
+          = f.input :category_id, as: :select2, collection: Category.pluck(:name, :id)
+          = f.input :tag_ids, as: :select2, collection: Tag.pluck(:name, :id), include_blank: false, input_html: { multiple: true }
+
+        .box-footer
+          = f.button :submit, class: %w[btn btn-primary]

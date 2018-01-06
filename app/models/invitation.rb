@@ -36,11 +36,11 @@ class Invitation < ApplicationRecord
 
   def valid_unique_username?
     if User.exists?(name: name)
-      errors.add(:name, 'すでに登録されています')
+      errors.add(:name, 'は登録されています')
       false
-    end
-      true
     else
+      true
+    end
   end
 
   def expired?

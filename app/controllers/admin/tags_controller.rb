@@ -1,34 +1,34 @@
 class Admin::TagsController < ApplicationController
   layout 'admin'
 
+  before_action :set_tags, only: %i[index]
   before_action :set_tag, only: %i[edit update destroy]
 
   def index
-    authorize(:taxonomy)
+    authorize(Tag)
 
-    @tags = Tag.all.order(:slug)
     @tag = Tag.new
   end
 
   def create
-    authorize(:taxonomy)
+    authorize(Tag)
 
     @tag = Tag.new(tag_params)
 
     if @tag.save
       redirect_to admin_tags_path
     else
-      @tags = Tag.all.order(:slug)
+      set_tags
       render :index
     end
   end
 
   def edit
-    authorize(:taxonomy)
+    authorize(@tag)
   end
 
   def update
-    authorize(:taxonomy)
+    authorize(@tag)
 
     if @tag.update(tag_params)
       redirect_to admin_tags_path
@@ -38,7 +38,7 @@ class Admin::TagsController < ApplicationController
   end
 
   def destroy
-    authorize(:taxonomy)
+    authorize(@tag)
 
     @tag.destroy
 
@@ -53,5 +53,9 @@ class Admin::TagsController < ApplicationController
 
   def set_tag
     @tag = Tag.find(params[:id])
+  end
+
+  def set_tags
+    @tags = Tag.all.order(:slug)
   end
 end

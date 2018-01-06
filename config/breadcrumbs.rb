@@ -86,3 +86,18 @@ crumb :edit_admin_author do |author|
   link '著者編集', edit_admin_author_path(author)
   parent :admin_authors
 end
+
+crumb :admin_articles do
+  link '記事', admin_articles_path
+  parent :admin_dashboard
+end
+
+crumb :new_admin_article do
+  link '記事作成', new_admin_article_path
+  parent :admin_articles
+end
+
+crumb :edit_admin_article do |article|
+  link '記事編集', edit_admin_article_path(article.uuid)
+  parent :admin_articles
+end

@@ -4,19 +4,23 @@ class Admin::UsersController < ApplicationController
   before_action :set_user, only: %i[show update destroy]
 
   def index
+    authorize(User)
+
     @users = User.all.order(:id)
   end
 
-  def show; end
+  def show
+    authorize(@user)
+  end
 
   def new
-    authorize(:user)
+    authorize(User)
 
     @user = User.new
   end
 
   def create
-    authorize(:user)
+    authorize(User)
 
     @user = User.new(user_params)
 

@@ -21,6 +21,10 @@ Rails.application.routes.draw do
     resources :categories, only: %i[index create edit update destroy]
     resources :tags, only: %i[index create edit update destroy]
     resources :authors, only: %i[index create edit update destroy]
+    resources :articles, param: :uuid, only: %i[index new create edit update destroy] do
+      resource :preview, only: %i[show]
+      resource :publish, only: %i[update]
+    end
   end
 
   get '/admin' => redirect('/admin/login/identifier')

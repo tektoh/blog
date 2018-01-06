@@ -11,6 +11,9 @@ html
     = stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
     = stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.2/css/AdminLTE.min.css'
     = stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.2/css/skins/skin-black.min.css'
+    = stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css'
+    = stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.css'
+    = stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.2/css/alt/AdminLTE-select2.min.css'
     = stylesheet_link_tag 'admin'
     = csrf_meta_tags
 
@@ -58,24 +61,34 @@ html
                 = current_user.role_i18n
 
           ul.sidebar-menu[data-widget="tree"]
-            - if policy(:taxonomy).edit?
+            li
+              = link_to admin_articles_path do
+                i.fa.fa-file
+                '
+                span 記事
+
+            - if policy(Category).index?
               li
                 = link_to admin_categories_path do
                   i.fa.fa-folder-open
                   '
                   span カテゴリー
+
+            - if policy(Tag).index?
               li
                 = link_to admin_tags_path do
                   i.fa.fa-tag
                   '
                   span タグ
+
+            - if policy(Author).index?
               li
                 = link_to admin_authors_path do
                   i.fa.fa-pencil
                   '
                   span 著者
 
-            - if policy(:invitation).index?
+            - if policy(Invitation).index?
               li.treeview
                 a[href="#"]
                   i.fa.fa-users
@@ -101,7 +114,7 @@ html
                   '
                   | ユーザー
 
-            - if policy(:site).edit?
+            - if policy(current_site).edit?
               li
                 = link_to edit_admin_site_path do
                   i.fa.fa-cog
@@ -115,9 +128,16 @@ html
           == breadcrumbs style: :ol, class: 'breadcrumb'
 
         section.content
+          = render 'layouts/flash_message'
           = yield
 
     = javascript_include_tag 'admin'
     = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'
     = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.2/js/adminlte.min.js'
+    = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js'
+    = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/locale/ja.js'
+    = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js'
+    = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js'
+    = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/i18n/ja.js'
+    = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/autosize.js/4.0.0/autosize.min.js'
     = yield 'scripts'

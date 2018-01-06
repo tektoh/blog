@@ -14,10 +14,4 @@ class TaxonomyPolicy < ApplicationPolicy
   def destroy?
     user.admin? || user.editor?
   end
-
-  class Scope < Scope
-    def resolve
-      scope
-    end
-  end
 end

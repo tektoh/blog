@@ -1,34 +1,34 @@
 class Admin::AuthorsController < ApplicationController
   layout 'admin'
 
+  before_action :set_authors, only: %i[index]
   before_action :set_author, only: %i[edit update destroy]
 
   def index
-    authorize(:taxonomy)
+    authorize(Author)
 
-    @authors = Author.all.order(:slug)
     @author = Author.new
   end
 
   def create
-    authorize(:taxonomy)
+    authorize(Author)
 
     @author = Author.new(author_params)
 
     if @author.save
       redirect_to admin_authors_path
     else
-      @authors = Author.all.order(:slug)
+      set_authors
       render :index
     end
   end
 
   def edit
-    authorize(:taxonomy)
+    authorize(@author)
   end
 
   def update
-    authorize(:taxonomy)
+    authorize(@author)
 
     if @author.update(author_params)
       redirect_to admin_authors_path
@@ -38,7 +38,7 @@ class Admin::AuthorsController < ApplicationController
   end
 
   def destroy
-    authorize(:taxonomy)
+    authorize(@author)
 
     @author.destroy
 
@@ -53,5 +53,9 @@ class Admin::AuthorsController < ApplicationController
 
   def set_author
     @author = Author.find(params[:id])
+  end
+
+  def set_authors
+    @authors = Author.all.order(:slug)
   end
 end

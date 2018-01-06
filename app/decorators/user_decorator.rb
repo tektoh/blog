@@ -1,7 +1,7 @@
 module UserDecorator
   def avatar_url(version = :origin)
     if !avatar.attached? || avatar.metadata.blank?
-      return '/images/user_avatar.png'
+      return '/images/avatar.png'
     end
 
     command = case version

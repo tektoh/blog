@@ -10,3 +10,7 @@ ja:
         writer: 'ライター'
         editor: '編集者'
         admin: '管理者'
+    article:
+      state:
+        draft: '下書き'
+        published: '公開'

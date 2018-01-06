@@ -1,34 +1,34 @@
 class Admin::CategoriesController < ApplicationController
   layout 'admin'
 
+  before_action :set_categories, only: %i[index]
   before_action :set_category, only: %i[edit update destroy]
 
   def index
-    authorize(:taxonomy)
+    authorize(Category)
 
-    @categories = Category.all.order(:slug)
     @category = Category.new
   end
 
   def create
-    authorize(:taxonomy)
+    authorize(Category)
 
     @category = Category.new(category_params)
 
     if @category.save
       redirect_to admin_categories_path
     else
-      @categories = Category.all.order(:slug)
+      set_categories
       render :index
     end
   end
 
   def edit
-    authorize(:taxonomy)
+    authorize(@category)
   end
 
   def update
-    authorize(:taxonomy)
+    authorize(@category)
 
     if @category.update(category_params)
       redirect_to admin_categories_path
@@ -38,7 +38,7 @@ class Admin::CategoriesController < ApplicationController
   end
 
   def destroy
-    authorize(:taxonomy)
+    authorize(@category)
 
     @category.destroy
 
@@ -53,5 +53,9 @@ class Admin::CategoriesController < ApplicationController
 
   def set_category
     @category = Category.find(params[:id])
+  end
+
+  def set_categories
+    @categories = Category.all.order(:slug)
   end
 end

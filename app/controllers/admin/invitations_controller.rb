@@ -4,19 +4,19 @@ class Admin::InvitationsController < ApplicationController
   before_action :set_invitation, only: %i[show destroy]
 
   def index
-    authorize(:invitation)
+    authorize(Invitation)
 
     @invitations = Invitation.order(:expires_at)
   end
 
   def new
-    authorize(:invitation)
+    authorize(Invitation)
 
     @invitation = Invitation.new
   end
 
   def create
-    authorize(:invitation)
+    authorize(Invitation)
 
     @invitation = Invitation.new(invitation_params)
 
