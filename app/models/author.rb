@@ -17,6 +17,8 @@
 #
 
 class Author < Taxonomy
+  has_many :articles
+
   has_one_attached :avatar
 
   validates :avatar, attachment: { purge: true, content_type: %r{\Aimage/(png|jpeg)\Z}, maximum: 10485760 }

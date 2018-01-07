@@ -17,4 +17,5 @@
 #
 
 class Category < Taxonomy
+  has_many :articles
 end

@@ -8,17 +8,11 @@
 
 .row
   .col-md-8
-    = content_tag 'div', nil, class: 'js-article-block-forms', data: { 'article-uuid' => @article.uuid }
+    = content_tag 'div', nil, class: 'js-article-block-forms', data: { 'article-uuid' => @article.uuid } do
+      .text-center
+        i.fa.fa-spinner.fa-pulse.fa-3x.fa-fw
 
   .col-md-4
-    .box.box-solid.box-info
-      .box-header
-        h3.box-title 公開
-      .box-body
-        = link_to admin_article_preview_path(@article.uuid), class: %w[btn btn-default btn-block btn-flat], target: '_blank' do
-          i.fa.fa-eye
-          '
-          | プレビュー
     .box.box-solid.box-info
       .box-header
         h3.box-title 情報
@@ -47,3 +41,22 @@
 
         .box-footer
           = f.button :submit, class: %w[btn btn-primary]
+
+    .box.box-solid.box-info
+      .box-header
+        h3.box-title 公開
+      .box-body
+        = link_to admin_article_preview_path(@article.uuid), class: %w[btn btn-default btn-block btn-flat], target: '_blank' do
+          i.fa.fa-eye
+          '
+          | プレビュー
+        - if @article.published?
+          = link_to article_path(@article.category_slug, @article.slug), class: %w[btn btn-default btn-block btn-flat], target: '_blank' do
+            i.fa.fa-globe
+            '
+            | 公開ページ
+      .box-footer
+        = link_to admin_article_publish_path(@article.uuid), class: %w[btn btn-success btn-block btn-flat], method: :patch do
+          i.fa.fa-send
+          '
+          | 公開する
