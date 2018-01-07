@@ -12,4 +12,9 @@ class ApplicationController < ActionController::Base
     @current_site ||= Site.first
   end
   helper_method :current_site
+
+  def preview?
+    !!@preview
+  end
+  helper_method :preview?
 end

@@ -13,6 +13,14 @@
   .col-md-4
     .box.box-solid.box-info
       .box-header
+        h3.box-title 公開
+      .box-body
+        = link_to admin_article_preview_path(@article.uuid), class: %w[btn btn-default btn-block btn-flat], target: '_blank' do
+          i.fa.fa-eye
+          '
+          | プレビュー
+    .box.box-solid.box-info
+      .box-header
         h3.box-title 情報
 
       = simple_form_for @article, url: admin_article_path(@article.uuid) do |f|

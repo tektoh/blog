@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  namespace :admin do
-  end
   if Rails.env.development?
     get '/login_as/:user_id', to: 'development/sessions#login_as'
     mount LetterOpenerWeb::Engine, at: '/letter_opener'
@@ -22,8 +20,8 @@ Rails.application.routes.draw do
     resources :tags, only: %i[index create edit update destroy]
     resources :authors, only: %i[index create edit update destroy]
     resources :articles, param: :uuid, only: %i[index new create edit update destroy] do
-      resource :preview, only: %i[show]
-      resource :publish, only: %i[update]
+      resource :preview, controller: 'articles/previews', only: %i[show]
+      resource :publish, controller: 'articles/publishes', only: %i[update]
       resources :article_blocks, controller: 'articles/article_blocks', only: %i[index show create edit update destroy] do
         patch :swap_level
       end
@@ -32,5 +30,10 @@ Rails.application.routes.draw do
 
   get '/admin' => redirect('/admin/login/identifier')
 
-  root 'home#index'
+  get '/tags/:tag_slug', as: :tag, to: 'articles#index'
+  get '/authors/:author_slug', as: :author, to: 'articles#index'
+  get '/:category_slug', as: :category, to: 'articles#index'
+  get '/:category_slug/:article_slug', as: :article, to: 'articles#show'
+
+  root 'articles#index'
 end

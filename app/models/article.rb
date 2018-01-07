@@ -73,4 +73,17 @@ class Article < ApplicationRecord
       relation
     end
   end
+
+  def build_body
+    result = ''
+
+    article_blocks.each do |article_block|
+      result << if article_block.sentence?
+                  sentence = article_block.blockable
+                  sentence.body
+                end
+    end
+
+    result
+  end
 end

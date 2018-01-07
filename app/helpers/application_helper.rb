@@ -1,17 +1,35 @@
 module ApplicationHelper
-  def default_meta_tags(site = nil)
-    @_site = site || current_site
+  def default_meta_tags
     {
-      site: @_site.name,
+      site: current_site.name,
       reverse: true,
       title: nil,
-      description: @_site.description,
+      description: current_site.description,
       canonical: request.original_url,
       og: {
         title: :title,
         type: 'website',
         url: request.original_url,
-        image: @_site.og_image.variant(resize: '1200x630'),
+        image: current_site.og_image_url(:ogp),
+        site_name: :site,
+        description: :description,
+        locale: 'ja_JP'
+      }
+    }
+  end
+
+  def article_meta_tags(article)
+    {
+      site: current_site.name,
+      reverse: true,
+      title: article.title,
+      description: current_site.description,
+      canonical: request.original_url,
+      og: {
+        title: :title,
+        type: 'website',
+        url: request.original_url,
+        image: article.eye_cache.attached? ? article.eye_cache_url(:ogp) : current_site.og_image_url(:ogp),
         site_name: :site,
         description: :description,
         locale: 'ja_JP'

@@ -13,29 +13,34 @@
  *= require_self
  */
 
-@import 'variables';
-@import 'bootstrap-sprockets';
-@import 'bootstrap';
-@import 'font-awesome';
+.jumbotron {
+  background: url('/images/cover.jpg') center / cover;
+  color: white;
+}
 
-.btn {
-  text-transform: none;
+.container {
+  max-width: 980px;
+}
 
-  &.btn-facebook {
-    color: #fff;
-    background-color: $brand-facebook;
+.page-content {
+  padding-bottom: 60px;
+}
 
-    &:hover {
-      background-color: darken($brand-facebook, 6%);
-    }
-  }
+.published-at {
+  text-align: center;
+  margin: 1rem 0;
+}
 
-  &.btn-twitter {
-    color: #fff;
-    background-color: $brand-twitter;
+.category, .tags, .author {
+  margin-top: 20px;
+}
 
-    &:hover {
-      background-color: darken($brand-twitter, 6%);
-    }
+.article {
+  padding: 40px;
+
+  h1,
+  h2,
+  h3 {
+    margin: 2rem 0 1rem;
   }
 }

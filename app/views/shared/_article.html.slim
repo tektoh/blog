@@ -1,0 +1,29 @@
+h1.title = article.title
+
+section.published-at
+  time
+    = l(article.published_at? ? article.published_at.to_date : Time.current.to_date, format: '%Y年%-m月%-d日')
+
+- if article.eye_cache.attached?
+  section.eye_cache
+    = image_tag article.eye_cache_url(:lg), class: 'img-fluid'
+
+- if article.category.present?
+  section.category
+    h4 Category
+    = link_to article.category.name, category_path(article.category.slug)
+
+- if article.tags.present?
+  section.tags
+    h4 Tags
+    ul.list-inline
+    - article.tags.each do |tag|
+      li.list-inline-item = link_to tag.name, tag_path(tag.slug)
+
+article.article
+  = sanitize(article.body)
+
+- if article.author.present?
+  section.author
+    h4 Author
+    = link_to article.author.name, author_path(article.author.slug)
