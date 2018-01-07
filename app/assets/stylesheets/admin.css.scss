@@ -54,3 +54,7 @@
 .insert-block {
   padding: 10px;
 }
+
+.box + .insert-block {
+  margin-top: -20px;
+}

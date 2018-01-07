@@ -44,10 +44,10 @@ class Article < ApplicationRecord
   validates :description, length: { maximum: 1000 }, allow_blank: true
   validates :state, presence: true
 
-  with_options if: :published? do |article|
-    article.validates :slug, slug_format: true, presence: true, length: { maximum: 255 }
-    article.validates :published_at, presence: true
-    article.validates :category_id, presence: true
+  with_options if: :published? do |v|
+    v.validates :slug, slug_format: true, presence: true, length: { maximum: 255 }
+    v.validates :published_at, presence: true
+    v.validates :category_id, presence: true
   end
 
   delegate :name, to: :category, prefix: true, allow_nil: true

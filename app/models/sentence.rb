@@ -10,6 +10,6 @@
 #
 
 class Sentence < ApplicationRecord
-  has_one :article_block, dependent: :destroy
+  has_one :article_block, as: :blockable, dependent: :destroy
   has_one :article, through: :article_block
 end

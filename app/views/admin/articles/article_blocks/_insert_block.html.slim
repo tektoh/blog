@@ -10,7 +10,14 @@
       .modal-header
         h4.modal-title ブロックの追加
       .modal-body
-        a.btn.btn-app
+        = link_to admin_article_article_blocks_path(article.uuid), \
+          class: %w[btn btn-app btn-default js-insert-article-block], \
+          data: { \
+            remote: true, \
+            disable: true, \
+            method: :post, \
+            params: { article_block: { level: level, blockable_type: 'sentence'  } } \
+           } do
           i.fa.fa-edit
           '
           | 文章

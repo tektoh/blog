@@ -24,6 +24,9 @@ Rails.application.routes.draw do
     resources :articles, param: :uuid, only: %i[index new create edit update destroy] do
       resource :preview, only: %i[show]
       resource :publish, only: %i[update]
+      resources :article_blocks, controller: 'articles/article_blocks', only: %i[index show create edit update destroy] do
+        patch :swap_level
+      end
     end
   end
 
