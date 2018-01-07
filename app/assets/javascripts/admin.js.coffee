@@ -46,6 +46,7 @@ $ ->
     $root.on 'ajax:success', '.js-edit-article-block', (event, data) ->
       $content = $(@).parents('.js-article-block-content')
       $content.html(data)
+      console.log($content.find('.js-article-block-editor'))
       $content.find('.js-article-block-editor').articleBlockEditor()
 
     $root.on 'ajax:success', '.js-update-article-block', ->

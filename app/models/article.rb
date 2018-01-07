@@ -56,6 +56,8 @@ class Article < ApplicationRecord
 
   before_create -> { self.uuid = SecureRandom.uuid }
 
+  scope :viewable, -> { published.where('published_at < ?', Time.current) }
+  scope :new_arrivals, -> { viewable.order(published_at: :desc) }
   scope :by_category, ->(category_id) { where(category_id: category_id) }
   scope :title_contain, ->(word) { where('title LIKE ?', "%#{word}%") }
 
@@ -86,5 +88,13 @@ class Article < ApplicationRecord
     end
 
     result
+  end
+
+  def next_article
+    @next_article ||= Article.viewable.order(published_at: :asc).where('published_at > ?', published_at).first
+  end
+
+  def prev_article
+    @prev_article ||= Article.viewable.order(published_at: :desc).where('published_at < ?', published_at).first
   end
 end

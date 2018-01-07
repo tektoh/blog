@@ -1,2 +1,2 @@
-- set_meta_tags title: @article.title
+- set_meta_tags title: @article.title, description: @article.description, og: { image: @article.eye_cache_url(:ogp) }
 = render 'shared/article', article: @article

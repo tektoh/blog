@@ -38,6 +38,7 @@ gem 'seed-fu'
 # Pagination
 gem 'kaminari'
 gem 'kaminari-i18n'
+gem 'bootstrap4-kaminari-views'
 
 # Breadcrumbs
 gem 'gretel'

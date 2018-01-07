@@ -16,14 +16,19 @@
 .jumbotron {
   background: url('/images/cover.jpg') center / cover;
   color: white;
-}
 
-.container {
-  max-width: 980px;
+  a {
+    color: white;
+  }
 }
 
 .page-content {
+  padding-bottom: 80px;
+}
+
+.article-content {
   padding-bottom: 60px;
+  max-width: 800px;
 }
 
 .published-at {
@@ -36,8 +41,6 @@
 }
 
 .article {
-  padding: 40px;
-
   h1,
   h2,
   h3 {

@@ -18,5 +18,5 @@
 
 class Taxonomy < ApplicationRecord
   validates :name, presence: true, uniqueness: { scope: :type }, length: { maximum: 16 }
-  validates :slug, presence: true, uniqueness: { scope: :type }, length: { maximum: 16 }, slug_format: true
+  validates :slug, presence: true, uniqueness: { scope: :type }, length: { maximum: 64 }, slug_format: true
 end

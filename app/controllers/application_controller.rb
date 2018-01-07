@@ -13,8 +13,21 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_site
 
+  def preview!
+    @preview = true
+  end
+
   def preview?
-    !!@preview
+    @preview
   end
   helper_method :preview?
+
+  def hide_new_arrivals!
+    @hide_new_arrivals = true
+  end
+
+  def hide_new_arrivals?
+    @hide_new_arrivals
+  end
+  helper_method :hide_new_arrivals?
 end
