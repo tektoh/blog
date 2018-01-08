@@ -14,6 +14,6 @@ module SiteDecorator
                   false
               end
 
-    (command ? og_image.variant(command).processed : og_image).service_url
+    (command ? og_image.variant(command).processed : og_image).service_url(expires_in: 100.years)
   end
 end
