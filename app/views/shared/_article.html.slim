@@ -21,7 +21,7 @@
       - article.tags.each do |tag|
         li.list-inline-item = link_to tag.name, tag_path(tag.slug)
 
-  article.article.p-5
+  article.article
     == article.body
 
   - if article.author.present?
