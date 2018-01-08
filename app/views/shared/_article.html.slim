@@ -25,7 +25,7 @@
     == article.body
 
   - if article.author.present?
-    section.author.mb-5
+    section.author.my-5
       .card
         .card-body
           .media
@@ -34,18 +34,18 @@
               h5.mt-0 = link_to article.author.name, author_path(article.author.slug)
               = article.author.description
 
-  .row
+  section.row.next-article.my-5
     .col-sm-6
       - if article.prev_article.present?
         .card
           .card-body
-            h6.card-title.text-center 新しい記事
+            h6.card-title.text-center 古い記事
             h6.card-title
               = link_to article.prev_article.title, article_path(article.prev_article.category_slug, article.prev_article.slug)
     .col-sm-6
       - if article.next_article.present?
         .card
           .card-body
-            h6.card-title.text-center 古い記事
+            h6.card-title.text-center 新しい記事
             h6.card-title
               = link_to article.next_article.title, article_path(article.next_article.category_slug, article.next_article.slug)
