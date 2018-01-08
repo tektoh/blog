@@ -1,76 +1,6 @@
-# Start Dash
+# Blog
 
----
-
-※ この項は start-dash リポジトリの説明なのでプロジェクトで使うときは削除してください。 ここから
-
----
-
-こちらは[株式会社StartupTechnology](http://startup-technology.com/)の開発において、Webアプリ開発の初期にスタートダッシュをかけるために、初期設定を行ったRailsテンプレートです。
-こちらをベースに各自の開発に合った形で調整を行ってください。
-
-## Features
-
-### アプリケーションサーバー
-
-- Puma
-
-### デプロイ
-
-- capistrano
-
-### ユーザー認証
-
-- sorcery
-- pundit
-
-### テンプレートエンジン
-
-- slim
-- simple_form
-
-### Decorator
-
-- active_decorator
-
-### フロントエンド
-
-- Webpacker
-- React
-
-### CSSフレームワーク
-
-- Bootstrap3(Sass)
-- Fontawesome
-
-### アップロード
-
-- carrierwave
-
-### バックグラウンドジョブ
-
-- resque
-
-### コード解析
-
-- Rubocop
-- Reek
-- Rails Best Practices
-- Brakeman
-- Bullet
-- Coffeelint
-- SCSS-Lint
-
-### その他
-
-- EditorConfig
-- See `Gemfile`.
-
----
-
-※ この項は start-dash リポジトリの説明なのでプロジェクトで使うときは削除してください。 ここまで
-
----
+ブログシステム
 
 ## Ruby version
 
@@ -92,7 +22,7 @@
 - リポジトリのクローン
 
 ```bash
-$ git@github.com:startup-technology/start-dash.git
+$ git@github.com:startup-technology/blog.git
 ```
 
 - Gemのインストール
@@ -104,7 +34,7 @@ $ bundle install --path vendor/bundle
 - npmのインストール
 
 ```bash
-$ npm install
+$ yarn install
 ```
 
 ### Configuration
@@ -134,19 +64,13 @@ $ rake db:create db:reset
 ### Database initialization
 
 ```bash
-$ rake db:seed_fu
+$ rake db:seed
 ```
 
 ## Run rails server
 
 ```bash
 $ bundle exec rails server
-```
-
-## Run active job
-
-```bash
-$ bundle exec rake resque:work
 ```
 
 ## Webpacker
@@ -215,12 +139,6 @@ $ bundle exec slim-lint
 
 -  ご自身のエディタに[EditorConfig](http://editorconfig.org/)のインストールをお願いします。
 
-## CI as a service
-
-- [CircleCI](https://circleci.com/)
-- [SideCI](https://www.sideci.com)
-  - SideCIの運用方針は[こちら](https://github.com/startup-technology/sideci-docs)をご覧下さい。
-
 ## Development controller
 
 ### Force login
@@ -231,19 +149,3 @@ $ bundle exec slim-lint
 /login_as/[user_id]
 ```
 
-### Letter opener web
-
-```
-/letter_opener
-```
-
-## Development tasks
-
-### Reset database
-
-- Execute db:drop, db:db:create, db:migrate, db:seed_fu
-- See `lib/tasks/db/rest_all.rake`
-
-```bash
-$ rake db:reset_all
-```
