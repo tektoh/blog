@@ -14,3 +14,9 @@ ja:
       state:
         draft: '下書き'
         published: '公開'
+    medium:
+      media_type:
+        image: '画像'
+    embed:
+      embed_type:
+        youtube: 'YouTube'

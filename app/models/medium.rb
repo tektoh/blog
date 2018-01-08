@@ -1,0 +1,21 @@
+# == Schema Information
+#
+# Table name: media
+#
+#  id         :bigint(8)        not null, primary key
+#  media_type :integer          default(0), not null
+#  name       :string(255)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+class Medium < ApplicationRecord
+  has_one :article_block, as: :blockable, dependent: :destroy
+  has_one :article, through: :article_block
+
+  has_one_attached :attachment
+
+  enum media_type: %i[image]
+
+  validates :attachment, attachment: { purge: true, content_type: %r{\Aimage/(png|jpeg)\Z}, maximum: 10485760 }, if: :image?
+end

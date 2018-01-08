@@ -45,9 +45,17 @@ class ArticleBlock < ApplicationRecord
     blockable.is_a?(Sentence)
   end
 
+  def medium?
+    blockable.is_a?(Medium)
+  end
+
+  def embed?
+    blockable.is_a?(Embed)
+  end
+
   def insert_and_save!
     # levelをずらす
-    article_blocks = article.article_blocks.where('level >= ?', level).order(level: :desc)
+    article_blocks = article.article_blocks.where('level >= ?', level).reorder(level: :desc)
     article_blocks.each do |article_block|
       article_block.level += 1
       article_block.save!
@@ -59,6 +67,12 @@ class ArticleBlock < ApplicationRecord
     case type.to_s.classify
     when 'Sentence'
       self.blockable = Sentence.create!
+
+    when 'Medium'
+      self.blockable = Medium.create!
+
+    when 'Embed'
+      self.blockable = Embed.create!
     else
       raise "ブロックタイプが不正です (#{type})"
     end

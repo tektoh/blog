@@ -34,14 +34,15 @@ class Admin::Articles::ArticleBlocksController < ApplicationController
   def edit; end
 
   def update
-    blockable_params = if params.key?(:sentence)
-                         sentence_params
-                       end
-
     if @article_block.blockable.update(blockable_params)
-      head :ok
+      if @article_block.medium?
+        # FIXME remote: true では Ajaxでファイルアップロードができない
+        redirect_to edit_admin_article_path(@article.uuid)
+      else
+        head :ok
+      end
     else
-      head :bad_request
+      render action: :edit, status: 400
     end
   end
 
@@ -82,8 +83,28 @@ class Admin::Articles::ArticleBlocksController < ApplicationController
     params.require(:article_block).permit(:level)
   end
 
+  def blockable_params
+    if params.key?(:sentence)
+      sentence_params
+    elsif params.key?(:medium)
+      medium_params
+    elsif params.key?(:embed)
+      embed_params
+    else
+      raise ActionController::ParameterMissing.new(:blockable)
+    end
+  end
+
   def sentence_params
     params.require(:sentence).permit(:body)
+  end
+
+  def medium_params
+    params.require(:medium).permit(:medium_type, :attachment)
+  end
+
+  def embed_params
+    params.require(:embed).permit(:embed_type, :identifier)
   end
 
   def set_article

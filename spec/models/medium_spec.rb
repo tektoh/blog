@@ -1,15 +1,16 @@
 # == Schema Information
 #
-# Table name: sentences
+# Table name: media
 #
 #  id         :bigint(8)        not null, primary key
-#  body       :text(65535)
+#  media_type :integer          default(0), not null
+#  name       :string(255)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
 require 'rails_helper'
 
-RSpec.describe Sentence, type: :model do
+RSpec.describe Medium, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
 end

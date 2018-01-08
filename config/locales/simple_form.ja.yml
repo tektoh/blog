@@ -36,6 +36,7 @@ ja:
         role: '役割'
       site:
         name: 'サイト名'
+        subtitle: 'サブタイトル'
         description: '概要'
         favicon: 'favicon'
         og_image: 'og:image'
@@ -59,3 +60,9 @@ ja:
         category_id: 'カテゴリー'
         author_id: '著者'
         tag_ids: 'タグ'
+      medium:
+        media_type: 'メディアタイプ'
+        attachment: 'ファイル'
+      embed:
+        embed_type: '埋め込みタイプ'
+        identifier: 'ID'

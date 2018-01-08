@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_01_05_142151) do
+ActiveRecord::Schema.define(version: 2018_01_08_022806) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "name", null: false
@@ -75,6 +75,13 @@ ActiveRecord::Schema.define(version: 2018_01_05_142151) do
     t.index ["uuid"], name: "index_articles_on_uuid"
   end
 
+  create_table "embeds", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+    t.integer "embed_type", default: 0, null: false
+    t.string "identifier"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "invitations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "uuid", null: false
     t.string "name", null: false
@@ -89,8 +96,14 @@ ActiveRecord::Schema.define(version: 2018_01_05_142151) do
     t.index ["uuid"], name: "index_invitations_on_uuid", unique: true
   end
 
+  create_table "media", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+    t.integer "media_type", default: 0, null: false
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "sentences", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
-    t.string "headline"
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -98,7 +111,8 @@ ActiveRecord::Schema.define(version: 2018_01_05_142151) do
 
   create_table "sites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "name"
-    t.string "description"
+    t.string "subtitle"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

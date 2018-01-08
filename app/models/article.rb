@@ -10,7 +10,7 @@
 #  title        :string(255)
 #  description  :text(65535)
 #  body         :text(65535)
-#  state        :integer          default(NULL), not null
+#  state        :integer          default("draft"), not null
 #  published_at :datetime
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
@@ -34,6 +34,8 @@ class Article < ApplicationRecord
   has_many :tags, through: :article_tags
   has_many :article_blocks, -> { order(:level) }, inverse_of: :article
   has_many :sentences, through: :article_blocks, source: :blockable, source_type: 'Sentence'
+  has_many :media, through: :article_blocks, source: :blockable, source_type: 'Medium'
+  has_many :embeds, through: :article_blocks, source: :blockable, source_type: 'Embed'
 
   has_one_attached :eye_cache
 
@@ -43,6 +45,7 @@ class Article < ApplicationRecord
   validates :title, presence: true, uniqueness: true, length: { maximum: 255 }
   validates :description, length: { maximum: 1000 }, allow_blank: true
   validates :state, presence: true
+  validates :eye_cache, attachment: { purge: true, content_type: %r{\Aimage/(png|jpeg)\Z}, maximum: 10485760 }
 
   with_options if: :published? do |v|
     v.validates :slug, slug_format: true, presence: true, length: { maximum: 255 }
@@ -77,13 +80,20 @@ class Article < ApplicationRecord
     end
   end
 
-  def build_body
+  # FIXME: レンダリングのために引数でコントローラーを渡しているが、そもそもコントローラーに移した方がいいかもしれない
+  def build_body(controller)
     result = ''
 
     article_blocks.each do |article_block|
       result << if article_block.sentence?
                   sentence = article_block.blockable
                   sentence.body
+                elsif article_block.medium?
+                  medium = ActiveDecorator::Decorator.instance.decorate(article_block.blockable)
+                  controller.render_to_string("shared/_media_#{medium.media_type}", locals: { medium: medium }, layout: false)
+                elsif article_block.embed?
+                  embed = ActiveDecorator::Decorator.instance.decorate(article_block.blockable)
+                  controller.render_to_string("shared/_embed_#{embed.embed_type}", locals: { embed: embed }, layout: false)
                 end
     end
 

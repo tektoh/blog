@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
 
   before_action :require_login
   before_action :current_site
+  before_action :init_components
 
   def current_site
     @current_site ||= Site.first
@@ -22,12 +23,36 @@ class ApplicationController < ActionController::Base
   end
   helper_method :preview?
 
-  def hide_new_arrivals!
-    @hide_new_arrivals = true
+  def hide_pagination!
+    @components[:pagination] = false
   end
 
-  def hide_new_arrivals?
-    @hide_new_arrivals
+  def pagination?
+    @components[:pagination]
   end
-  helper_method :hide_new_arrivals?
+  helper_method :pagination?
+
+  def hide_new_arrivals!
+    @components[:new_arrivals] = false
+  end
+
+  def new_arrivals?
+    @components[:new_arrivals]
+  end
+  helper_method :new_arrivals?
+
+  def categories?
+    @components[:categories]
+  end
+  helper_method :categories?
+
+  private
+
+  def init_components
+    @components = {
+      pagination: true,
+      new_arrivals: true,
+      categories: true
+    }
+  end
 end

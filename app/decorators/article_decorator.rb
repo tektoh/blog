@@ -7,6 +7,8 @@ module ArticleDecorator
     command = case version
               when :thumb
                 { resize: '640x480' }
+              when :lg
+                { resize: '1024x768' }
               when :ogp
                 { resize: '120x630' }
               else

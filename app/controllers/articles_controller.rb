@@ -11,6 +11,7 @@ class ArticlesController < ApplicationController
                   @category.articles
                 else
                   hide_new_arrivals!
+                  hide_pagination!
                   Article.all
                 end
 

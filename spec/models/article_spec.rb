@@ -10,7 +10,7 @@
 #  title        :string(255)
 #  description  :text(65535)
 #  body         :text(65535)
-#  state        :integer          default(NULL), not null
+#  state        :integer          default("draft"), not null
 #  published_at :datetime
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null

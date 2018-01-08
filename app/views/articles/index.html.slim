@@ -14,12 +14,5 @@
   .text-center.mb-5
     = image_tag @author.avatar_url(:icon), class: 'img-thumbnail'
 
-div.d-flex.justify-content-center
-  = paginate @articles, theme: 'twitter-bootstrap-4'
+= render 'shared/articles', articles: @articles
 
-.card-columns
-  - @articles.each do |article|
-    = render 'shared/article_card', article: article
-
-div.d-flex.justify-content-center
-  = paginate @articles, theme: 'twitter-bootstrap-4'
