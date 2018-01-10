@@ -4,7 +4,7 @@ module Role
   included do
     enum role: {
       writer: 0,
-      articleBlockEditor: 10,
+      editor: 10,
       admin: 20
     }
 
