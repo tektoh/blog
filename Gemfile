@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'rails', '5.2.0.beta2'
+gem 'rails', '5.2.0.rc1'
+
+gem 'bootsnap', require: false
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'therubyracer'
 
