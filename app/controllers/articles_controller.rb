@@ -1,5 +1,20 @@
 class ArticlesController < ApplicationController
+  skip_before_action :require_login
+
+  before_action :set_articles, only: :index
+
   def index
+    @articles = @articles.new_arrivals.page(params[:page]).per(20)
+  end
+
+  def show
+    @category = Category.find_by!(slug: params[:category_slug])
+    @article = @category.articles.find_by!(slug: params[:article_slug])
+  end
+
+  private
+
+  def set_articles
     @articles = if params[:tag_slug].present?
                   set_tag
                   @tag.articles
@@ -14,16 +29,7 @@ class ArticlesController < ApplicationController
                   hide_pagination!
                   Article.all
                 end
-
-    @articles = @articles.new_arrivals.page(params[:page]).per(20)
   end
-
-  def show
-    @category = Category.find_by!(slug: params[:category_slug])
-    @article = @category.articles.find_by!(slug: params[:article_slug])
-  end
-
-  private
 
   def set_tag
     @tag = Tag.find_by!(slug: params[:tag_slug])

@@ -1,4 +1,4 @@
-class CreateArticleBlocks < ActiveRecord::Migration[5.2]
+class CreateArticleBlocks < ActiveRecord::Migration[5.1]
   def change
     create_table :article_blocks do |t|
       t.belongs_to :article

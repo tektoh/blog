@@ -10,7 +10,7 @@ module ApplicationHelper
         title: :title,
         type: 'website',
         url: request.original_url,
-        image: current_site.og_image_url(:ogp),
+        image: current_site.og_image? ? current_site.og_image.url : nil,
         site_name: :site,
         description: :description,
         locale: 'ja_JP'

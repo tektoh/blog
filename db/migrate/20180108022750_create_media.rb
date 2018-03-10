@@ -1,4 +1,4 @@
-class CreateMedia < ActiveRecord::Migration[5.2]
+class CreateMedia < ActiveRecord::Migration[5.1]
   def change
     create_table :media do |t|
       t.integer :media_type, default: 0, null: false

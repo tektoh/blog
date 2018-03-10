@@ -6,6 +6,7 @@
 #  type        :string(255)
 #  name        :string(255)
 #  slug        :string(255)
+#  icon        :string(255)
 #  description :text(65535)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
@@ -17,9 +18,13 @@
 #
 
 class Author < Taxonomy
+  mount_uploader :icon, AvatarUploader
+
   has_many :articles
 
-  has_one_attached :avatar
+  alias_attribute :avatar, :icon
 
-  validates :avatar, attachment: { purge: true, content_type: %r{\Aimage/(png|jpeg)\Z}, maximum: 10485760 }
+  validates :avatar,
+            file_size: { less_than_or_equal_to: 10.megabytes },
+            file_content_type: { allow: %w[image/jpeg image/png] }
 end

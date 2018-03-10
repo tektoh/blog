@@ -1,7 +1,7 @@
 p.login-box-msg Enter password to start your session
-= simple_form_for @user, url: admin_login_password_path do |f|
+= simple_form_for @user, url: admin_login_password_path, method: :post do |f|
   .text-center
-    = image_tag @user.avatar_url(:icon), class: %w[img-thumbnail image-icon]
+    = image_tag @user.avatar.icon.url, class: %w[img-thumbnail image-icon]
     br
     br
   = f.input :name, as: :hidden

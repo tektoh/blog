@@ -56,7 +56,4 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.logger = ActiveSupport::Logger.new('log/development.log', 5, 10 * 1024 * 1024)
-
-  # Storage
-  config.active_storage.service = :local
 end

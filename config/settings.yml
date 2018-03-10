@@ -15,3 +15,7 @@ sorcery:
     key: <%= ENV.fetch('FACEBOOK_APP_ID') { '' } %>
     secret: <%= ENV.fetch('FACEBOOK_APP_SECRET') { '' } %>
     callback_url: http://localhost:3000/users/auth/facebook/callback
+resque:
+  redis:
+carrierwave:
+  storage: file
