@@ -1,6 +1,13 @@
 # = require jquery2
 # = require jquery_ujs
-# = require cocoon
+# = require bootstrap-sass/assets/javascripts/bootstrap
+# = require admin-lte/dist/js/adminlte
+# = require moment/moment
+# = require moment/locale/ja
+# = require eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min
+# = require select2/dist/js/select2
+# = require select2/dist/js/i18n/ja.js
+# = require autosize/dist/autosize
 
 $ ->
   $('.js-datetimepicker').datetimepicker

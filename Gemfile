@@ -7,9 +7,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'therubyracer'
 
 # Assets
-gem 'bootstrap-sass'
 gem 'coffee-rails'
-gem 'font-awesome-rails'
 gem 'jquery-rails'
 gem 'sass-rails'
 gem 'uglifier'
