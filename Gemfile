@@ -8,7 +8,6 @@ gem 'therubyracer'
 
 # Assets
 gem 'coffee-rails'
-gem 'jquery-rails'
 gem 'sass-rails'
 gem 'uglifier'
 gem 'webpacker'

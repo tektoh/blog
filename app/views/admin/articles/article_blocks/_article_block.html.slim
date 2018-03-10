@@ -10,7 +10,7 @@ section.box
               remote: true, \
               disable: true, \
               method: :patch, \
-              params: { article_block: { level: article_block.level - 1 }} \
+              params: { article_block: { level: article_block.level - 1 } }.to_param \
             } do
           i.fa.fa-arrow-up
       - else
@@ -24,7 +24,7 @@ section.box
               remote: true, \
               disable: true, \
               method: :patch, \
-              params: { article_block: { level: article_block.level + 1 } } \
+              params: { article_block: { level: article_block.level + 1 } }.to_param \
              } do
           i.fa.fa-arrow-down
       - else

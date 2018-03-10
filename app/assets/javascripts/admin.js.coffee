@@ -1,5 +1,5 @@
-# = require jquery2
-# = require jquery_ujs
+# = require rails-ujs
+# = require jquery/dist/jquery
 # = require bootstrap-sass/assets/javascripts/bootstrap
 # = require admin-lte/dist/js/adminlte
 # = require moment/moment
@@ -50,9 +50,9 @@ $ ->
     $root.on 'ajax:error', '.js-swap-level-article-block', ->
       alert('エラーが発生しました')
 
-    $root.on 'ajax:success', '.js-edit-article-block', (event, data) ->
+    $root.on 'ajax:success', '.js-edit-article-block', (event) ->
       $content = $(@).parents('.js-article-block-content')
-      $content.html(data)
+      $content.html(event.detail[0].body.innerHTML)
       $content.find('.js-article-block-editor').articleBlockEditor()
 
     $root.on 'ajax:success', '.js-update-article-block', ->

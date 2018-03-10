@@ -16,7 +16,7 @@
             remote: true, \
             disable: true, \
             method: :post, \
-            params: { article_block: { level: level, blockable_type: 'sentence'  } } \
+            params: { article_block: { level: level, blockable_type: 'sentence'  } }.to_param \
            } do
           i.fa.fa-edit
           '
@@ -28,7 +28,7 @@
             remote: true, \
             disable: true, \
             method: :post, \
-            params: { article_block: { level: level, blockable_type: 'medium'  } } \
+            params: { article_block: { level: level, blockable_type: 'medium'  } }.to_param \
            } do
           i.fa.fa-image
           '
@@ -40,7 +40,7 @@
             remote: true, \
             disable: true, \
             method: :post, \
-            params: { article_block: { level: level, blockable_type: 'embed' } } \
+            params: { article_block: { level: level, blockable_type: 'embed' } }.to_param \
             } do
           i.fa.fa-youtube-play
           '
