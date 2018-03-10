@@ -8,7 +8,7 @@
   .col-md-3
     .box.box-primary
       .box-body.box-profile
-        = image_tag @user.avatar_url(:icon), class: %w[profile-user-img img-responsive img-circle]
+        = image_tag @user.avatar.icon.url, class: %w[profile-user-img img-responsive img-circle]
 
         h3.profile-username.text-center
           = @user.name

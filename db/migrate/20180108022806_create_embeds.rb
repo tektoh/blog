@@ -1,4 +1,4 @@
-class CreateEmbeds < ActiveRecord::Migration[5.2]
+class CreateEmbeds < ActiveRecord::Migration[5.1]
   def change
     create_table :embeds do |t|
       t.integer :embed_type, default: 0, null: false

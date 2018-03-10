@@ -5,9 +5,9 @@
     time
       = l(article.published_at? ? article.published_at.to_date : Time.current.to_date, format: '%Y年%-m月%-d日')
 
-  - if article.eye_cache.attached?
+  - if article.eye_cache?
     section.eye_cache
-      = image_tag article.eye_cache_url(:lg), class: 'img-fluid'
+      = image_tag article.eye_cache.lg.url, class: 'img-fluid'
 
   - if article.category.present?
     section.category
@@ -29,7 +29,7 @@
       .card
         .card-body
           .media
-            = image_tag article.author.avatar_url(:media), class: 'mr-3', style: 'width: 64px; height: 64px;'
+            = image_tag article.author.avatar.icon.url, class: 'mr-3', style: 'width: 64px; height: 64px;'
             .media-body
               h5.mt-0 = link_to article.author.name, author_path(article.author.slug)
               = article.author.description

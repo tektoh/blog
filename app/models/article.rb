@@ -7,6 +7,7 @@
 #  author_id    :bigint(8)
 #  uuid         :string(255)
 #  slug         :string(255)
+#  eye_cache    :string(255)
 #  title        :string(255)
 #  description  :text(65535)
 #  body         :text(65535)
@@ -27,6 +28,8 @@
 #
 
 class Article < ApplicationRecord
+  mount_uploader :eye_cache, ImageUploader
+
   belongs_to :category
   belongs_to :author
 
@@ -37,15 +40,15 @@ class Article < ApplicationRecord
   has_many :media, through: :article_blocks, source: :blockable, source_type: 'Medium'
   has_many :embeds, through: :article_blocks, source: :blockable, source_type: 'Embed'
 
-  has_one_attached :eye_cache
-
   enum state: %i[draft published]
 
   validates :slug, slug_format: true, uniqueness: true, length: { maximum: 255 }, allow_blank: true
   validates :title, presence: true, uniqueness: true, length: { maximum: 255 }
   validates :description, length: { maximum: 1000 }, allow_blank: true
   validates :state, presence: true
-  validates :eye_cache, attachment: { purge: true, content_type: %r{\Aimage/(png|jpeg)\Z}, maximum: 10485760 }
+  validates :eye_cache,
+            file_size: { less_than_or_equal_to: 10.megabytes },
+            file_content_type: { allow: %w[image/jpeg image/png] }
 
   with_options if: :published? do |v|
     v.validates :slug, slug_format: true, presence: true, length: { maximum: 255 }

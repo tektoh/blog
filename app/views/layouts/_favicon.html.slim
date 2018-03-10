@@ -1,0 +1,6 @@
+- if current_site.favicon?
+  link[rel="icon" type="image/png" href="#{current_site.favicon.x16.url}" sizes="16x16"]
+  link[rel="icon" type="image/png" href="#{current_site.favicon.x32.url}" sizes="32x32"]
+  link[rel="icon" type="image/png" href="#{current_site.favicon.x48.url}" sizes="48x48"]
+  link[rel="apple-touch-icon"  href="#{current_site.favicon.x152.url}" sizes="152x152"]
+  link[rel="icon" href="#{current_site.favicon.x192.url}" sizes="192x192"]

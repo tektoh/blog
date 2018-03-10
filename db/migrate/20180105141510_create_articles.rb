@@ -1,10 +1,11 @@
-class CreateArticles < ActiveRecord::Migration[5.2]
+class CreateArticles < ActiveRecord::Migration[5.1]
   def change
     create_table :articles do |t|
       t.belongs_to :category
       t.belongs_to :author
       t.string :uuid
       t.string :slug
+      t.string :eye_cache
       t.string :title
       t.text :description
       t.text :body

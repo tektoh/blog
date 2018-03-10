@@ -6,6 +6,4 @@ meta[name="viewport" content="width=device-width, initial-scale=1.0"]
 
 = display_meta_tags(default_meta_tags)
 
-- if current_site.favicon.attached?
-  link[rel="icon" type="#{current_site.favicon.content_type}" href="#{current_site.favicon_url('16x16')}" sizes="16x16"]
-  link[rel="icon" type="#{current_site.favicon.content_type}" href="#{current_site.favicon_url('32x32')}" sizes="32x32"]
+= render 'layouts/favicon'

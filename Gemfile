@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '5.2.0.rc1'
+gem 'rails', '5.1.5'
 
 gem 'bootsnap', require: false
 gem 'sdoc', '~> 0.4.0', group: :doc
@@ -59,6 +59,7 @@ gem 'enum_help'
 gem 'virtus'
 
 # Validation
+gem 'file_validators'
 gem 'validate_url'
 gem 'validates_email_format_of'
 
@@ -66,7 +67,8 @@ gem 'validates_email_format_of'
 gem 'active_decorator'
 
 # Storage
-gem 'aws-sdk-s3', require: false
+gem 'carrierwave'
+gem 'carrierwave-aws'
 gem 'mini_magick'
 
 # Application server

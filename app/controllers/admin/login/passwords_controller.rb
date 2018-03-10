@@ -4,7 +4,7 @@ class Admin::Login::PasswordsController < ApplicationController
   skip_before_action :require_login
 
   def show
-    @user = User.new(name: session.delete(:login_user_name))
+    @user = User.find_by!(name: session[:login_user_name])
   end
 
   def create
@@ -12,9 +12,9 @@ class Admin::Login::PasswordsController < ApplicationController
 
     if @user.valid_password?(user_params.fetch(:password, nil))
       auto_login(@user)
+      session.delete(:login_user_name)
       redirect_to admin_url
     else
-      @user = User.new(user_params)
       @user.errors.add(:password, 'パスワードが正しくありません')
       render :show
     end

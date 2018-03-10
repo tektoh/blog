@@ -7,6 +7,7 @@
 #  author_id    :bigint(8)
 #  uuid         :string(255)
 #  slug         :string(255)
+#  eye_cache    :string(255)
 #  title        :string(255)
 #  description  :text(65535)
 #  body         :text(65535)
