@@ -122,7 +122,7 @@ group :development, :test do
   gem 'tapp'
 
   # Table/Schema
-  gem 'annotate', github: 'ctran/annotate_models', branch: 'develop'
+  gem 'annotate'
   gem 'migration_comments'
 
   # Deploy

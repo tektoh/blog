@@ -2,11 +2,11 @@
 #
 # Table name: invitations
 #
-#  id         :bigint(8)        not null, primary key
+#  id         :integer          not null, primary key
 #  uuid       :string(255)      not null
 #  name       :string(255)      not null
 #  role       :integer          default("writer")
-#  user_id    :bigint(8)
+#  user_id    :integer
 #  expires_at :datetime         not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

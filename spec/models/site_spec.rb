@@ -2,7 +2,7 @@
 #
 # Table name: sites
 #
-#  id          :bigint(8)        not null, primary key
+#  id          :integer          not null, primary key
 #  name        :string(255)
 #  subtitle    :string(255)
 #  og_image    :string(255)

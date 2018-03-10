@@ -2,7 +2,7 @@
 #
 # Table name: images
 #
-#  id           :bigint(8)        not null, primary key
+#  id           :integer          not null, primary key
 #  file         :string(255)
 #  content_type :string(255)
 #  file_size    :string(255)
