@@ -3,10 +3,10 @@
 # Table name: images
 #
 #  id           :integer          not null, primary key
-#  file         :string(255)
-#  content_type :string(255)
-#  file_size    :string(255)
-#  title        :string(255)
+#  file         :string
+#  content_type :string
+#  file_size    :string
+#  title        :string
 #  width        :integer
 #  height       :integer
 #  created_at   :datetime         not null

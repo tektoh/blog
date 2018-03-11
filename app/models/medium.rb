@@ -4,7 +4,7 @@
 #
 #  id         :integer          not null, primary key
 #  media_type :integer          default("image"), not null
-#  name       :string(255)
+#  name       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

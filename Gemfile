@@ -30,7 +30,7 @@ gem 'config'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
 
 # Database
-gem 'mysql2'
+gem 'pg'
 gem 'redis-rails'
 
 # Seeds

@@ -3,8 +3,8 @@
 # Table name: invitations
 #
 #  id         :integer          not null, primary key
-#  uuid       :string(255)      not null
-#  name       :string(255)      not null
+#  uuid       :string           not null
+#  name       :string           not null
 #  role       :integer          default("writer")
 #  user_id    :integer
 #  expires_at :datetime         not null

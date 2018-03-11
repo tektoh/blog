@@ -285,7 +285,6 @@ GEM
     multi_xml (0.6.0)
     multipart-post (2.0.0)
     mustermann (1.0.1)
-    mysql2 (0.4.10)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (4.2.0)
@@ -306,6 +305,7 @@ GEM
       activerecord (>= 5.1.0, < 5.2)
     parser (2.4.0.2)
       ast (~> 2.3)
+    pg (1.0.0)
     powerpack (0.1.1)
     pry (0.11.3)
       coderay (~> 1.1.0)
@@ -601,9 +601,9 @@ DEPENDENCIES
   meta-tags
   migration_comments
   mini_magick
-  mysql2
   paranoia
   paranoia_uniqueness_validator
+  pg
   pry
   pry-byebug
   pry-doc

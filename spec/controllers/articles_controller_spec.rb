@@ -2,15 +2,15 @@
 #
 # Table name: articles
 #
-#  id           :bigint(8)        not null, primary key
-#  category_id  :bigint(8)
-#  author_id    :bigint(8)
-#  uuid         :string(255)
-#  slug         :string(255)
-#  eye_cache    :string(255)
-#  title        :string(255)
-#  description  :text(65535)
-#  body         :text(65535)
+#  id           :integer          not null, primary key
+#  category_id  :integer
+#  author_id    :integer
+#  uuid         :string
+#  slug         :string
+#  eye_cache    :string
+#  title        :string
+#  description  :text
+#  body         :text
 #  state        :integer          default("draft"), not null
 #  published_at :datetime
 #  created_at   :datetime         not null

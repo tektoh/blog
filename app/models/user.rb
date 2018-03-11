@@ -3,9 +3,9 @@
 # Table name: users
 #
 #  id               :integer          not null, primary key
-#  name             :string(255)      not null
-#  crypted_password :string(255)
-#  avatar           :string(255)
+#  name             :string           not null
+#  crypted_password :string
+#  avatar           :string
 #  role             :integer          default("writer")
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null

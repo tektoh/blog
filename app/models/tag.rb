@@ -3,11 +3,11 @@
 # Table name: taxonomies
 #
 #  id          :integer          not null, primary key
-#  type        :string(255)
-#  name        :string(255)
-#  slug        :string(255)
-#  icon        :string(255)
-#  description :text(65535)
+#  type        :string
+#  name        :string
+#  slug        :string
+#  icon        :string
+#  description :text
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #

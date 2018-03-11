@@ -4,7 +4,7 @@
 #
 #  id             :integer          not null, primary key
 #  article_id     :integer
-#  blockable_type :string(255)
+#  blockable_type :string
 #  blockable_id   :integer
 #  level          :integer          default(0), not null
 #  created_at     :datetime         not null

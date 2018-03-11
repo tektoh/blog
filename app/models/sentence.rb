@@ -3,7 +3,7 @@
 # Table name: sentences
 #
 #  id         :integer          not null, primary key
-#  body       :text(65535)
+#  body       :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

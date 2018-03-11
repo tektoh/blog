@@ -4,7 +4,7 @@
 #
 #  id         :integer          not null, primary key
 #  embed_type :integer          default("youtube"), not null
-#  identifier :string(255)
+#  identifier :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
