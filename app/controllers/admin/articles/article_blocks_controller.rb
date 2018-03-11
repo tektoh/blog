@@ -47,7 +47,10 @@ class Admin::Articles::ArticleBlocksController < ApplicationController
   end
 
   def destroy
-    @article_block.destroy!
+    ArticleBlock.transaction do
+      @article_block.destroy!
+      @article_block.article.alignment_article_blocks!
+    end
     head :ok
   end
 

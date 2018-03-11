@@ -103,6 +103,13 @@ class Article < ApplicationRecord
     result
   end
 
+  def alignment_article_blocks!
+    article_blocks.each.with_index(0) do |article_block, level|
+      article_block.level = level
+      article_block.save!
+    end
+  end
+
   def next_article
     @next_article ||= Article.viewable.order(published_at: :asc).where('published_at > ?', published_at).first
   end
