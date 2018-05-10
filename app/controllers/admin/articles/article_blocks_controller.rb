@@ -103,7 +103,7 @@ class Admin::Articles::ArticleBlocksController < ApplicationController
   end
 
   def medium_params
-    params.require(:medium).permit(:medium_type, :attachment)
+    params.require(:medium).permit(:media_type, :attachment)
   end
 
   def embed_params

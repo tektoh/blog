@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '5.1.5'
+gem 'rails', '5.2.0'
 
 gem 'bootsnap', require: false
 gem 'sdoc', '~> 0.4.0', group: :doc
@@ -27,11 +27,12 @@ gem 'sorcery'
 
 # Configuration
 gem 'config'
-gem 'dotenv-rails', require: 'dotenv/rails-now'
 
 # Database
+gem 'hiredis'
 gem 'pg'
-gem 'redis-rails'
+gem 'redis'
+gem 'redis-session-store'
 
 # Seeds
 gem 'seed-fu'
@@ -84,6 +85,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'dotenv-rails', require: 'dotenv/rails-now'
   gem 'sqlite3'
 
   # Email
@@ -102,7 +104,7 @@ group :development, :test do
   gem 'brakeman', require: false
   gem 'bullet'
   gem 'coffeelint'
-  gem 'rails_best_practices', '~> 1.18.1'
+  gem 'rails_best_practices', '~> 1.19.2'
   gem 'reek', '~> 4.6.2'
   gem 'rubocop', '~> 0.49'
   gem 'scss_lint', require: false
@@ -110,6 +112,7 @@ group :development, :test do
 
   # Debugger
   gem 'better_errors'
+  gem 'binding_of_caller'
   gem 'byebug'
   gem 'pry'
   gem 'pry-byebug'

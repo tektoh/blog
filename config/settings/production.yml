@@ -1,0 +1,14 @@
+session_store:
+  key: _session
+  serializer: json
+  redis:
+    expire_after: <%= 1.day %>
+    key_prefix: 'session:'
+    url: redis://localhost:6379/0
+carrierwave:
+  aws_bucket: blog-dev-uploads
+  aws_acl: public-read
+  asset_host: https://uploads.blog-dev.com
+  aws_attributes:
+    expires: <%= 1.week.from_now.httpdate %>
+    cache_control: max-age=<%= 1.week.to_i %>
