@@ -1,5 +1,4 @@
 set :stage, :production
-set :branch, 'master'
 set :rails_env, 'production'
 set :migration_role, 'db'
 set :deploy_to, '/var/www/start-dash'

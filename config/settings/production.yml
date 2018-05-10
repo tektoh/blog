@@ -5,6 +5,9 @@ session_store:
     expire_after: <%= 1.day %>
     key_prefix: 'session:'
     url: redis://blog-pro-cache1.ze0pjp.clustercfg.apne1.cache.amazonaws.com/0
+resque:
+  redis:
+    url: redis://blog-pro-cache1.ze0pjp.clustercfg.apne1.cache.amazonaws.com/1
 carrierwave:
   aws_bucket: blog-dev-uploads
   aws_acl: public-read

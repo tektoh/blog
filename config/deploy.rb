@@ -1,14 +1,14 @@
 # config valid only for current version of Capistrano
 lock '3.9.0'
 
-set :application, 'start-dash'
-set :repo_url, 'git@github.com:startup-technology/start-dash.git'
+set :application, 'blog'
+set :repo_url, 'git@github.com:startup-technology/blog.git'
 
 # Default branch is :master
 set :branch, ENV['BRANCH'] || 'master'
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, '/var/www/start-dash'
+set :deploy_to, '/var/www/blog'
 
 # Default value for :scm is :git
 # set :scm, :git
@@ -41,8 +41,7 @@ set :rbenv_path, '/usr/local/rbenv'
 set :bundle_jobs, 4
 
 after 'deploy:publishing', 'deploy:restart'
-after 'deploy:restart', 'resque:restart'
-before 'deploy:migrate', 'deploy:db_create'
+# after 'deploy:restart', 'resque:restart'
 namespace :deploy do
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
@@ -50,17 +49,6 @@ namespace :deploy do
       # within release_path do
       #   execute :rake, 'cache:clear'
       # end
-    end
-  end
-
-  desc 'Create database'
-  task :db_create do
-    on roles(:db) do
-      with rails_env: fetch(:rails_env) do
-        within release_path do
-          execute :bundle, :exec, :rake, 'db:create'
-        end
-      end
     end
   end
 end
