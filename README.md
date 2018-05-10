@@ -12,7 +12,7 @@
 
 ## System dependencies
 
-- MySQL >= 5.5
+- Postgresql
 - Redis
 - Node.js >= 6.0.0
 - Yarn >= 0.20.1
