@@ -12,7 +12,7 @@ carrierwave:
   storage: aws
   aws_bucket: blog-dev-uploads
   aws_acl: public-read
-  asset_host: https://uploads.blog-dev.com
+  asset_host: https://blog-dev.com
   aws_attributes:
     expires: <%= 1.week.from_now.httpdate %>
     cache_control: max-age=<%= 1.week.to_i %>
