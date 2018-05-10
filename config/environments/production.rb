@@ -7,7 +7,10 @@ Rails.application.configure do
   config.cache_classes = true
 
   # Session
-  config.session_store :redis_store, Settings.session_store.to_h
+  config.session_store :redis_session_store,
+                       key: Settings.session_store.key,
+                       serializer: Settings.session_store.serializer.to_sym,
+                       redis: Settings.session_store.redis.to_h
 
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
