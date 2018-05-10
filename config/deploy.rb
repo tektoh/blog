@@ -41,7 +41,7 @@ set :rbenv_path, '/usr/local/rbenv'
 set :bundle_jobs, 4
 
 after 'deploy:publishing', 'deploy:restart'
-# after 'deploy:restart', 'resque:restart'
+after 'deploy:restart', 'resque:restart'
 namespace :deploy do
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do

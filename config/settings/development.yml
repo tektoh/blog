@@ -5,3 +5,5 @@ session_store:
     expire_after: <%= 1.day %>
     key_prefix: 'session:'
     url: redis://localhost:6379/0
+carrierwave:
+  storage: file

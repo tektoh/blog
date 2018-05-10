@@ -9,6 +9,7 @@ resque:
   redis:
     url: redis://blog-pro-cache1.ze0pjp.clustercfg.apne1.cache.amazonaws.com/1
 carrierwave:
+  storage: aws
   aws_bucket: blog-dev-uploads
   aws_acl: public-read
   asset_host: https://uploads.blog-dev.com
