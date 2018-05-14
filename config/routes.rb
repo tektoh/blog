@@ -30,9 +30,12 @@ Rails.application.routes.draw do
         patch :swap_level
       end
     end
-  end
 
-  get '/admin' => redirect('/admin/login/identifier')
+    get '/new', as: :new, to: 'root#new'
+    post '/', as: :create, to: 'root#create'
+
+    root 'root#index'
+  end
 
   get '/tags/:tag_slug', as: :tag, to: 'articles#index'
   get '/authors/:author_slug', as: :author, to: 'articles#index'

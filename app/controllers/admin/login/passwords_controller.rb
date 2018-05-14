@@ -13,7 +13,7 @@ class Admin::Login::PasswordsController < ApplicationController
     if @user.valid_password?(user_params.fetch(:password, nil))
       auto_login(@user)
       session.delete(:login_user_name)
-      redirect_to admin_url
+      redirect_to admin_root_url
     else
       @user.errors.add(:password, 'パスワードが正しくありません')
       render :show

@@ -3,7 +3,7 @@ html
   head
     meta[charset="utf-8"]
     meta[name="viewport" content="width=device-width, initial-scale=1.0"]
-    title = current_site.name
+    title = current_site&.name || 'Initialize'
     = stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'
     = stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.2/css/AdminLTE.min.css'
     = stylesheet_link_tag 'admin'
@@ -12,8 +12,8 @@ html
   body.hold-transition.login-page
     .login-box
       .login-logo
-        = link_to admin_path do
-          b = current_site.name
+        = link_to admin_root_path do
+          b = current_site&.name || 'Initialize'
       .login-box-body
         = yield
 
