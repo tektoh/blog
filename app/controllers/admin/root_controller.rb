@@ -21,9 +21,7 @@ class Admin::RootController < ApplicationController
     if @site.valid? & @user.valid?
       User.transaction do
         @site.save!
-
-        @user.role = :admin
-        @user.save!
+        @user.admin!
       end
 
       auto_login(@user)

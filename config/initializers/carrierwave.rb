@@ -12,5 +12,8 @@ elsif Rails.env.staging? || Rails.env.production?
       expires: Settings.carrierwave.aws_attributes.expires,
       cache_control: Settings.carrierwave.aws_attributes.cache_control
     }
+    config.aws_credentials = {
+      region: Settings.carrierwave.aws_credentials.region
+    }
   end
 end

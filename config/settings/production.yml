@@ -16,3 +16,5 @@ carrierwave:
   aws_attributes:
     expires: <%= 1.week.from_now.httpdate %>
     cache_control: max-age=<%= 1.week.to_i %>
+  aws_credentials:
+    region: ap-northeast-1
