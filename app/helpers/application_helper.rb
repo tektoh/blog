@@ -21,4 +21,8 @@ module ApplicationHelper
   def flash_class(key)
     { alert: 'danger', notice: 'success' }.fetch(key.to_sym) { 'danger' }
   end
+
+  def cover_image_url
+    current_site.present? ? current_site.cover_image.url : nil
+  end
 end

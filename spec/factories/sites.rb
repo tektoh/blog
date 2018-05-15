@@ -2,7 +2,7 @@
 #
 # Table name: sites
 #
-#  id          :integer          not null, primary key
+#  id          :bigint(8)        not null, primary key
 #  name        :string
 #  subtitle    :string
 #  og_image    :string
@@ -10,6 +10,7 @@
 #  description :text
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  cover_image :string
 #
 
 FactoryBot.define do

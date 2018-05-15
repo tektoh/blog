@@ -2,7 +2,7 @@
 #
 # Table name: media
 #
-#  id         :integer          not null, primary key
+#  id         :bigint(8)        not null, primary key
 #  media_type :integer          default("image"), not null
 #  name       :string
 #  created_at :datetime         not null

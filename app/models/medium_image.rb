@@ -2,9 +2,9 @@
 #
 # Table name: medium_images
 #
-#  id         :integer          not null, primary key
-#  medium_id  :integer
-#  image_id   :integer
+#  id         :bigint(8)        not null, primary key
+#  medium_id  :bigint(8)
+#  image_id   :bigint(8)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

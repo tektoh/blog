@@ -17,6 +17,13 @@
         br
         br
 
+      = f.input :cover_image, as: :file, hint: 'JPEG/PNG (1200x630)'
+
+      - if @site.cover_image?
+        = image_tag @site.cover_image.url, class: 'img-responsive'
+        br
+        br
+
       = f.input :og_image, as: :file, hint: 'JPEG/PNG (1200x630)'
 
       - if @site.og_image?

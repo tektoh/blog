@@ -2,9 +2,9 @@
 #
 # Table name: articles
 #
-#  id           :integer          not null, primary key
-#  category_id  :integer
-#  author_id    :integer
+#  id           :bigint(8)        not null, primary key
+#  category_id  :bigint(8)
+#  author_id    :bigint(8)
 #  uuid         :string
 #  slug         :string
 #  eye_cache    :string

@@ -1,19 +1,9 @@
-class AvatarUploader < CarrierWave::Uploader::Base
+class CoverImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   storage Settings.carrierwave.storage.to_sym
 
-  version :icon do
-    process resize_to_fill: [128, 128]
-  end
-
-  version :sm do
-    process resize_to_limit: [300, 300]
-  end
-
-  version :md do
-    process resize_to_limit: [800, 800]
-  end
+  process resize_to_limit: [1200, 630]
 
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
@@ -24,7 +14,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   def default_url
-    ActionController::Base.helpers.asset_path('avatar.png')
+    ActionController::Base.helpers.asset_path('cover.jpg')
   end
 
   private
