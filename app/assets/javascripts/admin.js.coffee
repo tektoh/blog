@@ -34,6 +34,8 @@ $ ->
 
     $root.on 'ajax:complete', '.js-insert-article-block', ->
       $root.find('.modal').modal('hide')
+      $('body').removeClass('modal-open');
+      $('.modal-backdrop').remove();
 
     $root.on 'ajax:before', '.js-remove-article-block', ->
       confirm('ブロックを削除しますか？')
