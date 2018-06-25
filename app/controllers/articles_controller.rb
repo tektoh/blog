@@ -1,10 +1,10 @@
 class ArticlesController < ApplicationController
   skip_before_action :require_login
 
-  before_action :set_articles, only: :index
-
   def index
-    @articles = @articles.new_arrivals.page(params[:page]).per(20)
+    return if taxonomy?
+    hide_new_arrivals!
+    hide_pagination!
   end
 
   def show
@@ -14,35 +14,54 @@ class ArticlesController < ApplicationController
 
   private
 
-  def set_articles
-    @articles = if params[:tag_slug].present?
-                  set_tag
-                  @tag.articles
-                elsif params[:author_slug].present?
-                  set_author
-                  @author.articles
-                elsif params[:category_slug].present?
-                  set_category
-                  @category.articles
+  def tag?
+    params[:tag_slug].present?
+  end
+  helper_method :tag?
+
+  def author?
+    params[:author_slug].present?
+  end
+  helper_method :author?
+
+  def category?
+    params[:category_slug].present?
+  end
+  helper_method :category?
+
+  def taxonomy?
+    tag? || author? || category?
+  end
+  helper_method :taxonomy?
+
+  def title
+    @title ||= if taxonomy?
+                 taxonomy.name
+               end
+  end
+  helper_method :title
+
+  def articles
+    return @articles if defined? @articles
+
+    @articles = if taxonomy?
+                  taxonomy.articles
                 else
-                  hide_new_arrivals!
-                  hide_pagination!
                   Article.all
                 end
-  end
 
-  def set_tag
-    @tag = Tag.find_by!(slug: params[:tag_slug])
-    @title = @tag.name
+    @articles.new_arrivals.page(params[:page]).per(20)
   end
+  helper_method :articles
 
-  def set_author
-    @author = Author.find_by!(slug: params[:author_slug])
-    @title = @author.name
+  def taxonomy
+    @taxonomy ||= if tag?
+                    Tag.find_by!(slug: params[:tag_slug])
+                  elsif author?
+                    Author.find_by!(slug: params[:author_slug])
+                  elsif category?
+                    Category.find_by!(slug: params[:category_slug])
+                  end
   end
-
-  def set_category
-    @category = Category.find_by!(slug: params[:category_slug])
-    @title = @category.name
-  end
+  helper_method :taxonomy
 end

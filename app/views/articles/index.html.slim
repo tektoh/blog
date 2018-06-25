@@ -1,18 +1,18 @@
-- set_meta_tags title: @title
+- set_meta_tags title: title
 
-- if @category.present?
-  h3.text-center Category
-  h1.text-center.display-3.mb-5 = @category.name
+- if taxonomy?
+  - if taxonomy.category?
+    h3.text-center Category
+    h1.text-center.display-3.mb-5 = taxonomy.name
 
-- if @tag.present?
-  h3.text-center Tag
-  h1.text-center.display-3.mb-5 = "##{@tag.name}"
+  - if taxonomy.tag?
+    h3.text-center Tag
+    h1.text-center.display-3.mb-5 = "##{taxonomy.name}"
 
-- if @author.present?
-  h3.text-center Author
-  h1.text-center.display-3 = "#{@author.name}"
-  .text-center.mb-5
-    = image_tag @author.avatar_url(:icon), class: 'img-thumbnail'
+  - if taxonomy.author?
+    h3.text-center Author
+    h1.text-center.display-3 = "#{taxonomy.name}"
+    .text-center.mb-5
+      = image_tag taxonomy.icon_url(:icon), class: 'img-thumbnail img-icon'
 
-= render 'shared/articles', articles: @articles
-
+= render 'shared/articles', articles: articles
