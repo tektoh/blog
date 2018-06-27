@@ -78,7 +78,6 @@ gem 'puma'
 gem 'resque'
 gem 'whenever', require: false
 
-# Debugger
 group :development do
   gem 'listen'
   gem 'web-console'

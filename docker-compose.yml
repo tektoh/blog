@@ -14,9 +14,26 @@ services:
       - ./tmp/docker/cache:/data
     ports:
       - '6379:6379'
-  web:
+  webpacker:
     build: .
-    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    command: bin/webpack-dev-server
+    environment:
+      NODE_ENV: development
+      RAILS_ENV: development
+    volumes:
+      - .:/app
+    ports:
+      - '8080:8080'
+  rails:
+    build: .
+    command: /bin/sh -c "rm tmp/pids/server.pid; bundle exec rails s -p 3000 -b '0.0.0.0'"
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD:
+      REDIS_URL: redis://cache:6379/0
+      WEBPACKER_DEV_SERVER_HOST: webpacker
+      WEBPACKER_DEV_SERVER_PORT: 8080
     volumes:
       - .:/app
     ports:
@@ -24,3 +41,6 @@ services:
     depends_on:
       - db
       - cache
+      - webpacker
+    tty: true
+    stdin_open: true
