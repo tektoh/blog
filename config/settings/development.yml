@@ -4,6 +4,6 @@ session_store:
   redis:
     expire_after: <%= 1.day %>
     key_prefix: 'session:'
-    url: redis://cache:6379/0
+    url: <%= ENV.fetch('REDIS_URL') { 'redis://localhost:6379/0' } %>
 carrierwave:
   storage: file
