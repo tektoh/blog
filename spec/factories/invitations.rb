@@ -21,6 +21,18 @@
 
 FactoryBot.define do
   factory :invitation do
-    
+    name { generate :slug }
+
+    trait :writer do
+      role 'writer'
+    end
+
+    trait :editor do
+      role 'editor'
+    end
+
+    trait :admin do
+      role 'admin'
+    end
   end
 end

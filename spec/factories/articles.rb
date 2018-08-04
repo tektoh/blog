@@ -29,6 +29,17 @@
 
 FactoryBot.define do
   factory :article do
-    
+    title { generate :title }
+
+    trait :draft do
+      state 'draft'
+    end
+
+    trait :published do
+      state 'published'
+      slug { generate :slug }
+      published_at { generate :time }
+      category { create :category }
+    end
   end
 end

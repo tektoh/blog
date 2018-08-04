@@ -1,2 +1,1 @@
-class TagPolicy < TaxonomyPolicy
-end
+class TagPolicy < TaxonomyPolicy; end

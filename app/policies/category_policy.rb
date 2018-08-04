@@ -1,2 +1,1 @@
-class CategoryPolicy < TaxonomyPolicy
-end
+class CategoryPolicy < TaxonomyPolicy; end
