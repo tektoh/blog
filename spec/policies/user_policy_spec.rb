@@ -1,28 +1,112 @@
 require 'rails_helper'
 
 RSpec.describe UserPolicy do
-
-  let(:user) { User.new }
-
   subject { described_class }
 
-  permissions ".scope" do
-    pending "add some examples to (or delete) #{__FILE__}"
+  let(:user) { create :user }
+
+  context 'for a writer' do
+    let(:current_user) { create :user, :writer }
+
+    permissions :index? do
+      it { expect(subject).to permit(current_user, user) }
+    end
+
+    permissions :show? do
+      it { expect(subject).to permit(current_user, user) }
+    end
+
+    permissions :new? do
+      it { expect(subject).not_to permit(current_user, user) }
+    end
+
+    permissions :create? do
+      it { expect(subject).not_to permit(current_user, user) }
+    end
+
+    permissions :edit? do
+      it { expect(subject).not_to permit(current_user, user) }
+      it { expect(subject).to permit(current_user, current_user) }
+    end
+
+    permissions :update? do
+      it { expect(subject).not_to permit(current_user, user) }
+      it { expect(subject).to permit(current_user, current_user) }
+    end
+
+    permissions :destroy? do
+      it { expect(subject).not_to permit(current_user, user) }
+      it { expect(subject).not_to permit(current_user, current_user) }
+    end
   end
 
-  permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
+  context 'for a editor' do
+    let(:current_user) { create :user, :editor }
+
+    permissions :index? do
+      it { expect(subject).to permit(current_user, user) }
+    end
+
+    permissions :show? do
+      it { expect(subject).to permit(current_user, user) }
+    end
+
+    permissions :new? do
+      it { expect(subject).not_to permit(current_user, user) }
+    end
+
+    permissions :create? do
+      it { expect(subject).not_to permit(current_user, user) }
+    end
+
+    permissions :edit? do
+      it { expect(subject).not_to permit(current_user, user) }
+      it { expect(subject).to permit(current_user, current_user) }
+    end
+
+    permissions :update? do
+      it { expect(subject).not_to permit(current_user, user) }
+      it { expect(subject).to permit(current_user, current_user) }
+    end
+
+    permissions :destroy? do
+      it { expect(subject).not_to permit(current_user, user) }
+      it { expect(subject).not_to permit(current_user, current_user) }
+    end
   end
 
-  permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+  context 'for a admin' do
+    let(:current_user) { create :user, :admin }
 
-  permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+    permissions :index? do
+      it { expect(subject).to permit(current_user, user) }
+    end
 
-  permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    permissions :show? do
+      it { expect(subject).to permit(current_user, user) }
+    end
+
+    permissions :new? do
+      it { expect(subject).to permit(current_user, user) }
+    end
+
+    permissions :create? do
+      it { expect(subject).to permit(current_user, user) }
+    end
+
+    permissions :edit? do
+      it { expect(subject).to permit(current_user, user) }
+      it { expect(subject).to permit(current_user, current_user) }
+    end
+
+    permissions :update? do
+      it { expect(subject).to permit(current_user, user) }
+      it { expect(subject).to permit(current_user, current_user) }
+    end
+
+    permissions :destroy? do
+      it { expect(subject).to permit(current_user, user) }
+      it { expect(subject).not_to permit(current_user, current_user) }
+    end
   end
 end

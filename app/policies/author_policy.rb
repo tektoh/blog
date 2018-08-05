@@ -1,2 +1,1 @@
-class AuthorPolicy < TaxonomyPolicy
-end
+class AuthorPolicy < TaxonomyPolicy; end

@@ -9,7 +9,7 @@ class ArticlesController < ApplicationController
 
   def show
     @category = Category.find_by!(slug: params[:category_slug])
-    @article = @category.articles.find_by!(slug: params[:article_slug])
+    @article = @category.articles.viewable.find_by!(slug: params[:article_slug])
   end
 
   private

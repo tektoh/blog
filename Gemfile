@@ -96,6 +96,7 @@ group :development, :test do
 
   # Test
   gem 'factory_bot_rails'
+  gem 'faker'
   gem 'rspec-rails'
   gem 'simplecov', require: false
 
@@ -139,7 +140,6 @@ end
 group :test do
   gem 'capybara'
   gem 'database_cleaner'
-  gem 'faker'
   gem 'fuubar'
   gem 'launchy'
   gem 'selenium-webdriver'

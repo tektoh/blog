@@ -19,6 +19,7 @@
 
 FactoryBot.define do
   factory :author do
-    
+    name { generate :name }
+    slug { generate :slug }
   end
 end

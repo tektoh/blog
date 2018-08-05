@@ -19,6 +19,21 @@
 
 FactoryBot.define do
   factory :user do
-    
+    before(:create) { |user| user.password_confirmation = user.password }
+
+    name { generate :slug }
+    password { generate :password }
+
+    trait :writer do
+      role 'writer'
+    end
+
+    trait :editor do
+      role 'editor'
+    end
+
+    trait :admin do
+      role 'admin'
+    end
   end
 end

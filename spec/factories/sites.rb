@@ -15,6 +15,8 @@
 
 FactoryBot.define do
   factory :site do
-    
+    name { generate :title }
+    subtitle { generate :title }
+    description { generate :title }
   end
 end
