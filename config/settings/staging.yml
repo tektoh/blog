@@ -1,0 +1,20 @@
+session_store:
+  key: _session
+  serializer: json
+  redis:
+    expire_after: <%= 1.day %>
+    key_prefix: 'session:'
+    url: redis://blog-staging.ze0pjp.0001.apne1.cache.amazonaws.com/1
+resque:
+  redis:
+    url: redis://blog-staging.ze0pjp.0001.apne1.cache.amazonaws.com/2
+carrierwave:
+  storage: aws
+  aws_bucket: blog-staging-uploads
+  aws_acl: public-read
+  asset_host: https://blog-staging.com
+  aws_attributes:
+    expires: <%= 1.week.from_now.httpdate %>
+    cache_control: max-age=<%= 1.week.to_i %>
+  aws_credentials:
+    region: ap-northeast-1
