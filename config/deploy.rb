@@ -2,7 +2,7 @@
 lock '3.9.0'
 
 set :application, 'blog'
-set :repo_url, 'git@github.com:startup-technology/blog.git'
+set :repo_url, 'git@10.100.5.147:segawa/blog.git'
 
 # Default branch is :master
 set :branch, ENV['BRANCH'] || 'master'
