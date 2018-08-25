@@ -7,8 +7,8 @@ set :workers, '*' => 1
 set :whenever_environment, :staging
 set :whenever_roles, :batch
 
-role :app, %w[blog@web1.blog-staging.com]
-role :web, %w[blog@web1.blog-staging.com]
-role :db, %w[blog@web1.blog-staging.com]
-role :batch, %w[blog@web1.blog-staging.com]
-role :resque_worker, %w[blog@web1.blog-staging.com]
+role :app, %w[blog@web1.staging.blog-dev.com]
+role :web, %w[blog@web1.staging.blog-dev.com]
+role :db, %w[blog@web1.staging.blog-dev.com]
+role :batch, %w[blog@web1.staging.blog-dev.com]
+role :resque_worker, %w[blog@web1.staging.blog-dev.com]
