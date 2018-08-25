@@ -4,10 +4,10 @@ session_store:
   redis:
     expire_after: <%= 1.day %>
     key_prefix: 'session:'
-    url: redis://blog-pro-cache2.ze0pjp.ng.0001.apne1.cache.amazonaws.com/1
+    url: redis://blog-production.ze0pjp.0001.apne1.cache.amazonaws.com/1
 resque:
   redis:
-    url: redis://blog-pro-cache2.ze0pjp.ng.0001.apne1.cache.amazonaws.com/2
+    url: redis://blog-production.ze0pjp.0001.apne1.cache.amazonaws.com/2
 carrierwave:
   storage: aws
   aws_bucket: blog-dev-uploads
