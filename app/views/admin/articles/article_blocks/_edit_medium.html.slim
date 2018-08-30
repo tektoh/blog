@@ -1,10 +1,4 @@
-= simple_form_for medium, \
-    html: { class: 'js-update-article-block' }, \
-    url: admin_article_article_block_path(article.uuid, article_block), \
-    data: { \
-      remote: true, \
-      disable: true \
-    } do |f|
+= simple_blockable_form_for article, article_block, medium, class: 'js-update-article-block' do |f|
   .box-body
     = f.input :media_type, collect: Medium.media_types_i18n.invert, include_blank: false
     = f.input :attachment, as: :file

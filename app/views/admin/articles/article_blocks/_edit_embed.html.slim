@@ -1,10 +1,4 @@
-= simple_form_for embed, \
-    html: { class: 'js-update-article-block' }, \
-    url: admin_article_article_block_path(article.uuid, article_block), \
-    data: { \
-      remote: true, \
-      disable: true \
-    } do |f|
+= simple_blockable_form_for article, article_block, embed, class: 'js-update-article-block' do |f|
   .box-body
     = f.input :embed_type, collect: Embed.embed_types_i18n.invert, include_blank: false
     = f.input :identifier

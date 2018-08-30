@@ -55,7 +55,8 @@ $ ->
     $root.on 'ajax:success', '.js-edit-article-block', (event) ->
       $content = $(@).parents('.js-article-block-content')
       $content.html(event.detail[0].body.innerHTML)
-      $content.find('.js-article-block-editor').articleBlockEditor()
+      $content.find('.js-article-block-sentence-editor').sentenceEditor()
+      $content.find('.js-article-block-code-editor').codeEditor()
 
     $root.on 'ajax:success', '.js-update-article-block', ->
       reload()
@@ -76,6 +77,8 @@ $ ->
 
       .done (data) =>
         $root.html(data)
+        $root.find('.js-article-block-sentence-editor').sentenceEditor()
+        $root.find('.js-article-block-code-editor').codeEditor()
 
       .fail =>
         alert('エラーが発生しました')

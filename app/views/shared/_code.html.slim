@@ -1,0 +1,7 @@
+ruby:
+  code = local_assigns[:code]
+
+section.code(id="code_#{code.id}")
+  pre.highlight
+    code
+      == code.body_highlighted

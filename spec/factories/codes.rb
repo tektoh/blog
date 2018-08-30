@@ -1,18 +1,16 @@
 # == Schema Information
 #
-# Table name: sentences
+# Table name: codes
 #
 #  id         :bigint(8)        not null, primary key
+#  mode       :string
 #  body       :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-class Sentence < ApplicationRecord
-  has_one :article_block, as: :blockable, dependent: :destroy
-  has_one :article, through: :article_block
-
-  def empty?
-    body.blank?
+FactoryBot.define do
+  factory :code do
+    
   end
 end

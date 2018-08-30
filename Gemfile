@@ -19,6 +19,7 @@ gem 'rails-i18n', '~> 5.0.0'
 # gem 'turbolinks'
 gem 'jbuilder'
 gem 'meta-tags'
+gem 'rouge'
 gem 'slim-rails'
 
 # Authentication
@@ -64,7 +65,7 @@ gem 'validate_url'
 gem 'validates_email_format_of'
 
 # Decorator
-gem 'active_decorator'
+gem 'draper'
 
 # Storage
 gem 'carrierwave'

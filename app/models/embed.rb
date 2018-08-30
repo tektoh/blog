@@ -16,4 +16,8 @@ class Embed < ApplicationRecord
   enum embed_type: %i[youtube]
 
   validates :identifier, length: { maximum: 200 }
+
+  def empty?
+    identifier.blank?
+  end
 end

@@ -1,5 +1,6 @@
 = content_for 'scripts' do
-  = javascript_pack_tag 'edit_article'
+  = javascript_pack_tag 'sentence_editor'
+  = javascript_pack_tag 'code_editor'
 
 = content_for 'content-header' do
   = @article.title
@@ -13,8 +14,8 @@
         i.fa.fa-spinner.fa-pulse.fa-3x.fa-fw
 
   .col-md-4
-    .box.box-solid.box-info
-      .box-header
+    .box.box-default
+      .box-header.with-border
         h3.box-title 情報
 
       = simple_form_for @article, url: admin_article_path(@article.uuid) do |f|
@@ -42,8 +43,8 @@
         .box-footer
           = f.button :submit, class: %w[btn btn-primary]
 
-    .box.box-solid.box-info
-      .box-header
+    .box.box-default
+      .box-header.with-border
         h3.box-title 公開
       .box-body
         = link_to admin_article_preview_path(@article.uuid), class: %w[btn btn-default btn-block btn-flat], target: '_blank' do

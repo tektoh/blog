@@ -10,41 +10,25 @@
       .modal-header
         h4.modal-title ブロックの追加
       .modal-body
-        = link_to admin_article_article_blocks_path(article.uuid), \
-          class: %w[btn btn-app btn-default js-insert-article-block], \
-          data: { \
-            remote: true, \
-            disable: true, \
-            method: :post, \
-            params: { article_block: { level: level, blockable_type: 'sentence'  } }.to_param \
-           } do
+        = insert_block_button(article, level, 'sentence', class: 'js-insert-article-block') do
           i.fa.fa-edit
           '
           | 文章
 
-        = link_to admin_article_article_blocks_path(article.uuid), \
-          class: %w[btn btn-app btn-default js-insert-article-block], \
-          data: { \
-            remote: true, \
-            disable: true, \
-            method: :post, \
-            params: { article_block: { level: level, blockable_type: 'medium'  } }.to_param \
-           } do
+        = insert_block_button(article, level, 'medium', class: 'js-insert-article-block') do
           i.fa.fa-image
           '
-          | 画像
+          | メディア
 
-        = link_to admin_article_article_blocks_path(article.uuid), \
-          class: %w[btn btn-app btn-default js-insert-article-block], \
-          data: { \
-            remote: true, \
-            disable: true, \
-            method: :post, \
-            params: { article_block: { level: level, blockable_type: 'embed' } }.to_param \
-            } do
+        = insert_block_button(article, level, 'embed', class: 'js-insert-article-block') do
           i.fa.fa-youtube-play
           '
           | 埋め込み
+
+        = insert_block_button(article, level, 'code', class: 'js-insert-article-block') do
+          i.fa.fa-code
+          '
+          | コード
 
       .modal-footer
         button.btn.btn-default[data-dismiss="modal"] 閉じる

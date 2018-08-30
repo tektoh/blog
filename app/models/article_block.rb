@@ -31,52 +31,44 @@ class ArticleBlock < ApplicationRecord
     validates :level, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   end
 
+  BLOCKABLE_MODELS = [Sentence, Medium, Embed, Code]
+
   class << self
     def blockable_types
-      %w[Sentence Medium Embed]
+      BLOCKABLE_MODELS.map(&:name)
     end
 
     def valid_blockable_type?(type)
       blockable_types.include?(type.to_s.classify)
     end
+
+    def blockable_class(type)
+      unless valid_blockable_type?(type)
+        raise "ブロックタイプが不正です (#{type})"
+      end
+      type.to_s.classify.constantize
+    end
   end
 
-  def sentence?
-    blockable.is_a?(Sentence)
-  end
-
-  def medium?
-    blockable.is_a?(Medium)
-  end
-
-  def embed?
-    blockable.is_a?(Embed)
+  BLOCKABLE_MODELS.each do |model|
+    define_method(:"#{model.model_name.singular}?") { blockable.is_a?(model) }
   end
 
   def insert_and_save!
-    # levelをずらす
-    article_blocks = article.article_blocks.where('level >= ?', level).reorder(level: :desc)
-    article_blocks.each do |article_block|
-      article_block.level += 1
-      article_block.save!
-    end
+    article_blocks_behind.reorder(level: :desc).each(&:shift_level!)
     save!
   end
 
-  def create_blockable!(type)
-    case type.to_s.classify
-    when 'Sentence'
-      self.blockable = Sentence.create!
+  def shift_level!
+    self.level = level.next
+    save!
+  end
 
-    when 'Medium'
-      self.blockable = Medium.create!
+  def article_blocks_behind
+    article.article_blocks.where('level >= ?', level)
+  end
 
-    when 'Embed'
-      self.blockable = Embed.create!
-    else
-      raise "ブロックタイプが不正です (#{type})"
-    end
-
-    blockable
+  def create_blockable!(type, attributes = {}, &block)
+    self.blockable = ArticleBlock.blockable_class(type).create!(attributes, &block)
   end
 end

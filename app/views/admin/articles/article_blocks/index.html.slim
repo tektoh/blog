@@ -1,5 +1,4 @@
-= render 'admin/articles/article_blocks/insert_block', article: @article, level: 0
-
-- @article_blocks.each do |article_block|
-  = render 'admin/articles/article_blocks/article_block', article: @article, article_blocks: @article_blocks, article_block: article_block
-  = render 'admin/articles/article_blocks/insert_block', article: @article, level: article_block.level + 1
+= render 'admin/articles/article_blocks/insert_block', article: article, level: 0
+- article_blocks.each do |article_block|
+  = render 'admin/articles/article_blocks/article_block', article: article, article_blocks: article_blocks, article_block: article_block
+  = render 'admin/articles/article_blocks/insert_block', article: article, level: article_block.level + 1

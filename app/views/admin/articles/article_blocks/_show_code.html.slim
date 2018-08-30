@@ -1,5 +1,7 @@
 .box-body
-  = sanitize(sentence.body)
+  pre.highlight
+    code
+      == code.body_highlighted
 .box-footer
   .pull-right
     = edit_block_button article, article_block, class: 'js-edit-article-block' do

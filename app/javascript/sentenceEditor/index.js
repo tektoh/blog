@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 import Editor from './editor'
 
 (function ($, undefined) {
-  $.fn.articleBlockEditor = function () {
+  $.fn.sentenceEditor = function () {
     this.each((i, elm) => {
       const editorBody = elm.querySelector('.editor-body')
       const textarea = elm.querySelector('textarea')

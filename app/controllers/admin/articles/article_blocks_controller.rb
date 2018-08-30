@@ -1,20 +1,15 @@
 class Admin::Articles::ArticleBlocksController < ApplicationController
   layout false
 
-  before_action :set_article
-  before_action :set_article_block, only: %i[show edit update destroy]
-
-  def index
-    @article_blocks = @article.article_blocks.preload(:blockable)
-  end
+  def index; end
 
   def show; end
 
   def create
     ArticleBlock.transaction do
-      @article_block = @article.article_blocks.new(article_block_params)
+      article_block = article.article_blocks.new(article_block_params)
 
-      if @article_block.invalid?(:insert)
+      if article_block.invalid?(:insert)
         return head :bad_request
       end
 
@@ -24,8 +19,8 @@ class Admin::Articles::ArticleBlocksController < ApplicationController
         return head :bad_request
       end
 
-      @article_block.create_blockable!(blockable_type)
-      @article_block.insert_and_save!
+      article_block.create_blockable!(blockable_type)
+      article_block.insert_and_save!
     end
 
     head :ok
@@ -34,8 +29,8 @@ class Admin::Articles::ArticleBlocksController < ApplicationController
   def edit; end
 
   def update
-    if @article_block.blockable.update(blockable_params)
-      if @article_block.medium?
+    if article_block.blockable.update(blockable_params)
+      if article_block.medium?
         # FIXME remote: true では Ajaxでファイルアップロードができない
         redirect_to edit_admin_article_path(@article.uuid)
       else
@@ -82,20 +77,37 @@ class Admin::Articles::ArticleBlocksController < ApplicationController
 
   private
 
+  def article
+    @article ||= Article.find_by!(uuid: params[:article_uuid]).decorate
+  end
+  helper_method :article
+
+  def article_blocks
+    @article_blocks ||= article.article_blocks.preload(:blockable).decorate
+  end
+  helper_method :article_blocks
+
+  def article_block
+    @article_block ||= article.article_blocks.find(params[:id])
+  end
+  helper_method :article_block
+
+  def article_block=(v)
+    @article_block = v
+  end
+
   def article_block_params
     params.require(:article_block).permit(:level)
   end
 
   def blockable_params
-    if params.key?(:sentence)
-      sentence_params
-    elsif params.key?(:medium)
-      medium_params
-    elsif params.key?(:embed)
-      embed_params
-    else
+    type = ArticleBlock.blockable_types.map(&:underscore).find { |type| params.key?(type) }
+
+    if type.blank?
       raise ActionController::ParameterMissing.new(:blockable)
     end
+
+    send(:"#{type}_params")
   end
 
   def sentence_params
@@ -110,11 +122,7 @@ class Admin::Articles::ArticleBlocksController < ApplicationController
     params.require(:embed).permit(:embed_type, :identifier)
   end
 
-  def set_article
-    @article = Article.find_by!(uuid: params[:article_uuid])
-  end
-
-  def set_article_block
-    @article_block = @article.article_blocks.find(params[:id])
+  def code_params
+    params.require(:code).permit(:mode, :body)
   end
 end

@@ -83,26 +83,6 @@ class Article < ApplicationRecord
     end
   end
 
-  # FIXME: レンダリングのために引数でコントローラーを渡しているが、そもそもコントローラーに移した方がいいかもしれない
-  def build_body(controller)
-    result = ''
-
-    article_blocks.each do |article_block|
-      result << if article_block.sentence?
-                  sentence = article_block.blockable
-                  sentence.body
-                elsif article_block.medium?
-                  medium = ActiveDecorator::Decorator.instance.decorate(article_block.blockable)
-                  controller.render_to_string("shared/_media_#{medium.media_type}", locals: { medium: medium }, layout: false)
-                elsif article_block.embed?
-                  embed = ActiveDecorator::Decorator.instance.decorate(article_block.blockable)
-                  controller.render_to_string("shared/_embed_#{embed.embed_type}", locals: { embed: embed }, layout: false)
-                end
-    end
-
-    result
-  end
-
   def alignment_article_blocks!
     article_blocks.each.with_index(0) do |article_block, level|
       article_block.level = level

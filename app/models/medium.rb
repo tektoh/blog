@@ -10,6 +10,8 @@
 #
 
 class Medium < ApplicationRecord
+  include ArticleBlockable
+
   has_one :article_block, as: :blockable, inverse_of: :blockable, dependent: :destroy
   has_one :article, through: :article_block
 
@@ -18,10 +20,14 @@ class Medium < ApplicationRecord
 
   attribute :attachment
 
+  enum media_type: %i[image]
+
   before_save do
     self.image = Image.create!(file: attachment) if attachment.present? && image?
     self
   end
 
-  enum media_type: %i[image]
+  def empty?
+    image.blank?
+  end
 end
