@@ -41,6 +41,10 @@
 
 .blog-article-title {
   font-family: "Sawarabi Mincho";
+
+  a:hover {
+    text-decoration: none;
+  }
 }
 
 .blog-article-meta {

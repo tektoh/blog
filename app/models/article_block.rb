@@ -31,11 +31,11 @@ class ArticleBlock < ApplicationRecord
     validates :level, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   end
 
-  BLOCKABLE_MODELS = [Sentence, Medium, Embed, Code]
+  BLOCKABLE_MODELS = %w[Sentence Medium Embed Code]
 
   class << self
     def blockable_types
-      BLOCKABLE_MODELS.map(&:name)
+      BLOCKABLE_MODELS
     end
 
     def valid_blockable_type?(type)
@@ -51,7 +51,7 @@ class ArticleBlock < ApplicationRecord
   end
 
   BLOCKABLE_MODELS.each do |model|
-    define_method(:"#{model.model_name.singular}?") { blockable.is_a?(model) }
+    define_method(:"#{model.underscore}?") { blockable.is_a?(model.constantize) }
   end
 
   def insert_and_save!

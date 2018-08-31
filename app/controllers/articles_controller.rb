@@ -48,7 +48,8 @@ class ArticlesController < ApplicationController
   def articles
     return @articles if defined? @articles
     @articles = taxonomy? ? taxonomy.articles : Article.all
-    @articles.new_arrivals.page(params[:page]).per(20)
+    @articles = @articles.archives_in(params[:year], params[:month]) if params[:year]
+    @articles.new_arrivals.page(params[:page]).per(5)
   end
   helper_method :articles
 end

@@ -39,6 +39,8 @@ Rails.application.routes.draw do
 
   get '/tags/:tag_slug', as: :tag, to: 'articles#index'
   get '/authors/:author_slug', as: :author, to: 'articles#index'
+  get '/archives/:year', to: 'articles#index'
+  get '/archives/:year/:month', as: :archive, to: 'articles#index'
   get '/:category_slug', as: :category, to: 'articles#index'
   get '/:category_slug/:article_slug', as: :article, to: 'articles#show'
 
