@@ -4,20 +4,24 @@ html
     = render 'layouts/meta_tags'
     = stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css'
     = stylesheet_link_tag 'application', media: 'all'
+    - if preview?
+      = stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.2/gh-fork-ribbon.min.css'
     = yield 'stylesheets'
   body
-    = render 'layouts/header'
+    - if preview?
+      a.github-fork-ribbon[href="" data-ribbon="Preview"]
 
-    section.container.page-content
-      main = yield
+    .container
+      = render 'layouts/header'
+      = render 'layouts/navigation', categories: categories
 
-      - if new_arrivals?
-        .section.container.new_arrivals.my-5
-          = render 'shared/new_arrival_articles', articles: Article.new_arrivals.limit(3)
+    main.container
+      .row
+        section.col-md-8.blog-main
+          = yield
 
-      - if categories?
-        .section.container.categories.my-5
-          = render 'shared/categories', categories: Category.all
+        aside.col-md-4.blog-sidebar
+          = render 'layouts/sidebar'
 
     = javascript_include_tag 'https://code.jquery.com/jquery-3.2.1.slim.min.js'
     = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js'

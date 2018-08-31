@@ -1,0 +1,7 @@
+ruby:
+  categories = local_assigns[:categories]
+
+.nav-scroller.py-1.mb-2
+  nav.nav.d-flex.justify-content-between
+    - categories.each do |category|
+      = link_to category.name, category_path(category.slug), class: %w[p-2 text-muted]

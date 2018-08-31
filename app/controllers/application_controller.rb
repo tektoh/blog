@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :require_login
-  before_action :current_site
-  before_action :init_components
+
+  private
 
   def current_site
     @current_site ||= Site.first
@@ -23,36 +23,13 @@ class ApplicationController < ActionController::Base
   end
   helper_method :preview?
 
-  def hide_pagination!
-    @components[:pagination] = false
+  def categories
+    @categories ||= Category.all
   end
+  helper_method :categories
 
-  def pagination?
-    @components[:pagination]
+  def new_arrival_articles
+    @new_arrival_articles ||= Article.new_arrivals.limit(3)
   end
-  helper_method :pagination?
-
-  def hide_new_arrivals!
-    @components[:new_arrivals] = false
-  end
-
-  def new_arrivals?
-    @components[:new_arrivals]
-  end
-  helper_method :new_arrivals?
-
-  def categories?
-    @components[:categories]
-  end
-  helper_method :categories?
-
-  private
-
-  def init_components
-    @components = {
-      pagination: true,
-      new_arrivals: true,
-      categories: true
-    }
-  end
+  helper_method :new_arrival_articles
 end

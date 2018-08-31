@@ -1,5 +1,7 @@
-header.jumbotron.jumbotron-fluid(style="background: url(#{cover_image_url}) center / cover")
-  .container
-    h1 = link_to current_site.name, root_path
-    p.lead = current_site.subtitle
+header.blog-header.py-3
+  .row.flex-nowrap.justify-content-between.align-items-center
+    .col-4.pt-1
+    .col-4.text-center
+      = link_to current_site.name, root_path, class: %w[blog-header-logo text-dark]
+    .col-4.d-flex.justify-content-end
 

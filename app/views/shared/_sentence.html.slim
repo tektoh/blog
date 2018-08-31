@@ -1,5 +1,5 @@
 ruby:
   sentence = local_assigns[:sentence]
 
-section.sentence(id="sentence_#{sentence.id}")
+section.sentence.mb-4(id="sentence_#{sentence.id}")
   = sanitize(sentence.body)

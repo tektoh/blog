@@ -2,17 +2,23 @@
 
 - if taxonomy?
   - if taxonomy.category?
-    h3.text-center Category
-    h1.text-center.display-3.mb-5 = taxonomy.name
+    h3.pb-3.mb-4.font-italic.border-bottom
+      | Category :
+      '
+      = taxonomy.name
 
   - if taxonomy.tag?
-    h3.text-center Tag
-    h1.text-center.display-3.mb-5 = "##{taxonomy.name}"
+    h3.pb-3.mb-4.font-italic.border-bottom
+      | Tag :
+      '
+      = "##{taxonomy.name}"
 
   - if taxonomy.author?
-    h3.text-center Author
-    h1.text-center.display-3 = "#{taxonomy.name}"
-    .text-center.mb-5
-      = image_tag taxonomy.icon_url(:icon), class: 'img-thumbnail img-icon'
+    h3.pb-3.mb-4.font-italic.border-bottom
+      | Author :
+      '
+      = taxonomy.name
 
-= render 'shared/articles', articles: articles
+- articles.each do |article|
+  - cache article, expires_in: 10.minutes
+    = render 'shared/article', article: article

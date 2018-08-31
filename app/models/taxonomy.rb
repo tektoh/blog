@@ -21,15 +21,15 @@ class Taxonomy < ApplicationRecord
   validates :name, presence: true, uniqueness: { scope: :type }, length: { maximum: 16 }
   validates :slug, presence: true, uniqueness: { scope: :type }, length: { maximum: 64 }, slug_format: true
 
-  def category?
-    is_a?(Category)
+  TAXONOMY_MODELS = [Category, Tag, Author]
+
+  class << self
+    def taxonomy_types
+      TAXONOMY_MODELS.map(&:name)
+    end
   end
 
-  def tag?
-    is_a?(Tag)
-  end
-
-  def author?
-    is_a?(Author)
+  TAXONOMY_MODELS.each do |model|
+    define_method(:"#{model.model_name.singular}?") { is_a?(model) }
   end
 end

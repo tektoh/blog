@@ -1,5 +1,5 @@
 ruby:
   medium = local_assigns[:medium]
 
-section.media-image(id="medium_#{medium.id}")
+section.medium-image.mb-4(id="medium_#{medium.id}")
   = image_tag medium.image.file.lg.url if medium.image.present?

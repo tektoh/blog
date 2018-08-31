@@ -1,67 +1,54 @@
 class ArticlesController < ApplicationController
   skip_before_action :require_login
 
-  def index
-    return if taxonomy?
-    hide_new_arrivals!
-    hide_pagination!
-  end
+  def index; end
 
-  def show
-    @category = Category.find_by!(slug: params[:category_slug])
-    @article = @category.articles.viewable.find_by!(slug: params[:article_slug]).decorate
-  end
+  def show; end
 
   private
 
-  def tag?
-    params[:tag_slug].present?
+  Taxonomy::taxonomy_types.map(&:underscore).each do |taxonomy|
+    method_name = :"#{taxonomy}?"
+    define_method(method_name) { params[:"#{taxonomy}_slug"].present? }
+    helper_method method_name
   end
-  helper_method :tag?
 
-  def author?
-    params[:author_slug].present?
+  def taxonomy_name
+    return @taxonomy_name if defined?(@taxonomy_name)
+    @taxonomy_name = Taxonomy::taxonomy_types
+                       .map(&:underscore)
+                       .find { |taxonomy_type| send(:"#{taxonomy_type}?") }
   end
-  helper_method :author?
-
-  def category?
-    params[:category_slug].present?
-  end
-  helper_method :category?
 
   def taxonomy?
-    tag? || author? || category?
+    taxonomy_name.present?
   end
   helper_method :taxonomy?
 
+  def taxonomy
+    @taxonomy ||= taxonomy_name.classify.constantize.find_by!(slug: params[:"#{taxonomy_name}_slug"])
+  end
+  helper_method :taxonomy
+
   def title
-    @title ||= if taxonomy?
-                 taxonomy.name
-               end
+    @title ||= taxonomy? ? taxonomy.name : ''
   end
   helper_method :title
 
+  def article
+    @article ||= category.articles.viewable.find_by!(slug: params[:article_slug]).decorate
+  end
+  helper_method :article
+
+  def category
+    @category ||= Category.find_by!(slug: params[:category_slug])
+  end
+  helper_method :category
+
   def articles
     return @articles if defined? @articles
-
-    @articles = if taxonomy?
-                  taxonomy.articles
-                else
-                  Article.all
-                end
-
+    @articles = taxonomy? ? taxonomy.articles : Article.all
     @articles.new_arrivals.page(params[:page]).per(20)
   end
   helper_method :articles
-
-  def taxonomy
-    @taxonomy ||= if tag?
-                    Tag.find_by!(slug: params[:tag_slug])
-                  elsif author?
-                    Author.find_by!(slug: params[:author_slug])
-                  elsif category?
-                    Category.find_by!(slug: params[:category_slug])
-                  end
-  end
-  helper_method :taxonomy
 end
