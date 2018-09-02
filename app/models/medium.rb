@@ -23,7 +23,7 @@ class Medium < ApplicationRecord
 
   enum media_type: %i[image]
 
-  validates :attachment, presence: { message: 'ファイルを選択してください' }, unless: :attachment_url?
+  validates :attachment, presence: { message: 'ファイルを選択してください' }, allow_blank: true, unless: :attachment_url?
   validates :attachment_url, url: { schemes: %w[http https] }, allow_blank: true
   validate :validate_attachment_url, if: :attachment_url?
   before_save :create_image!, if: -> { image? && attachment? }
