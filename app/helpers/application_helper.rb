@@ -114,6 +114,7 @@ module ApplicationHelper
                     url: admin_article_article_block_path(article.uuid, article_block),
                     data: {
                       remote: true,
+                      type: :html,
                       disable: true
                     } do |f|
       capture(f, &block)

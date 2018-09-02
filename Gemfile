@@ -72,6 +72,10 @@ gem 'carrierwave'
 gem 'carrierwave-aws'
 gem 'mini_magick'
 
+# HTTP Client
+gem 'faraday'
+gem 'mime-types'
+
 # Application server
 gem 'puma'
 

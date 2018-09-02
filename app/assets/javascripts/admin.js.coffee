@@ -58,8 +58,10 @@ $ ->
       $content.find('.js-article-block-sentence-editor').sentenceEditor()
       $content.find('.js-article-block-code-editor').codeEditor()
 
-    $root.on 'ajax:success', '.js-update-article-block', ->
-      reload()
+    $root.on 'ajax:success', '.js-update-article-block', (event) ->
+      data = event.detail[2].responseText
+      $content = $(event.currentTarget).parent('.js-article-block-content')
+      $content.html(data)
 
     $root.on 'ajax:error', '.js-update-article-block', ->
       alert('エラーが発生しました')

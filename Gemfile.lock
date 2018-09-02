@@ -600,6 +600,7 @@ DEPENDENCIES
   enum_help
   factory_bot_rails
   faker
+  faraday
   file_validators
   font-awesome-rails
   fuubar
@@ -613,6 +614,7 @@ DEPENDENCIES
   listen
   meta-tags
   migration_comments
+  mime-types
   mini_magick
   paranoia
   paranoia_uniqueness_validator

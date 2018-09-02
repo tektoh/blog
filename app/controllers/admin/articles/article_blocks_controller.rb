@@ -7,7 +7,7 @@ class Admin::Articles::ArticleBlocksController < ApplicationController
 
   def create
     ArticleBlock.transaction do
-      article_block = article.article_blocks.new(article_block_params)
+      article_block = article.article_blocks.build(article_block_params)
 
       if article_block.invalid?(:insert)
         return head :bad_request
@@ -34,10 +34,10 @@ class Admin::Articles::ArticleBlocksController < ApplicationController
         # FIXME remote: true では Ajaxでファイルアップロードができない
         redirect_to edit_admin_article_path(@article.uuid)
       else
-        head :ok
+        render action: :show
       end
     else
-      render action: :edit, status: 400
+      render action: :edit
     end
   end
 
@@ -115,7 +115,7 @@ class Admin::Articles::ArticleBlocksController < ApplicationController
   end
 
   def medium_params
-    params.require(:medium).permit(:media_type, :attachment)
+    params.require(:medium).permit(:media_type, :attachment, :attachment_url)
   end
 
   def embed_params

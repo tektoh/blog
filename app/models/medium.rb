@@ -19,15 +19,37 @@ class Medium < ApplicationRecord
   has_one :image, through: :medium_image
 
   attribute :attachment
+  attribute :attachment_url
 
   enum media_type: %i[image]
 
-  before_save do
-    self.image = Image.create!(file: attachment) if attachment.present? && image?
-    self
-  end
+  validates :attachment, presence: { message: 'ファイルを選択してください' }, unless: :attachment_url?
+  validates :attachment_url, url: { schemes: %w[http https] }, allow_blank: true
+  validate :validate_attachment_url, if: :attachment_url?
+  before_save :create_image!, if: -> { image? && attachment? }
+  before_save :fetch_image!, if: -> { image? && !attachment? && attachment_url? }
 
   def empty?
     image.blank?
+  end
+
+  def validate_attachment_url
+    response = Faraday.head(attachment_url)
+    if response.success?
+      content_type = response.headers['content-type']
+      if content_type.present? && !MIME::Type.new(content_type).simplified.match(%r{\Aimage/(jpeg|png)\z})
+        errors.add(:attachment_url, 'URLが画像ではありません')
+      end
+    else
+      errors.add(:attachment_url, "エラーが発生しました: #{response.headers['status']}")
+    end
+  end
+
+  def create_image!
+    self.image = Image.create!(file: attachment)
+  end
+
+  def fetch_image!
+    self.image = Image.create!(remote_file_url: attachment_url)
   end
 end
