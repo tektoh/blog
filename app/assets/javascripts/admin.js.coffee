@@ -60,8 +60,11 @@ $ ->
 
     $root.on 'ajax:success', '.js-update-article-block', (event) ->
       data = event.detail[2].responseText
-      $content = $(event.currentTarget).parent('.js-article-block-content')
-      $content.html(data)
+      if data
+        $content = $(event.currentTarget).parent('.js-article-block-content')
+        $content.html(data)
+      else
+        reload()
 
     $root.on 'ajax:error', '.js-update-article-block', ->
       alert('エラーが発生しました')

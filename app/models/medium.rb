@@ -26,8 +26,8 @@ class Medium < ApplicationRecord
   validates :attachment, presence: { message: 'ファイルを選択してください' }, allow_blank: true, unless: :attachment_url?
   validates :attachment_url, url: { schemes: %w[http https] }, allow_blank: true
   validate :validate_attachment_url, if: :attachment_url?
-  before_save :create_image!, if: -> { image? && attachment? }
-  before_save :fetch_image!, if: -> { image? && !attachment? && attachment_url? }
+  before_save :create_image_by_attachment!, if: :will_create_image_by_attachment?
+  before_save :create_image_by_attachment_url!, if: :will_create_image_by_attachment_url?
 
   def empty?
     image.blank?
@@ -45,11 +45,19 @@ class Medium < ApplicationRecord
     end
   end
 
-  def create_image!
+  def will_create_image_by_attachment?
+    image? && attachment.present?
+  end
+
+  def create_image_by_attachment!
     self.image = Image.create!(file: attachment)
   end
 
-  def fetch_image!
+  def will_create_image_by_attachment_url?
+    image? && !attachment.present? && attachment_url?
+  end
+
+  def create_image_by_attachment_url!
     self.image = Image.create!(remote_file_url: attachment_url)
   end
 end

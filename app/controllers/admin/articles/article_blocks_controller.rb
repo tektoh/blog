@@ -32,7 +32,8 @@ class Admin::Articles::ArticleBlocksController < ApplicationController
     if article_block.blockable.update(blockable_params)
       if article_block.medium?
         # FIXME remote: true では Ajaxでファイルアップロードができない
-        redirect_to edit_admin_article_path(@article.uuid)
+        # NoContent の場合はフロント側でリロードする
+        head :ok
       else
         render action: :show
       end
@@ -43,8 +44,8 @@ class Admin::Articles::ArticleBlocksController < ApplicationController
 
   def destroy
     ArticleBlock.transaction do
-      @article_block.destroy!
-      @article_block.article.alignment_article_blocks!
+      article_block.destroy!
+      article_block.article.alignment_article_blocks!
     end
     head :ok
   end
