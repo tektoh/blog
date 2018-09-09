@@ -1,8 +1,8 @@
-.p-3.mb-3.bg-light.rounded
+section.about.p-3.mb-3.bg-light.rounded
   h4.font-italic About
   = simple_format current_site.description
 
-.p-3
+section.archives.p-3
   h4.font-italic Archives
   ol.list-unstyled.mb-0
     - Article.archives.reverse.each do |date|

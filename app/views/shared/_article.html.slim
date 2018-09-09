@@ -30,13 +30,12 @@ section.blog-article
 
     - if article.author.present?
       section.author.my-5
-        .card
-          .card-body
-            .media
-              = image_tag article.author.avatar.icon.url, class: 'mr-3', style: 'width: 64px; height: 64px;'
-              .media-body
-                h5.mt-0 = link_to article.author.name, author_path(article.author.slug)
-                = article.author.description
+        h4.font-italic Author
+        .media
+          = image_tag article.author.avatar.icon.url, class: 'mr-3', style: 'width: 64px; height: 64px;'
+          .media-body
+            h5.mt-0 = link_to article.author.name, author_path(article.author.slug)
+            = article.author.description
 
   - else
     article.blog-article-body
