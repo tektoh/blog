@@ -2,4 +2,6 @@ ruby:
   medium = local_assigns[:medium]
 
 section.medium-image.mb-4(id="medium_#{medium.id}")
-  = image_tag medium.image.file.lg.url if medium.image.present?
+  - if medium.image.present?
+    = link_to medium.image.file.url, target: :_blank do
+      = image_tag medium.image.file.lg.url, alt: medium.name

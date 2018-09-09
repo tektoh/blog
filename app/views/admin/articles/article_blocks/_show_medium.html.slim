@@ -1,4 +1,5 @@
 .box-body
+  h4 = medium.name
   - if medium.image.present?
     = image_tag medium.image.file.md.url, class: 'img-thumbnail'
 .box-footer
