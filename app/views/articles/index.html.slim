@@ -19,6 +19,4 @@
       '
       = taxonomy.name
 
-- articles.each do |article|
-  - cache article, expires_in: 10.minutes
-    = render 'shared/article', article: article
+= render partial: 'shared/article', collection: articles, cached: true

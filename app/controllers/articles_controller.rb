@@ -1,6 +1,8 @@
 class ArticlesController < ApplicationController
   skip_before_action :require_login
 
+  before_action -> { expires_in 1.hour }
+
   def index; end
 
   def show; end
