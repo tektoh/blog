@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '5.2.0'
+gem 'rails', '5.2.1'
 
 gem 'bootsnap', require: false
 gem 'sdoc', '~> 0.4.0', group: :doc
@@ -83,6 +83,10 @@ gem 'puma'
 gem 'resque'
 gem 'whenever', require: false
 
+group :staging, :production do
+  gem 'rails_12factor'
+end
+
 group :development do
   gem 'listen'
   gem 'web-console'
@@ -109,9 +113,10 @@ group :development, :test do
   gem 'brakeman', require: false
   gem 'bullet'
   gem 'coffeelint'
-  gem 'rails_best_practices', '~> 1.19.2'
-  gem 'reek', '~> 4.6.2'
-  gem 'rubocop', '~> 0.49'
+  gem 'rails_best_practices'
+  gem 'reek'
+  gem 'rubocop'
+  gem 'rubocop-rails_config'
   gem 'scss_lint', require: false
   gem 'slim_lint'
 
@@ -131,15 +136,6 @@ group :development, :test do
   # Table/Schema
   gem 'annotate'
   gem 'migration_comments'
-
-  # Deploy
-  gem 'capistrano', '3.9.0'
-  gem 'capistrano-bundler'
-  gem 'capistrano-rails'
-  gem 'capistrano-rails-console'
-  gem 'capistrano-rbenv'
-  gem 'capistrano-resque', require: false
-  gem 'capistrano3-puma'
 end
 
 group :test do
