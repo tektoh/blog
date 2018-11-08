@@ -15,8 +15,9 @@ gem 'uglifier'
 gem 'webpacker'
 
 # UI/UX
+gem 'actionpack-action_caching'
 gem 'rails-i18n', '~> 5.0.0'
-# gem 'turbolinks'
+gem 'turbolinks'
 gem 'jbuilder'
 gem 'meta-tags'
 gem 'rouge'

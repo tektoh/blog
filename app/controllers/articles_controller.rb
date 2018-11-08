@@ -3,6 +3,8 @@ class ArticlesController < ApplicationController
 
   before_action -> { expires_in 1.hour }
 
+  caches_action :index, :show, expires_in: 1.hour
+
   def index; end
 
   def show; end

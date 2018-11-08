@@ -24,15 +24,15 @@ FactoryBot.define do
     name { generate :slug }
 
     trait :writer do
-      role 'writer'
+      role { 'writer' }
     end
 
     trait :editor do
-      role 'editor'
+      role { 'editor' }
     end
 
     trait :admin do
-      role 'admin'
+      role { 'admin' }
     end
   end
 end

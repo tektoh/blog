@@ -14,8 +14,14 @@
 
 - Postgresql
 - Redis
-- Node.js >= 6.0.0
-- Yarn >= 0.20.1
+- Node.js
+- Yarn
+
+### System dependencies for Development
+
+- docker
+- docker-compose
+- docker-sync
 
 ## Project initiation
 
@@ -55,22 +61,34 @@ $ cp .env.default .env
 
 *AWSのアクセスキーなどは個別に担当者に聞いてください。*
 
-### Database creation
+### Build docker containers
 
 ```bash
-$ rake db:create db:reset
-```
-
-### Database initialization
-
-```bash
-$ rake db:seed
+$ docker-compose build
 ```
 
 ## Run rails server
 
 ```bash
 $ bundle exec rails server
+```
+
+or
+
+```bash
+$ docker-sync-stack start
+```
+
+### Database initialization
+
+```bash
+$ rails db:setup
+```
+
+or
+
+```bash
+$ docker-compose exec rails rails db:setup
 ```
 
 ## Webpacker
@@ -87,8 +105,16 @@ $ ./bin/webpack
 $ ./bin/webpack-dev-server
 ```
 
+## Run specs
+
 ```bash
 $ spring rspec spec/[対象ファイル]
+```
+
+or
+
+```bash
+$ docker-compose exec rails bin/rspec spec/[対象ファイル]
 ```
 
 ## How to run the static code analysis

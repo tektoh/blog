@@ -1,13 +1,17 @@
+cache_store:
+  redis:
+    namespace: 'cache'
+    url: <%= ENV.fetch('REDIS_URL') %>/0
 session_store:
   key: _session
   serializer: json
   redis:
     expire_after: <%= 1.day %>
     key_prefix: 'session:'
-    url: <%= ENV['REDIS_URL'] %>/1
+    url: <%= ENV.fetch('REDIS_URL') %>/1
 resque:
   redis:
-    url: <%= ENV['REDIS_URL'] %>/2
+    url: <%= ENV.fetch('REDIS_URL') %>/2
 carrierwave:
   storage: aws
   aws_bucket: blog-staging-uploads

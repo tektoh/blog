@@ -22,6 +22,8 @@ services:
       RAILS_ENV: development
     volumes:
       - .:/app
+      - /app/tmp/pids
+      - /app/.git
     ports:
       - '8080:8080'
   rails:
@@ -31,11 +33,13 @@ services:
       POSTGRES_HOST: db
       POSTGRES_USERNAME: postgres
       POSTGRES_PASSWORD:
-      REDIS_URL: redis://cache:6379/0
+      REDIS_URL: redis://cache:6379
       WEBPACKER_DEV_SERVER_HOST: webpacker
       WEBPACKER_DEV_SERVER_PORT: 8080
     volumes:
       - .:/app
+      - /app/tmp/pids
+      - /app/.git
     ports:
       - '3000:3000'
     depends_on:

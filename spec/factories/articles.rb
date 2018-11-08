@@ -32,11 +32,11 @@ FactoryBot.define do
     title { generate :title }
 
     trait :draft do
-      state 'draft'
+      state { 'draft' }
     end
 
     trait :published do
-      state 'published'
+      state { 'published' }
       slug { generate :slug }
       published_at { generate :time }
       category { create :category }
