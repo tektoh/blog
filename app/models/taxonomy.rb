@@ -21,15 +21,15 @@ class Taxonomy < ApplicationRecord
   validates :name, presence: true, uniqueness: { scope: :type }, length: { maximum: 16 }
   validates :slug, presence: true, uniqueness: { scope: :type }, length: { maximum: 64 }, slug_format: true
 
-  TAXONOMY_MODELS = %w[Category Tag Author]
+  TAXONOMY_TYPES = %w[Category Tag Author]
 
   class << self
     def taxonomy_types
-      TAXONOMY_MODELS
+      TAXONOMY_TYPES
     end
   end
 
-  TAXONOMY_MODELS.each do |model|
-    define_method(:"#{model.underscore}?") { is_a?(model.constantize) }
+  taxonomy_types.each do |type|
+    define_method(:"#{type.underscore}?") { is_a?(type.constantize) }
   end
 end
