@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/startup-technology/blog
+    working_directory: ~/blog
     parallelism: 1
     shell: /bin/bash --login
     environment:
@@ -9,7 +9,7 @@ jobs:
       CIRCLE_ARTIFACTS: /tmp/circleci-artifacts
       CIRCLE_TEST_REPORTS: /tmp/circleci-test-results
     docker:
-      - image: circleci/ruby:2.4-node
+      - image: circleci/ruby:2.5-node
         environment:
           RAILS_ENV: test
           BUNDLE_PATH: vendor/bundle
