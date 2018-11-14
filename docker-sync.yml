@@ -1,7 +1,0 @@
-version: "2"
-
-syncs:
-  app-sync:
-    src: '.'
-    sync_strategy: 'unison'
-    sync_excludes: ['.gitignore', '.git/', 'docker*', 'tmp/pids']

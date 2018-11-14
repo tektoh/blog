@@ -1,4 +1,6 @@
 version: '3'
+volumes:
+  data-volume:
 services:
   db:
     image: postgres:9.6
@@ -14,21 +16,9 @@ services:
       - ./tmp/docker/cache:/data
     ports:
       - '6379:6379'
-  webpacker:
-    build: .
-    command: bin/webpack-dev-server
-    environment:
-      NODE_ENV: development
-      RAILS_ENV: development
-    volumes:
-      - .:/app
-      - /app/tmp/pids
-      - /app/.git
-    ports:
-      - '8080:8080'
   rails:
     build: .
-    command: /bin/sh -c "rm tmp/pids/server.pid; bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
     environment:
       POSTGRES_HOST: db
       POSTGRES_USERNAME: postgres
@@ -38,13 +28,31 @@ services:
       WEBPACKER_DEV_SERVER_PORT: 8080
     volumes:
       - .:/app
+      - /app/tmp/cache
       - /app/tmp/pids
       - /app/.git
+      - data-volume:/usr/local/bundle
+      - data-volume:/app/node_modules
     ports:
       - '3000:3000'
     depends_on:
       - db
       - cache
-      - webpacker
     tty: true
     stdin_open: true
+  webpacker:
+    build: .
+    command: bin/webpack-dev-server
+    environment:
+      NODE_ENV: development
+      RAILS_ENV: development
+    volumes:
+      - .:/app
+      - /app/tmp
+      - /app/.git
+      - data-volume:/usr/local/bundle
+      - data-volume:/app/node_modules
+    ports:
+      - '8080:8080'
+    depends_on:
+      - rails

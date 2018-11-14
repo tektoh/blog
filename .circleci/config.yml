@@ -26,7 +26,7 @@ jobs:
           keys:
             - rails-bundle-{{ checksum "Gemfile.lock" }}
             - rails-bundle-
-      - run: bundle check || bundle install
+      - run: bundle check || bundle install --clean --jobs=4
       - save_cache:
           key: rails-bundle-{{ checksum "Gemfile.lock" }}
           paths:
