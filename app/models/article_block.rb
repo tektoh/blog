@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: article_blocks
@@ -65,7 +67,7 @@ class ArticleBlock < ApplicationRecord
   end
 
   def article_blocks_behind
-    article.article_blocks.where('level >= ?', level)
+    article.article_blocks.where("level >= ?", level)
   end
 
   def create_blockable!(type, attributes = {}, &block)

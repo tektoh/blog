@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
@@ -31,14 +33,14 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   private
 
-  def secure_token
-    var = :"@#{mounted_as}_secure_token"
-    model.instance_variable_get(var) || model.instance_variable_set(var, SecureRandom.uuid)
-  end
+    def secure_token
+      var = :"@#{mounted_as}_secure_token"
+      model.instance_variable_get(var) || model.instance_variable_set(var, SecureRandom.uuid)
+    end
 
-  def save_content_type_and_size_in_model
-    return self unless file && model && model.has_attribute?(:content_type)
-    model.content_type = file.content_type if file.content_type
-    model.file_size = file.size
-  end
+    def save_content_type_and_size_in_model
+      return self unless file && model && model.has_attribute?(:content_type)
+      model.content_type = file.content_type if file.content_type
+      model.file_size = file.size
+    end
 end

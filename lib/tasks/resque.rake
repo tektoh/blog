@@ -1,9 +1,11 @@
-require 'resque/tasks'
+# frozen_string_literal: true
+
+require "resque/tasks"
 
 namespace :resque do
   task setup: :environment do
-    ENV['TERM_CHILD'] ||= '1'
-    ENV['QUEUE'] ||= '*'
-    require 'resque'
+    ENV["TERM_CHILD"] ||= "1"
+    ENV["QUEUE"] ||= "*"
+    require "resque"
   end
 end

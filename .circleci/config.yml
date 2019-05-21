@@ -9,24 +9,39 @@ jobs:
       CIRCLE_ARTIFACTS: /tmp/circleci-artifacts
       CIRCLE_TEST_REPORTS: /tmp/circleci-test-results
     docker:
-      - image: circleci/ruby:2.5-node
+      - image: circleci/ruby:2.6.3-node-browsers
         environment:
           RAILS_ENV: test
+          POSTGRES_HOST: localhost
+          POSTGRES_USERNAME: postgres
+          POSTGRES_PASSWORD: ""
+          REDIS_URL: redis://localhost:6379
           BUNDLE_PATH: vendor/bundle
           YARN_CACHE_FOLDER: ~/.cache/yarn
+          DISABLE_SPRING: true
+          COVERAGE: true
       - image: circleci/postgres:9.6-alpine
         environment:
-          POSTGRES_USER: circleci
-          POSTGRES_DB: circle_test
+          POSTGRES_USER: postgres
+          POSTGRES_DB: blog_test
           POSTGRES_PASSWORD: ""
+      - image: circleci/redis:3.2.11-alpine
     steps:
       - checkout
       - run: mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS
+      - run:
+          command: |
+            sudo gem update --system
+            sudo gem uninstall bundler
+            sudo rm /usr/local/bin/bundle
+            sudo rm /usr/local/bin/bundler
+            sudo gem install bundler
+      - run: bundle -v
       - restore_cache:
           keys:
             - rails-bundle-{{ checksum "Gemfile.lock" }}
             - rails-bundle-
-      - run: bundle check || bundle install --clean --jobs=4
+      - run: bundle check || bundle install
       - save_cache:
           key: rails-bundle-{{ checksum "Gemfile.lock" }}
           paths:
@@ -41,9 +56,9 @@ jobs:
           paths:
             - ~/.cache/yarn
       - run: dockerize -wait tcp://localhost:5432 -timeout 1m
-      - run: cp -v config/database.ci.yml config/database.yml
+      - run: bundle exec bundle audit check --update
       - run: bundle exec rails db:create db:schema:load --trace
-      - run: bundle exec rspec --format progress
+      - run: bundle exec rails spec
       - store_test_results:
           path: /tmp/circleci-test-results
       - store_artifacts:

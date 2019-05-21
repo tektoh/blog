@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CryptedPassword
   extend ActiveSupport::Concern
 
@@ -14,7 +16,7 @@ module CryptedPassword
 
   protected
 
-  def new_record_or_changes_password
-    new_record? || changes[:crypted_password]
-  end
+    def new_record_or_changes_password
+      new_record? || changes[:crypted_password]
+    end
 end

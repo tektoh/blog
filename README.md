@@ -1,177 +1,145 @@
 # Blog
 
-ブログシステム
+ブログ
 
-## Ruby version
+## アーキテクチャ
 
-- See `.ruby-version`.
-
-## Rails version
-
-- See `Gemfile`.
-
-## System dependencies
-
+- Ruby on Rails
 - Postgresql
 - Redis
-- Node.js
-- Yarn
 
-### System dependencies for Development
+## 開発環境
 
-- docker
-- docker-compose
-- docker-sync
+### あなたのパソコンに必要なもの
 
-## Project initiation
+- Docker
+- Docker Compose
+- エディタにEditorConfigプラグインを入れてください
 
-- リポジトリのクローン
-
-```bash
-$ git@github.com:startup-technology/blog.git
-```
-
-- Gemのインストール
+### 環境変数
+開発環境で使用するAPIキーなどは `.env` ファイルに記載します。
+`.env.example` を参照してください。
 
 ```bash
-$ bundle install --path vendor/bundle
+cp -v .env{.example,}
 ```
 
-- npmのインストール
+### Dockerコンテナ
+
+- db: データベース(Postgresql)
+- cache: キャッシュサーバー(Redis)
+- rails: Railsサーバー(Puma)
+- webpack-dev-server: JavaScriptのコンパイル
+- spring: Rails CLI の受付
+- guard: spec, linter の自動実行
+
+### Dockerコンテナのビルド
 
 ```bash
-$ yarn install
+docker-compose build
 ```
 
-### Configuration
-
-*ファイルの中身はご自身の環境に合わせて適宜変更してください*
-
-- データベースの設定
+### Dockerコンテナの起動
 
 ```bash
-$ cp config/database.yml.default config/database.yml
+docker-compose up
 ```
 
-- 環境変数の設定
+コンテナが起動したらブラウザから `http://localhost:3000` でサービスにアクセスできます。
+
+### Dockerコンテナの停止
 
 ```bash
-$ cp .env.default .env
+docker-compose stop
 ```
 
-*AWSのアクセスキーなどは個別に担当者に聞いてください。*
+### 初期設定
 
-### Build docker containers
+コンテナが起動した状態で以下を実行してください
 
 ```bash
-$ docker-compose build
+docker-compose exec spring rails db:setup
 ```
 
-## Run rails server
+### その他の操作
+
+Gemfile, package.json を変更した場合はコンテナを再起動してください
 
 ```bash
-$ bundle exec rails server
+docker-compose stop
+docker-compose up
 ```
 
-or
+`rails` コマンドは spring のコンテナで実行してください
 
 ```bash
-$ docker-sync-stack start
+docker-compose exec spring rails db:migrate
 ```
 
-### Database initialization
+binding.pry する場合は `docker-compose ps` で Rails サーバーのイメージ名を確認し、 `docker attach [イメージ名]` でコンテナにアタッチしてください。
+
+各コンテナはvolumeで bundler や node_modules を共有しています。
+bundle install や yarn install が競合しないようにロックファイルを作成して制御しています。
+コンテナを起動中に強制終了するとロックファイルがvolumeに残ってしまうことがあります。
+コンテナが起動しなくなった場合はロックファイルを削除してみてください。
+
+[FIXME] 誰かもっとイケてる感じにしてほしい => docker-entrypoint.sh
 
 ```bash
-$ rails db:setup
+dc exec spring rm /usr/local/bundle/.wait
+dc exec spring rm /app/node_modules/.wait
 ```
 
-or
+bundle update
 
 ```bash
-$ docker-compose exec rails rails db:setup
+docker-compose run rails bundle update
 ```
 
-## Webpacker
+## Dockerを使わない場合
 
-JavaScriptのコンパイル
+rbenv, bundler, nodenv, yarn, postgresql, redis が必要です。
 
-```
-$ ./bin/webpack
-```
 
-サーバーの起動
+.env に以下の環境変数を追加してください
 
 ```
-$ ./bin/webpack-dev-server
+POSTGRES_HOST=localhost
+POSTGRES_USERNAME=postgres
+POSTGRES_PASSWORD=
+REDIS_URL=redis://localhost:6379
 ```
 
-## Run specs
+ローカル環境で postgresql-server と redis-server を起動してください。
+
+初期設定
+```bash
+bundle install
+yarn install
+bundle exec rails db:setup
+```
+
+Railsの起動
 
 ```bash
-$ spring rspec spec/[対象ファイル]
+bundle exec rails s
 ```
 
-or
+Resqueの起動
 
 ```bash
-$ docker-compose exec rails bin/rspec spec/[対象ファイル]
+bundle exec rails resque:work
 ```
 
-## How to run the static code analysis
-
-### Rubocop
+webpack-dev-serverの起動
 
 ```bash
-$ bundle exec rubocop -R
+bin/webpack-dev-server
 ```
 
-### Reek
+guardの起動
 
 ```bash
-$ bundle exec reek
-```
-
-### Rails best practices
-
-```bash
-$ bundle exec rails_best_practices
-```
-
-### Brakeman
-
-```bash
-$ bundle exec brakeman
-```
-
-### ESLint
-
-```bash
-$ npm run lint
-```
-
-### SCSS-Lint
-
-```bash
-$ bundle exec scss-lint
-```
-
-### Slim-Lint
-
-```bash
-$ bundle exec slim-lint
-```
-
-## EditorConfig
-
--  ご自身のエディタに[EditorConfig](http://editorconfig.org/)のインストールをお願いします。
-
-## Development controller
-
-### Force login
-
-- See `app/controllers/development/sessions_controller.rb`
-
-```
-/login_as/[user_id]
+bundle exec guard -i
 ```
 

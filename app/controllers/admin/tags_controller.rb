@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Admin::TagsController < ApplicationController
-  layout 'admin'
+  layout "admin"
 
   before_action :set_tags, only: %i[index]
   before_action :set_tag, only: %i[edit update destroy]
@@ -47,15 +49,15 @@ class Admin::TagsController < ApplicationController
 
   private
 
-  def tag_params
-    params.require(:tag).permit(:name, :slug)
-  end
+    def tag_params
+      params.require(:tag).permit(:name, :slug)
+    end
 
-  def set_tag
-    @tag = Tag.find(params[:id])
-  end
+    def set_tag
+      @tag = Tag.find(params[:id])
+    end
 
-  def set_tags
-    @tags = Tag.all.order(:slug)
-  end
+    def set_tags
+      @tags = Tag.all.order(:slug)
+    end
 end

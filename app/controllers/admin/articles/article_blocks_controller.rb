@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::Articles::ArticleBlocksController < ApplicationController
   layout false
 
@@ -78,52 +80,50 @@ class Admin::Articles::ArticleBlocksController < ApplicationController
 
   private
 
-  def article
-    @article ||= Article.find_by!(uuid: params[:article_uuid]).decorate
-  end
-  helper_method :article
+    def article
+      @article ||= Article.find_by!(uuid: params[:article_uuid]).decorate
+    end
+    helper_method :article
 
-  def article_blocks
-    @article_blocks ||= article.article_blocks.preload(:blockable).decorate
-  end
-  helper_method :article_blocks
+    def article_blocks
+      @article_blocks ||= article.article_blocks.preload(:blockable).decorate
+    end
+    helper_method :article_blocks
 
-  def article_block
-    @article_block ||= article.article_blocks.find(params[:id])
-  end
-  helper_method :article_block
+    def article_block
+      @article_block ||= article.article_blocks.find(params[:id])
+    end
+    helper_method :article_block
 
-  def article_block=(v)
-    @article_block = v
-  end
+    attr_writer :article_block
 
-  def article_block_params
-    params.require(:article_block).permit(:level)
-  end
-
-  def blockable_params
-    type = ArticleBlock.blockable_types.map(&:underscore).find { |type| params.key?(type) }
-
-    if type.blank?
-      raise ActionController::ParameterMissing.new(:blockable)
+    def article_block_params
+      params.require(:article_block).permit(:level)
     end
 
-    send(:"#{type}_params")
-  end
+    def blockable_params
+      type = ArticleBlock.blockable_types.map(&:underscore).find { |type| params.key?(type) }
 
-  def sentence_params
-    params.require(:sentence).permit(:body)
-  end
+      if type.blank?
+        raise ActionController::ParameterMissing.new(:blockable)
+      end
 
-  def medium_params
-    params.require(:medium).permit(:name, :media_type, :attachment, :attachment_url)
-  end
+      send(:"#{type}_params")
+    end
 
-  def embed_params
-    params.require(:embed).permit(:embed_type, :identifier)
-  end
+    def sentence_params
+      params.require(:sentence).permit(:body)
+    end
 
-  def code_params
-    params.require(:code).permit(:mode, :body)
-  end
+    def medium_params
+      params.require(:medium).permit(:name, :media_type, :attachment, :attachment_url)
+    end
+
+    def embed_params
+      params.require(:embed).permit(:embed_type, :identifier)
+    end
+
+    def code_params
+      params.require(:code).permit(:mode, :body)
+    end
 end

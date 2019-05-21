@@ -1,0 +1,19 @@
+h1.h3
+  | サイト初期設定
+
+= simple_form_for @site, url: admin_site_path, html: { multipart: true } do |f|
+  .card
+    .card-body
+      = f.input :name
+      = f.input :subtitle
+
+      hr
+
+      = simple_fields_for @user do |f_user|
+        = f_user.input :name, required: true
+        = f_user.input :password, required: true
+        = f_user.input :password_confirmation, required: true
+        = f_user.input :avatar, as: :file
+
+    .card-footer.text-right
+      = f.button :submit, "登録", class: %w[btn btn-primary]

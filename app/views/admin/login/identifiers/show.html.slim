@@ -1,6 +1,6 @@
-p.login-box-msg Sign in to start your session
-= simple_form_for @user, url: admin_login_identifier_path do |f|
+= simple_form_for @user, url: admin_login_identifier_path, html: { class: "form-login" } do |f|
+  h1.h3.mb-3.font-weight-normal
+    | Please sign in
+
   = f.input :name, label: false, placeholder: 'Username'
-  .row
-    .col-xs-offset-8.col-xs-4
-      = f.button :submit, '次へ', class: %w[btn btn-primary btn-block btn-flat]
+  = f.button :submit, '次へ', class: %w[btn btn-primary btn-block]

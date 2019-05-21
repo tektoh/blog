@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Admin::UsersController < ApplicationController
-  layout 'admin'
+  layout "admin"
 
   before_action :set_user, only: %i[show update destroy]
 
@@ -51,11 +53,11 @@ class Admin::UsersController < ApplicationController
 
   private
 
-  def user_params
-    params.require(:user).permit(policy(:user).permitted_attributes)
-  end
+    def user_params
+      params.require(:user).permit(policy(:user).permitted_attributes)
+    end
 
-  def set_user
-    @user = User.find(params[:id])
-  end
+    def set_user
+      @user = User.find(params[:id])
+    end
 end

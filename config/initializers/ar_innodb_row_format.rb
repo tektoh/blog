@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 ActiveSupport.on_load :active_record do
   module InnodbRowFormat
     def create_table(table_name, options = {})
-      table_options = options.merge(options: 'ENGINE=InnoDB ROW_FORMAT=DYNAMIC')
+      table_options = options.merge(options: "ENGINE=InnoDB ROW_FORMAT=DYNAMIC")
       super(table_name, table_options) do |td|
         yield td if block_given?
       end

@@ -1,55 +1,15 @@
-# This file overrides https://github.com/bbatsov/rubocop/blob/master/config/default.yml
+inherit_gem:
+  rubocop-rails_config:
+    - config/rails.yml
 
 AllCops:
+  TargetRubyVersion: 2.6
   Exclude:
     - "vendor/**/*"
-    - "db/**/*"
+    - "node_modules/**/*"
+    - "tmp/**/*"
+    - "log/**/*"
     - "bin/**/*"
     - "spec/**/*"
-  DisplayCopNames: true
-
-Rails:
-  Enabled: true
-
-Rails/Output:
-  Exclude:
-    - "config/unicorn/**/*"
-
-Metrics/AbcSize:
-  Max: 30
-
-Metrics/ClassLength:
-  CountComments: false
-  Max: 300
-
-Metrics/CyclomaticComplexity:
-  Max: 30
-
-Metrics/LineLength:
-  Enabled: false
-
-Metrics/MethodLength:
-  CountComments: false
-  Max: 30
-
-Naming/AccessorMethodName:
-  Exclude:
-    - "app/controllers/**/*"
-
-Style/AsciiComments:
-  Enabled: false
-
-Style/ClassAndModuleChildren:
-  Enabled: false
-
-Style/Documentation:
-  Enabled: false
-
-Style/FrozenStringLiteralComment:
-  Enabled: false
-
-Style/IfUnlessModifier:
-  Enabled: false
-
-Style/WhileUntilModifier:
-  Enabled: false
+    - "db/migrate/**/*"
+    - "db/schema.rb"

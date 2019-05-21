@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: articles
@@ -36,9 +38,9 @@ class Article < ApplicationRecord
   has_many :article_tags
   has_many :tags, through: :article_tags
   has_many :article_blocks, -> { order(:level) }, inverse_of: :article
-  has_many :sentences, through: :article_blocks, source: :blockable, source_type: 'Sentence'
-  has_many :media, through: :article_blocks, source: :blockable, source_type: 'Medium'
-  has_many :embeds, through: :article_blocks, source: :blockable, source_type: 'Embed'
+  has_many :sentences, through: :article_blocks, source: :blockable, source_type: "Sentence"
+  has_many :media, through: :article_blocks, source: :blockable, source_type: "Medium"
+  has_many :embeds, through: :article_blocks, source: :blockable, source_type: "Embed"
 
   enum state: %i[draft published]
 
@@ -62,13 +64,13 @@ class Article < ApplicationRecord
 
   before_create -> { self.uuid = SecureRandom.uuid }
 
-  scope :viewable, -> { published.where('published_at < ?', Time.current) }
+  scope :viewable, -> { published.where("published_at < ?", Time.current) }
   scope :new_arrivals, -> { viewable.order(published_at: :desc) }
   scope :by_category, ->(category_id) { where(category_id: category_id) }
   scope :archives_in, ->(year, month = nil) { month.nil? ? archives_in_year(Date.new(year.to_i)) : archives_in_month(Date.new(year.to_i, month.to_i)) }
   scope :archives_in_year, ->(date) { where(published_at: date.all_year) }
   scope :archives_in_month, ->(date) { where(published_at: date.all_month) }
-  scope :title_contain, ->(word) { where('title LIKE ?', "%#{word}%") }
+  scope :title_contain, ->(word) { where("title LIKE ?", "%#{word}%") }
 
   class << self
     def search(search_articles_form)
@@ -90,8 +92,8 @@ class Article < ApplicationRecord
         .viewable
         .select("DATE_PART('year', articles.published_at) AS year")
         .select("DATE_PART('month', articles.published_at) AS month")
-        .group('year, month')
-        .order('year, month')
+        .group("year, month")
+        .order("year, month")
         .map { |article| Date.new(article.year, article.month) }
     end
   end
@@ -104,10 +106,10 @@ class Article < ApplicationRecord
   end
 
   def next_article
-    @next_article ||= Article.viewable.order(published_at: :asc).where('published_at > ?', published_at).first
+    @next_article ||= Article.viewable.order(published_at: :asc).where("published_at > ?", published_at).first
   end
 
   def prev_article
-    @prev_article ||= Article.viewable.order(published_at: :desc).where('published_at < ?', published_at).first
+    @prev_article ||= Article.viewable.order(published_at: :desc).where("published_at < ?", published_at).first
   end
 end

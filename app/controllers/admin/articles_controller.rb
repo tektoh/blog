@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Admin::ArticlesController < ApplicationController
-  layout 'admin'
+  layout "admin"
 
   before_action :set_article, only: %i[edit update destroy]
 
@@ -35,7 +37,7 @@ class Admin::ArticlesController < ApplicationController
     authorize(@article)
 
     if @article.update(article_params)
-      flash[:notice] = '更新しました'
+      flash[:notice] = "更新しました"
       redirect_to edit_admin_article_path(@article.uuid)
     else
       render :edit
@@ -52,17 +54,17 @@ class Admin::ArticlesController < ApplicationController
 
   private
 
-  def article_params
-    params.require(:article).permit(
-      :title, :description, :slug, :state, :published_at, :eye_cache, :category_id, :author_id, tag_ids: []
-    )
-  end
+    def article_params
+      params.require(:article).permit(
+        :title, :description, :slug, :state, :published_at, :eye_cache, :category_id, :author_id, tag_ids: []
+      )
+    end
 
-  def search_params
-    params[:q]&.permit(:title, :category_id)
-  end
+    def search_params
+      params[:q]&.permit(:title, :category_id)
+    end
 
-  def set_article
-    @article = Article.find_by!(uuid: params[:uuid])
-  end
+    def set_article
+      @article = Article.find_by!(uuid: params[:uuid])
+    end
 end

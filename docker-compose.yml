@@ -1,58 +1,85 @@
-version: '3'
+version: '3.7'
+
+x-defaults: &defaults
+  build: .
+  environment: &default-environments
+    TZ: Asia/Tokyo
+    EDITOR: vi
+    APP_PATH: /app
+    RAILS_ENV: development
+    POSTGRES_HOST: db
+    POSTGRES_USERAME: postgres
+    POSTGRES_PASSWORD:
+    REDIS_URL: redis://cache:6379
+    SMTP_USERNAME:
+    SMTP_PASSWORD:
+    SMTP_ADDRESS: smtp
+    SMTP_PORT: 1025
+    NODE_ENV: development
+    WEBPACKER_DEV_SERVER_HOST: webpack-dev-server
+    WEBPACKER_DEV_SERVER_PORT: 3035
+    WEBPACKER_DEV_SERVER_PUBLIC: localhost:3035
+  volumes:
+    - .:/app
+    - /app/tmp/cache
+    - /app/tmp/pids
+    - /app/.git
+    - bundler-data:/usr/local/bundle
+    - yarn-data:/app/node_modules
+
 volumes:
-  data-volume:
+  bundler-data:
+  yarn-data:
+  db-data:
+  cache-data:
+
 services:
   db:
     image: postgres:9.6
-    restart: always
     volumes:
-      - ./tmp/docker/db:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql/data
     ports:
       - '5432:5432'
+
   cache:
     image: redis:3.2
-    restart: always
     volumes:
-      - ./tmp/docker/cache:/data
+      - cache-data:/data
     ports:
       - '6379:6379'
+
   rails:
-    build: .
+    <<: *defaults
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
-    environment:
-      POSTGRES_HOST: db
-      POSTGRES_USERNAME: postgres
-      POSTGRES_PASSWORD:
-      REDIS_URL: redis://cache:6379
-      WEBPACKER_DEV_SERVER_HOST: webpacker
-      WEBPACKER_DEV_SERVER_PORT: 8080
-    volumes:
-      - .:/app
-      - /app/tmp/cache
-      - /app/tmp/pids
-      - /app/.git
-      - data-volume:/usr/local/bundle
-      - data-volume:/app/node_modules
     ports:
       - '3000:3000'
+    tty: true
+    stdin_open: true
+
+#  resque:
+#    <<: *defaults
+#    command: bundle exec rails resque:work
+#    tty: true
+#    stdin_open: true
+
+  webpack-dev-server:
+    <<: *defaults
+    environment:
+      <<: *default-environments
+      WEBPACKER_DEV_SERVER_HOST: 0.0.0.0
+    command: bin/webpack-dev-server
+    ports:
+      - '3035:3035'
+
+  spring:
+    <<: *defaults
+    command: bundle exec spring server
+      - db
+      - cache
+
+  guard:
+    <<: *defaults
+    command: bundle exec guard -i
     depends_on:
       - db
       - cache
-    tty: true
-    stdin_open: true
-  webpacker:
-    build: .
-    command: bin/webpack-dev-server
-    environment:
-      NODE_ENV: development
-      RAILS_ENV: development
-    volumes:
-      - .:/app
-      - /app/tmp
-      - /app/.git
-      - data-volume:/usr/local/bundle
-      - data-volume:/app/node_modules
-    ports:
-      - '8080:8080'
-    depends_on:
-      - rails

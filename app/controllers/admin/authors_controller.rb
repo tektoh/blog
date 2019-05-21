@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Admin::AuthorsController < ApplicationController
-  layout 'admin'
+  layout "admin"
 
   before_action :set_authors, only: %i[index]
   before_action :set_author, only: %i[edit update destroy]
@@ -47,15 +49,15 @@ class Admin::AuthorsController < ApplicationController
 
   private
 
-  def author_params
-    params.require(:author).permit(:name, :slug, :description, :avatar)
-  end
+    def author_params
+      params.require(:author).permit(:name, :slug, :description, :avatar)
+    end
 
-  def set_author
-    @author = Author.find(params[:id])
-  end
+    def set_author
+      @author = Author.find(params[:id])
+    end
 
-  def set_authors
-    @authors = Author.all.order(:slug)
-  end
+    def set_authors
+      @authors = Author.all.order(:slug)
+    end
 end

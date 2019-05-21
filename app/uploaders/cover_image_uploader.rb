@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CoverImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
@@ -14,13 +16,13 @@ class CoverImageUploader < CarrierWave::Uploader::Base
   end
 
   def default_url
-    ActionController::Base.helpers.asset_path('cover.jpg')
+    ActionController::Base.helpers.asset_path("cover.jpg")
   end
 
   private
 
-  def secure_token
-    var = :"@#{mounted_as}_secure_token"
-    model.instance_variable_get(var) || model.instance_variable_set(var, SecureRandom.uuid)
-  end
+    def secure_token
+      var = :"@#{mounted_as}_secure_token"
+      model.instance_variable_get(var) || model.instance_variable_set(var, SecureRandom.uuid)
+    end
 end

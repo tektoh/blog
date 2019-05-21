@@ -1,5 +1,7 @@
-class Admin::Login::PasswordsController < ApplicationController
-  layout 'login'
+# frozen_string_literal: true
+
+class Admin::Login::PasswordsController < AdminController
+  layout "login"
 
   skip_before_action :require_login
 
@@ -13,16 +15,16 @@ class Admin::Login::PasswordsController < ApplicationController
     if @user.valid_password?(user_params.fetch(:password, nil))
       auto_login(@user)
       session.delete(:login_user_name)
-      redirect_to admin_root_url
+      redirect_to admin_root_path
     else
-      @user.errors.add(:password, 'パスワードが正しくありません')
+      @user.errors.add(:password, "パスワードが正しくありません")
       render :show
     end
   end
 
   private
 
-  def user_params
-    params.require(:user).permit(:name, :password)
-  end
+    def user_params
+      params.require(:user).permit(:name, :password)
+    end
 end

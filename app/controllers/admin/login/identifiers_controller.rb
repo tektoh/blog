@@ -1,5 +1,7 @@
-class Admin::Login::IdentifiersController < ApplicationController
-  layout 'login'
+# frozen_string_literal: true
+
+class Admin::Login::IdentifiersController < AdminController
+  layout "login"
 
   skip_before_action :require_login
 
@@ -14,17 +16,17 @@ class Admin::Login::IdentifiersController < ApplicationController
 
     if @user.present?
       session[:login_user_name] = @user.name
-      redirect_to admin_login_password_url
+      redirect_to admin_login_password_path
     else
       @user = User.new(user_params).tap(&:valid?)
-      @user.errors.add(:name, 'ユーザーが登録されていません')
+      @user.errors.add(:name, "ユーザーが登録されていません")
       render :show
     end
   end
 
   private
 
-  def user_params
-    params.require(:user).permit(:name)
-  end
+    def user_params
+      params.require(:user).permit(:name)
+    end
 end

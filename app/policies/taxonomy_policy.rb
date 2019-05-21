@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TaxonomyPolicy < ApplicationPolicy
   def index?
     user.admin? || user.editor?

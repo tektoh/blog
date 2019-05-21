@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Admin::InvitationsController < ApplicationController
-  layout 'admin'
+  layout "admin"
 
   before_action :set_invitation, only: %i[show destroy]
 
@@ -38,11 +40,11 @@ class Admin::InvitationsController < ApplicationController
 
   private
 
-  def invitation_params
-    params.require(:invitation).permit(:name, :role)
-  end
+    def invitation_params
+      params.require(:invitation).permit(:name, :role)
+    end
 
-  def set_invitation
-    @invitation = Invitation.find_by!(uuid: params[:uuid])
-  end
+    def set_invitation
+      @invitation = Invitation.find_by!(uuid: params[:uuid])
+    end
 end

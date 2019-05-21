@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Admin::RegistersController < ApplicationController
-  layout 'login'
+  layout "login"
 
   skip_before_action :require_login
 
@@ -25,23 +27,23 @@ class Admin::RegistersController < ApplicationController
 
   private
 
-  def invitation_params
-    ActionController::Parameters.new(@invitation.attributes)
-  end
+    def invitation_params
+      ActionController::Parameters.new(@invitation.attributes)
+    end
 
-  def user_params
-    params.require(:user).permit(policy(:user).permitted_attributes)
-  end
+    def user_params
+      params.require(:user).permit(policy(:user).permitted_attributes)
+    end
 
-  def set_invitation
-    @invitation = Invitation.validity.find_by!(uuid: params[:invitation_uuid])
-  end
+    def set_invitation
+      @invitation = Invitation.validity.find_by!(uuid: params[:invitation_uuid])
+    end
 
-  def user_registered?
-    raise ActiveRecord::RecordNotFound if User.exists?(name: @invitation.name)
-  end
+    def user_registered?
+      raise ActiveRecord::RecordNotFound if User.exists?(name: @invitation.name)
+    end
 
-  def set_user
-    @user = User.new(invitation_params.permit(:name, :role))
-  end
+    def set_user
+      @user = User.new(invitation_params.permit(:name, :role))
+    end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SitePolicy < ApplicationPolicy
   def update?
     user.admin?

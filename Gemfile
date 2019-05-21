@@ -1,150 +1,158 @@
-source 'https://rubygems.org'
+# frozen_string_literal: true
 
-gem 'rails', '5.2.1'
+source "https://rubygems.org"
 
-gem 'bootsnap', require: false
-gem 'sdoc', '~> 0.4.0', group: :doc
-gem 'therubyracer'
+gem "rails", "5.2.1"
+
+gem "bootsnap", require: false
+gem "sdoc", "~> 0.4.0", group: :doc
+gem "therubyracer"
 
 # Assets
-gem 'bootstrap-sass'
-gem 'coffee-rails'
-gem 'font-awesome-rails'
-gem 'sass-rails'
-gem 'uglifier'
-gem 'webpacker'
+gem "bootstrap-sass"
+gem "coffee-rails"
+gem "font-awesome-rails"
+gem "sass-rails"
+gem "uglifier"
+gem "webpacker"
 
 # UI/UX
-gem 'actionpack-action_caching'
-gem 'rails-i18n', '~> 5.0.0'
-gem 'turbolinks'
-gem 'jbuilder'
-gem 'meta-tags'
-gem 'rouge'
-gem 'slim-rails'
+gem "actionpack-action_caching"
+gem "rails-i18n", "~> 5.0.0"
+gem "turbolinks"
+gem "jbuilder"
+gem "meta-tags"
+gem "rouge"
+gem "slim-rails"
 
 # Authentication
-gem 'pundit'
-gem 'sorcery'
+gem "pundit"
+gem "sorcery"
 
 # Configuration
-gem 'config'
+gem "config"
 
 # Database
-gem 'hiredis'
-gem 'pg'
-gem 'redis'
-gem 'redis-session-store'
+gem "hiredis"
+gem "pg"
+gem "redis"
+gem "redis-session-store"
 
 # Seeds
-gem 'seed-fu'
+gem "seed-fu"
 
 # Pagination
-gem 'kaminari'
-gem 'kaminari-i18n'
-gem 'bootstrap4-kaminari-views'
+gem "kaminari"
+gem "kaminari-i18n"
+gem "bootstrap4-kaminari-views"
 
 # Breadcrumbs
-gem 'gretel'
+gem "gretel"
 
 # Form
-gem 'cocoon'
-gem 'simple_form'
+gem "cocoon"
+gem "simple_form"
 
 # Soft delete
-gem 'paranoia'
-gem 'paranoia_uniqueness_validator'
+gem "paranoia"
+gem "paranoia_uniqueness_validator"
 
 # Model
-gem 'active_hash'
-gem 'enum_help'
-gem 'virtus'
+gem "active_hash"
+gem "enum_help"
+gem "virtus"
 
 # Validation
-gem 'file_validators'
-gem 'validate_url'
-gem 'validates_email_format_of'
+gem "file_validators"
+gem "validate_url"
+gem "validates_email_format_of"
 
 # Decorator
-gem 'draper'
+gem "draper"
 
 # Storage
-gem 'carrierwave'
-gem 'carrierwave-aws'
-gem 'mini_magick'
+gem "carrierwave"
+gem "carrierwave-aws"
+gem "mini_magick"
 
 # HTTP Client
-gem 'faraday'
-gem 'mime-types'
+gem "faraday"
+gem "mime-types"
 
 # Application server
-gem 'puma'
+gem "puma"
 
 # Background Job
-gem 'resque'
-gem 'whenever', require: false
+gem "resque"
+gem "whenever", require: false
 
 group :staging, :production do
-  gem 'rails_12factor'
+  gem "rails_12factor"
 end
 
 group :development do
-  gem 'listen'
-  gem 'web-console'
+  gem "listen"
+  gem "web-console"
 end
 
 group :development, :test do
-  gem 'dotenv-rails', require: 'dotenv/rails-now'
-  gem 'sqlite3'
+  gem "dotenv-rails", require: "dotenv/rails-now"
+  gem "sqlite3"
+
+  gem "guard"
+  gem "guard-rspec"
+  gem "guard-rubocop"
+  gem "guard-slimlint"
 
   # Email
-  gem 'letter_opener_web'
+  gem "letter_opener_web"
 
   # CLI
-  gem 'spring'
-  gem 'spring-commands-rspec'
+  gem "spring"
+  gem "spring-commands-rspec"
 
   # Test
-  gem 'factory_bot_rails'
-  gem 'faker'
-  gem 'rspec-rails'
-  gem 'simplecov', require: false
+  gem "factory_bot_rails"
+  gem "faker"
+  gem "rspec-rails"
+  gem "simplecov", require: false
 
   # Code analyze
-  gem 'brakeman', require: false
-  gem 'bullet'
-  gem 'coffeelint'
-  gem 'rails_best_practices'
-  gem 'reek'
-  gem 'rubocop'
-  gem 'rubocop-rails_config'
-  gem 'scss_lint', require: false
-  gem 'slim_lint'
+  gem "brakeman", require: false
+  gem "bullet"
+  gem "coffeelint"
+  gem "rails_best_practices"
+  gem "reek"
+  gem "rubocop", "0.62"
+  gem "rubocop-rails_config"
+  gem "scss_lint", require: false
+  gem "slim_lint"
 
   # Debugger
-  gem 'better_errors'
-  gem 'binding_of_caller'
-  gem 'byebug'
-  gem 'pry'
-  gem 'pry-byebug'
-  gem 'pry-doc'
-  gem 'pry-rails'
+  gem "better_errors"
+  gem "binding_of_caller"
+  gem "byebug"
+  gem "pry"
+  gem "pry-byebug"
+  gem "pry-doc"
+  gem "pry-rails"
 
   # Print debug
-  gem 'awesome_print'
-  gem 'tapp'
+  gem "awesome_print"
+  gem "tapp"
 
   # Table/Schema
-  gem 'annotate'
-  gem 'migration_comments'
+  gem "annotate"
+  gem "migration_comments"
 end
 
 group :test do
-  gem 'capybara'
-  gem 'database_cleaner'
-  gem 'fuubar'
-  gem 'launchy'
-  gem 'selenium-webdriver'
-  gem 'shoulda-matchers'
-  gem 'timecop'
+  gem "capybara"
+  gem "database_cleaner"
+  gem "fuubar"
+  gem "launchy"
+  gem "selenium-webdriver"
+  gem "shoulda-matchers"
+  gem "simplecov", require: false
+  gem "timecop"
 end

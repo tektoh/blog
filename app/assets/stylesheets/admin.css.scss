@@ -1,11 +1,3 @@
-@import 'bootstrap-sprockets';
-@import 'bootstrap';
-@import 'font-awesome';
-@import 'admin-lte/dist/css/AdminLTE';
-@import 'admin-lte/dist/css/skins/skin-black';
-@import 'select2/dist/css/select2';
-@import 'admin-lte/dist/css/alt/AdminLTE-select2';
-@import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker';
 @import 'highlight';
 
 .image-icon-xs {
@@ -14,14 +6,10 @@
 }
 
 .image-icon {
-  height: 128pxx;
+  height: 128px;
   width: 128px;
 }
 
 .insert-block {
   padding: 10px;
-}
-
-.box + .insert-block {
-  margin-top: -20px;
 }

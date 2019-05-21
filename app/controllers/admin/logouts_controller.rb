@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::LogoutsController < ApplicationController
   def destroy
     logout

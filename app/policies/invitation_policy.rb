@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class InvitationPolicy < ApplicationPolicy
   def index?
     user.admin?

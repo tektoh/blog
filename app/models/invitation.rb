@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: invitations
@@ -32,11 +34,11 @@ class Invitation < ApplicationRecord
   before_create -> { self.uuid = SecureRandom.uuid }
   before_create -> { self.expires_at = 1.day.since }
 
-  scope :validity, -> { where('expires_at > ?', Time.zone.now) }
+  scope :validity, -> { where("expires_at > ?", Time.zone.now) }
 
   def valid_unique_username?
     if User.exists?(name: name)
-      errors.add(:name, 'は登録されています')
+      errors.add(:name, "は登録されています")
       false
     else
       true

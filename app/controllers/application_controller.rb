@@ -1,35 +1,41 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
-  include Pundit
-
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
-  protect_from_forgery with: :exception
-
   before_action :require_login
+
+  before_action :initialize_site, if: -> { current_site.blank? }
 
   private
 
-  def current_site
-    @current_site ||= Site.first
-  end
-  helper_method :current_site
+    def not_authenticated
+      redirect_to admin_login_identifier_path
+    end
 
-  def preview!
-    @preview = true
-  end
+    def initialize_site
+      redirect_to new_admin_site_path
+    end
 
-  def preview?
-    @preview
-  end
-  helper_method :preview?
+    def current_site
+      @current_site ||= Site.first
+    end
+    helper_method :current_site
 
-  def categories
-    @categories ||= Category.all
-  end
-  helper_method :categories
+    def preview!
+      @preview = true
+    end
 
-  def new_arrival_articles
-    @new_arrival_articles ||= Article.new_arrivals.limit(3)
-  end
-  helper_method :new_arrival_articles
+    def preview?
+      @preview
+    end
+    helper_method :preview?
+
+    def categories
+      @categories ||= Category.all
+    end
+    helper_method :categories
+
+    def new_arrival_articles
+      @new_arrival_articles ||= Article.new_arrivals.limit(3)
+    end
+    helper_method :new_arrival_articles
 end

@@ -3,18 +3,13 @@ html
   head
     meta[charset="utf-8"]
     meta[name="viewport" content="width=device-width, initial-scale=1.0"]
-    title = current_site&.name || 'Initialize'
-    = stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'
-    = stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.2/css/AdminLTE.min.css'
-    = stylesheet_link_tag 'admin'
+    title = current_site&.name || "Blog"
+    link[rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"]
+    = stylesheet_link_tag "login"
     = csrf_meta_tags
 
-  body.hold-transition.login-page
-    .login-box
-      .login-logo
-        = link_to admin_root_path do
-          b = current_site&.name || 'Initialize'
-      .login-box-body
-        = yield
-
-    = javascript_include_tag 'admin'
+  body.text-center
+    = yield

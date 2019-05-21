@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::Articles::PreviewsController < ApplicationController
   include ArticleBuilder
 
@@ -9,11 +11,11 @@ class Admin::Articles::PreviewsController < ApplicationController
 
   private
 
-  def article
-    return @article if defined?(@article)
-    @article = Article.find_by!(uuid: params[:article_uuid]).decorate
-    @article.body = build_article_body(@article)
-    @article
-  end
-  helper_method :article
+    def article
+      return @article if defined?(@article)
+      @article = Article.find_by!(uuid: params[:article_uuid]).decorate
+      @article.body = build_article_body(@article)
+      @article
+    end
+    helper_method :article
 end
