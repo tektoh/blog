@@ -1,14 +1,10 @@
-= content_for 'content-header' do
+= content_for "content-header" do
   | 招待状の作成
 
 - breadcrumb :new_admin_invitation
 
-.box.box-primary
-  = simple_form_for [:admin, @invitation] do |f|
-    .box-body
-      = f.error_notification
-      = f.input :name
-      = f.input :role, collect: Invitation.roles_i18n.invert
-
-    .box-footer
-      = f.button :submit, class: %w[btn btn-primary]
+= simple_form_for [:admin, @invitation] do |f|
+  = f.error_notification
+  = f.input :name
+  = f.input :role, collect: Invitation.roles_i18n.invert
+  = f.button :submit, class: "btn btn-primary"

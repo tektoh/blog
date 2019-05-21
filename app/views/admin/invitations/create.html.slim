@@ -1,23 +1,21 @@
-= content_for 'content-header' do
+= content_for "content-header" do
   | 招待状の作成
 
 - breadcrumb :new_admin_invitation
 
-.box.box-primary
-  .box-header
-    h3.box-title 招待状を作成しました
+.alert.alert-info 招待状を作成しました
 
-  .box-body
-    dl.dl-horizontal
-      dt = Invitation.human_attribute_name(:name)
-      dd = @invitation.name
+dl.row
+  dt.col-sm-3 = Invitation.human_attribute_name(:name)
+  dd.col-sm-9 = @invitation.name
 
-      dt = Invitation.human_attribute_name(:role)
-      dd = @invitation.role_i18n
+  dt.col-sm-3 = Invitation.human_attribute_name(:role)
+  dd.col-sm-9 = @invitation.role_i18n
 
-    p 以下のURLを招待する方に共有してください
+p 以下のURLを招待する方に共有してください
 
-    input.form-control[type="text" readonly value="#{admin_invitation_register_url(@invitation.uuid)}"]
+input.form-control[type="text" readonly value="#{admin_invitation_register_url(@invitation.uuid)}"]
 
-  .box-footer
-    = link_to '戻る', admin_invitations_path, class: %w[btn btn-link]
+hr
+
+= link_to "戻る", admin_invitations_path, class: "btn btn-link"

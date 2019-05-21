@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Admin::AuthorsController < ApplicationController
+class Admin::AuthorsController < AdminController
   layout "admin"
 
   before_action :set_authors, only: %i[index]

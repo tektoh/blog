@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Admin::TagsController < ApplicationController
+class Admin::TagsController < AdminController
   layout "admin"
 
   before_action :set_tags, only: %i[index]

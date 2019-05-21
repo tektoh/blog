@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Admin::CategoriesController < ApplicationController
+class Admin::CategoriesController < AdminController
   layout "admin"
 
   before_action :set_categories, only: %i[index]
@@ -49,15 +49,15 @@ class Admin::CategoriesController < ApplicationController
 
   private
 
-    def category_params
-      params.require(:category).permit(:name, :slug)
-    end
+  def category_params
+    params.require(:category).permit(:name, :slug)
+  end
 
-    def set_category
-      @category = Category.find(params[:id])
-    end
+  def set_category
+    @category = Category.find(params[:id])
+  end
 
-    def set_categories
-      @categories = Category.all.order(:slug)
-    end
+  def set_categories
+    @categories = Category.all.order(:slug)
+  end
 end

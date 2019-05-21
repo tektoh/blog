@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Admin::InvitationsController < ApplicationController
+class Admin::InvitationsController < AdminController
   layout "admin"
 
   before_action :set_invitation, only: %i[show destroy]
