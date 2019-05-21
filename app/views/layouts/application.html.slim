@@ -1,19 +1,23 @@
 doctype html
 html
   head
-    = render 'layouts/meta_tags'
-    = stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css'
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': true
+    = render "layouts/meta_tags"
+    link[rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    ]
+    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track": true
     - if preview?
-      = stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.2/gh-fork-ribbon.min.css'
-    = javascript_include_tag 'application', 'data-turbolinks-track': true
+      = stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.2/gh-fork-ribbon.min.css"
+    = javascript_include_tag "application", "data-turbolinks-track": true
   body
     - if preview?
       a.github-fork-ribbon[href="" data-ribbon="Preview"]
 
     .container
-      = render 'layouts/header'
-      = render 'layouts/navigation', categories: categories
+      = render "layouts/header"
+      = render "layouts/navigation", categories: categories
 
     main.container
       .row
@@ -21,4 +25,4 @@ html
           = yield
 
         aside.col-md-4.blog-sidebar
-          = render 'layouts/sidebar'
+          = render "layouts/sidebar"

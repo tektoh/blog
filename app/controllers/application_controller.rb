@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
     end
 
     def current_site
-      @current_site ||= Site.first
+      @current_site ||= Site.first&.decorate
     end
     helper_method :current_site
 

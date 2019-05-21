@@ -26,7 +26,7 @@
 # this file (`config/breadcrumbs.rb`).
 
 crumb :admin_dashboard do
-  link '<i class="fa fa-dashboard"></i> Home'.html_safe, admin_dashboard_path
+  link "ダッシュボード", admin_dashboard_path
 end
 
 crumb :edit_admin_site do

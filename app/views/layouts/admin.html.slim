@@ -2,125 +2,111 @@ doctype html
 html
   head
     meta[charset="utf-8"]
-    meta[name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"]
+    meta[name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"]
     title = current_site.name
-    = render 'layouts/favicon'
-    = stylesheet_link_tag 'admin'
+    link[rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    ]
+    link[rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+      integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+      crossorigin="anonymous"
+    ]
+    = render "layouts/favicon"
+    = stylesheet_link_tag "admin"
     = csrf_meta_tags
 
-  body.hold-transition.skin-black.sidebar-mini
-    .wrapper
-      header.main-header
-        = link_to admin_dashboard_path, class: 'logo' do
-          span.logo-lg
-            b = current_site.name
-          span.logo-mini
-            b = current_site.name[0]
+  body
+    nav.navbar.navbar-dark.fixed-top.bg-dark.navbar-expand-lg.shadow
+      = link_to admin_root_path, class: "navbar-brand" do
+        - if current_site.favicon?
+          => image_tag current_site.favicon.x48.url, width: 30, height: 30, class: "d-inline-block align-top"
+        = current_site.name
+      button.navbar-toggler[type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+      ]
+        span.navbar-toggler-icon
 
-        nav.navbar.navbar-static-top
-          = link_to '#', class: 'sidebar-toggle', data: { toggle: 'push-menu' } do
-            span.sr-only Toggle navigation
-
-          .navbar-custom-menu
-            ul.nav.navbar-nav
-              li.dropdown.user-menu
-                = link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do
-                  = image_tag current_user.avatar.icon.url, class: 'user-image'
-                  span.hidden-xs = current_user.name
-                ul.dropdown-menu
-                  li.user-header
-                    = image_tag current_user.avatar.icon.url, class: 'img-circle'
-                    p
-                      = current_user.name
-                      small = current_user.role_i18n
-                  li.user-body
-                    .row
-                      .col-xs-12.text-center
-                        = link_to 'プロフィール', admin_user_path(current_user)
-                  li.user-footer
-                    = link_to 'ログアウト', admin_logout_path, class: %w[btn btn-default btn-flat], method: :delete
-
-      aside.main-sidebar
-        section.sidebar
-          .user-panel
-            .pull-left.image
-              = image_tag current_user.avatar.icon.url, class: 'img-circle'
-            .pull-left.info
-              p = current_user.name
-              = link_to admin_user_path(current_user) do
-                i.fa.fa-circle.text-success
-                = current_user.role_i18n
-
-          ul.sidebar-menu[data-widget="tree"]
-            li
-              = link_to admin_articles_path do
-                i.fa.fa-file
-                '
-                span 記事
-
-            - if policy(Category).index?
-              li
-                = link_to admin_categories_path do
-                  i.fa.fa-folder-open
-                  '
-                  span カテゴリー
-
-            - if policy(Tag).index?
-              li
-                = link_to admin_tags_path do
-                  i.fa.fa-tag
-                  '
-                  span タグ
-
-            - if policy(Author).index?
-              li
-                = link_to admin_authors_path do
-                  i.fa.fa-pencil
-                  '
-                  span 著者
-
-            - if policy(Invitation).index?
-              li.treeview
-                a[href="#"]
-                  i.fa.fa-users
-                  '
-                  span ユーザー
-                  span.pull-right-container
-                    i.fa.fa-angle-left.pull-right
-                ul.treeview-menu
-                  li
-                    = link_to admin_users_path do
-                      i.fa.fa-circle-o
-                      '
-                      | ユーザー
-                  li
-                    = link_to admin_invitations_path do
-                      i.fa.fa-circle-o
-                      '
-                      | 招待
-            - else
-              li
-                = link_to admin_users_path do
+      #navbarSupportedContent.collapse.navbar-collapse
+        ul.navbar-nav.mr-auto
+          li.nav-item
+            = link_to root_path, class: "nav-link" do
+              i.fa.fa-globe
+              | サイト
+          li.nav-item
+            = link_to admin_articles_path, class: "nav-link" do
+              i.fa.fa-file
+              | 記事
+          - if policy(Category).index?
+            li.nav-item
+              = link_to admin_categories_path, class: "nav-link" do
+                i.fa.fa-folder-open
+                | カテゴリー
+          - if policy(Tag).index?
+            li.nav-item
+              = link_to admin_tags_path, class: "nav-link" do
+                i.fa.fa-tag
+                | タグ
+          - if policy(Author).index?
+            li.nav-item
+              = link_to admin_authors_path, class: "nav-link" do
+                i.fa.fa-pen
+                | 著者
+          - if policy(Invitation).index?
+            li.nav-item.dropdown
+              = link_to "#", class: "nav-link dropdown-toggle", role: "button", data: { toggle: "dropdown" } do
+                i.fa.fa-users
+                | ユーザー
+              .dropdown-menu
+                = link_to admin_users_path, class: "dropdown-item" do
                   i.fa.fa-circle-o
-                  '
                   | ユーザー
+                = link_to admin_invitations_path, class: "dropdown-item" do
+                  i.fa.fa-circle-o
+                  | 招待
+          - else
+            li.nav-item
+              = link_to admin_users_path do
+                i.fa.fa-circle-o
+                | ユーザー
+          - if policy(current_site).edit?
+            li.nav-item
+              = link_to edit_admin_site_path, class: "nav-link" do
+                i.fa.fa-cog
+                | 設定
+        ul.navbar-nav
+          li.nav-item.dropdown
+            = link_to "#", class: "nav-link dropdown-toggle", role: "button", data: { toggle: "dropdown" } do
+              = image_tag current_user.avatar.icon.url, class: "rounded nav-image"
+              = current_user.name
+            .dropdown-menu
+              = link_to "プロフィール", admin_user_path(current_user), class: "dropdown-item"
+              .dropdown-divider
+              = link_to "ログアウト", admin_logout_path, class: "dropdown-item", method: "delete"
 
-            - if policy(current_site).edit?
-              li
-                = link_to edit_admin_site_path do
-                  i.fa.fa-cog
-                  '
-                  span 設定
+    main[role="main"]
+      section.content-header.container.my-4
+        h1
+          = yield "content-header"
+        = render "layouts/breadcrumbs"
 
-      main.content-wrapper
-        section.content-header
-          h1
-            = yield 'content-header'
-          == breadcrumbs style: :ol, class: 'breadcrumb'
+      section.content-body.container.my-4
+        = render "layouts/flash_message"
+        = yield
 
-        section.content
-          = render 'layouts/flash_message'
-          = yield
-
-    = javascript_include_tag 'admin'
-    = yield 'scripts'
+    script[src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ]
+    script[src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ]
+    script[src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ]
+    = javascript_pack_tag "admin"
+    = yield "scripts"

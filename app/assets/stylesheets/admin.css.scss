@@ -13,3 +13,21 @@
 .insert-block {
   padding: 10px;
 }
+
+.nav-item {
+  .nav-image {
+    height: 32px;
+    width: 32px;
+    margin: -6px .5rem -6px 0;
+  }
+}
+
+[role=main] {
+  padding-top: 48px;
+}
+
+.content-header,
+.content-body {
+  max-width: 800px;
+}
+

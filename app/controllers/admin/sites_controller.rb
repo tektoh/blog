@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Admin::SitesController < ApplicationController
+class Admin::SitesController < AdminController
   layout "admin"
 
   skip_before_action :require_login, only: %i[new create]

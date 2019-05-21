@@ -4,10 +4,10 @@ section.blog-article
       = link_to article.category.name, category_path(article.category.slug)
 
   h2.blog-article-title
-    = link_to article.title, article_path(article.category_slug, article.slug), class: 'text-dark'
+    = link_to article.title, article_path(article.category_slug, article.slug), class: "text-dark"
 
   p.blog-article-meta
-    = l(article.published_at? ? article.published_at.to_date : Time.current.to_date, format: '%Y年%-m月%-d日')
+    = l(article.published_at? ? article.published_at.to_date : Time.current.to_date, format: "%Y年%-m月%-d日")
     - if article.author.present?
       '
       | by
@@ -16,7 +16,7 @@ section.blog-article
 
   - if article.eye_cache?
     .eye_cache.mb-3
-      = image_tag article.eye_cache.lg.url, class: 'img-fluid'
+      = image_tag article.eye_cache.lg.url, class: "img-fluid"
 
   - if article.tags.present?
     .tags.mb-3
@@ -24,7 +24,7 @@ section.blog-article
       - article.tags.each do |tag|
         li.list-inline-item = link_to "##{tag.name}", tag_path(tag.slug)
 
-  - if controller.action_name == 'show'
+  - if controller.action_name == "show"
     article.blog-article-body
       == article.body
 
@@ -32,7 +32,7 @@ section.blog-article
       section.author.my-5
         h4.font-italic Author
         .media
-          = image_tag article.author.avatar.icon.url, class: 'mr-3', style: 'width: 64px; height: 64px;'
+          = image_tag article.author.avatar.icon.url, class: "mr-3", style: "width: 64px; height: 64px;"
           .media-body
             h5.mt-0 = link_to article.author.name, author_path(article.author.slug)
             = article.author.description
@@ -41,6 +41,6 @@ section.blog-article
     article.blog-article-body
       = simple_format article.description
 
-    = link_to 'この記事を読む', article_path(article.category_slug, article.slug)
+    = link_to "この記事を読む", article_path(article.category_slug, article.slug)
 
     hr

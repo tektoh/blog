@@ -1,10 +1,10 @@
-= simple_blockable_form_for article, article_block, medium, class: 'js-update-article-block' do |f|
+= simple_blockable_form_for article, article_block, medium, class: "js-update-article-block" do |f|
   .box-body
     = f.input :name
     = f.input :media_type, collect: Medium.media_types_i18n.invert, include_blank: false
     = f.input :attachment, as: :file
-    = f.input :attachment_url, as: :url, label: false, placeholder: 'URL'
+    = f.input :attachment_url, as: :url, label: false, placeholder: "URL"
   .box-footer
     .pull-right
-      => link_to 'キャンセル', '#', class: %w[btn btn-default js-cancel-article-block]
+      => link_to "キャンセル", "#", class: %w[btn btn-default js-cancel-article-block]
       => f.button :submit, class: %[btn btn-primary]

@@ -1,0 +1,6 @@
+- breadcrumbs.tap do |links|
+  - if links.any?
+    ol.breadcrumb
+      - links.each do |link|
+        = content_tag "li", class: ["breadcrumb-item", link.current? ? "active" : nil] do
+          = link_to_unless link.current?, link.text, link.url

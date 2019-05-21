@@ -6,4 +6,4 @@ section.archives.p-3
   h4.font-italic Archives
   ol.list-unstyled.mb-0
     - Article.archives.reverse.each do |date|
-      li = link_to date.strftime('%Y年%-m月'), archive_path(date.year, date.month)
+      li = link_to date.strftime("%Y年%-m月"), archive_path(date.year, date.month)

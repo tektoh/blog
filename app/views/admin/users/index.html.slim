@@ -1,16 +1,15 @@
-= content_for 'content-header' do
+= content_for "content-header" do
   | ユーザー
 
 - breadcrumb :admin_users
 
-.box.box-primary
-  .box-header
-    h3.box-title ユーザー一覧
-    .pull-right.box-tools
-      - if policy(User).new?
-        = link_to '新規作成', new_admin_user_path, class: %w[btn btn-primary btn-sm]
+.card
+  - if policy(User).new?
+    .card-header
+      .text-right
+        = link_to "新規作成", new_admin_user_path, class: %w[btn btn-primary btn-sm]
 
-  .box-body.table-responsive.no-padding
+  .card-body
     table.table.table-hover
       thead
         tr
@@ -24,7 +23,7 @@
         - @users.each do |user|
           tr
             td = user.id
-            td = image_tag user.avatar_url(:icon), class: 'image-icon-xs'
+            td = image_tag user.avatar_url(:icon), class: "image-icon-xs"
             td = link_to user.name, admin_user_path(user)
             td = user.role_i18n
             td = l(user.created_at)

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Admin::UsersController < ApplicationController
+class Admin::UsersController < AdminController
   layout "admin"
 
   before_action :set_user, only: %i[show update destroy]

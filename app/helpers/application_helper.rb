@@ -12,7 +12,7 @@ module ApplicationHelper
         title: :title,
         type: "website",
         url: request.original_url,
-        image: current_site&.og_image&.url,
+        image: current_site&.og_image_url,
         site_name: :site,
         description: :description,
         locale: "ja_JP"
