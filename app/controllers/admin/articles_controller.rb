@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Admin::ArticlesController < ApplicationController
+class Admin::ArticlesController < AdminController
   layout "admin"
 
   before_action :set_article, only: %i[edit update destroy]

@@ -10,7 +10,10 @@ html
     = stylesheet_link_tag "application", media: "all", "data-turbolinks-track": true
     - if preview?
       = stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.2/gh-fork-ribbon.min.css"
-    = javascript_include_tag "application", "data-turbolinks-track": true
+    script[src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.2.0/turbolinks.js"
+      integrity="sha256-iM4Yzi/zLj/IshPWMC1IluRxTtRjMqjPGd97TZ9yYpU="
+      crossorigin="anonymous"
+    ]
   body
     - if preview?
       a.github-fork-ribbon[href="" data-ribbon="Preview"]
