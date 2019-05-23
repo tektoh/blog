@@ -16,8 +16,8 @@ elsif Rails.env.production?
     }
     config.aws_credentials = {
       region: Settings.carrierwave.aws_credentials.region,
-      aws_access_key_id: Settings.carrierwave.aws_credentials.aws_access_key_id,
-      aws_secret_access_key: Settings.carrierwave.aws_credentials.aws_secret_access_key
+      access_key_id: Settings.carrierwave.aws_credentials.aws_access_key_id,
+      secret_access_key: Settings.carrierwave.aws_credentials.aws_secret_access_key
     }
   end
 end
