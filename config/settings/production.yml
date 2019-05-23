@@ -14,11 +14,13 @@ resque:
     url: <%= ENV.fetch('REDIS_URL') %>/2
 carrierwave:
   storage: aws
-  aws_bucket: blog-dev-uploads
+  aws_bucket: <%= ENV.fetch("CARRIERWAVE_BUCKET_NAME") %>
   aws_acl: public-read
-  asset_host: https://blog-dev.com
+  asset_host: <%= ENV.fetch("CARRIERWAVE_ASSET_HOST") %>
   aws_attributes:
     expires: <%= 1.week.from_now.httpdate %>
     cache_control: max-age=<%= 1.week.to_i %>
   aws_credentials:
-    region: ap-northeast-1
+    region: <%= ENV.fetch("CARRIERWAVE_AWS_REGION") %>
+    aws_access_key_id: <%= ENV.fetch("CARRIERWAVE_AWS_ACCESS_KEY_ID") %>
+    aws_secret_access_key: <%= ENV.fetch("CARRIERWAVE_AWS_SECRET_ACCESS_KEY") %>

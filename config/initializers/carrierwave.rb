@@ -4,7 +4,7 @@ if Rails.env.development? || Rails.env.test?
   CarrierWave.configure do |config|
     config.storage = :file
   end
-elsif Rails.env.staging? || Rails.env.production?
+elsif Rails.env.production?
   CarrierWave.configure do |config|
     config.storage = :aws
     config.aws_bucket = Settings.carrierwave.aws_bucket
@@ -15,7 +15,10 @@ elsif Rails.env.staging? || Rails.env.production?
       cache_control: Settings.carrierwave.aws_attributes.cache_control
     }
     config.aws_credentials = {
-      region: Settings.carrierwave.aws_credentials.region
+      provider: "AWS",
+      region: Settings.carrierwave.aws_credentials.region,
+      aws_access_key_id: Settings.carrierwave.aws_credentials.aws_access_key_id,
+      aws_secret_access_key: Settings.carrierwave.aws_credentials.aws_secret_access_key
     }
   end
 end
