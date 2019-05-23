@@ -92,7 +92,7 @@ html
         ul.navbar-nav
           li.nav-item.dropdown
             = link_to "#", class: "nav-link dropdown-toggle", role: "button", data: { toggle: "dropdown" } do
-              = image_tag current_user.avatar.icon.url, class: "rounded nav-image"
+              = image_tag current_user.avatar.icon.url, class: "nav-image"
               = current_user.name
             .dropdown-menu
               = link_to "プロフィール", admin_user_path(current_user), class: "dropdown-item"

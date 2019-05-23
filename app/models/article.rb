@@ -61,6 +61,7 @@ class Article < ApplicationRecord
   delegate :name, to: :category, prefix: true, allow_nil: true
   delegate :slug, to: :category, prefix: true, allow_nil: true
   delegate :name, to: :author, prefix: true, allow_nil: true
+  delegate :slug, to: :author, prefix: true, allow_nil: true
 
   before_create -> { self.uuid = SecureRandom.uuid }
 

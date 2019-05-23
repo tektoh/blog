@@ -1,10 +1,10 @@
-.box-body
-  h4 = medium.name
+.card-body
   - if medium.image.present?
-    = image_tag medium.image.file.md.url, class: 'img-thumbnail'
-.box-footer
-  .pull-right
-    = edit_block_button article, article_block, class: 'js-edit-article-block'
-      i.fa.fa-edit
-      '
-      | 編集
+    = image_tag medium.image.file.md.url, class: "img-thumbnail"
+  p
+    small.text-muted
+      i = medium.name
+.card-footer.text-right
+  = edit_block_button article, article_block, class: "js-edit-article-block"
+    i.fa.fa-edit.mr-1
+    | 編集

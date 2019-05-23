@@ -39,16 +39,16 @@
 
     .card.my-4
       .card-body
-        = link_to admin_article_preview_path(@article.uuid), class: "btn btn-secondary btn-block", target: "_blank" do
+        = link_to admin_article_preview_path(@article.uuid), class: "btn btn-outline-primary btn-block", target: "_blank" do
           i.fa.fa-eye
           '
           | プレビュー
         - if @article.published?
-          = link_to article_path(@article.category_slug, @article.slug), class: "btn btn-default btn-block", target: "_blank" do
+          = link_to article_path(@article.category_slug, @article.slug), class: "btn btn-outline-primary btn-block", target: "_blank" do
             i.fa.fa-globe
             '
             | 公開ページ
-        = link_to admin_article_publish_path(@article.uuid), class: "btn btn-success btn-block", method: :patch do
+        = link_to admin_article_publish_path(@article.uuid), class: "btn btn-primary btn-block", method: :patch do
           i.fa.fa-send
           '
           | 公開する

@@ -1,24 +1,27 @@
-section.box
-  .box-header
-    = article_block.box_header_icon
-    h3.box-title = article_block.box_title
-    .box-tools.pull-right
-      - if article_block != article_blocks.first
-        = swap_block_button article, article_block, -1, class: "js-swap-level-article-block" do
-          i.fa.fa-arrow-up
-      - else
-        button.btn.btn-sm.btn-default.disabled
-          i.fa.fa-arrow-up
-      '
-      - if article_block != article_blocks.last
-        = swap_block_button article, article_block, +1, class: "js-swap-level-article-block" do
-          i.fa.fa-arrow-down
-      - else
-        button.btn.btn-sm.btn-default.disabled
-          i.fa.fa-arrow-down
-      '
-      = remove_block_button article, article_block, class: "js-remove-article-block" do
-        i.fa.fa-times
+.card
+  .card-header
+    .row
+      .col-auto
+        .mt-1
+          = article_block.box_header_icon
+          = article_block.box_title
+      .col-auto.ml-auto
+        - if article_block != article_blocks.first
+          = swap_block_button article, article_block, -1, class: "js-swap-level-article-block" do
+            i.fa.fa-arrow-up
+        - else
+          button.btn.btn-sm.btn-outline-secondary.disabled
+            i.fa.fa-arrow-up
+        '
+        - if article_block != article_blocks.last
+          = swap_block_button article, article_block, +1, class: "js-swap-level-article-block" do
+            i.fa.fa-arrow-down
+        - else
+          button.btn.btn-sm.btn-outline-secondary.disabled
+            i.fa.fa-arrow-down
+        '
+        = remove_block_button article, article_block, class: "js-remove-article-block" do
+          i.fa.fa-times
 
   .js-article-block-content
     - if article_block.blockable.empty?

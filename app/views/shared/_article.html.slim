@@ -1,12 +1,15 @@
 section.blog-article
-  - if article.category.present?
-    strong.d-inline-block.mb-2.text-primary
-      = link_to article.category.name, category_path(article.category.slug)
-
   h2.blog-article-title
-    = link_to article.title, article_path(article.category_slug, article.slug), class: "text-dark"
+    - if article.category.present?
+      small.text-muted
+        = link_to article.category.name, category_path(article.category.slug), class: "text-muted"
+        span.mx-1
+          | /
+      br
 
-  p.blog-article-meta
+    = link_to article.title, article_path(article.category_slug, article.slug), class: "text-dark text-break"
+
+  .blog-article-meta
     = l(article.published_at? ? article.published_at.to_date : Time.current.to_date, format: "%Y年%-m月%-d日")
     - if article.author.present?
       '
@@ -14,15 +17,14 @@ section.blog-article
       '
       = link_to article.author.name, author_path(article.author.slug)
 
+    - if article.tags.present?
+      ul.tags.list-inline.d-inline-block
+        - article.tags.each do |tag|
+          li.list-inline-item.mx-2 = link_to "##{tag.name}", tag_path(tag.slug)
+
   - if article.eye_cache?
     .eye_cache.mb-3
       = image_tag article.eye_cache.lg.url, class: "img-fluid"
-
-  - if article.tags.present?
-    .tags.mb-3
-      ul.list-inline
-      - article.tags.each do |tag|
-        li.list-inline-item = link_to "##{tag.name}", tag_path(tag.slug)
 
   - if controller.action_name == "show"
     article.blog-article-body

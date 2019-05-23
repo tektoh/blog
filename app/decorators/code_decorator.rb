@@ -20,6 +20,6 @@ class CodeDecorator < Draper::Decorator
   end
 
   def lexer
-    "Rouge::Lexers::#{code_mode.rouge.to_s.classify}".constantize.new
+    "Rouge::Lexers::#{model.code_mode.rouge.to_s.classify}".constantize.new
   end
 end

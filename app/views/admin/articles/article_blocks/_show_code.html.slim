@@ -1,10 +1,8 @@
-.box-body
+.card-body
   pre.highlight
     code
       == code.body_highlighted
-.box-footer
-  .pull-right
-    = edit_block_button article, article_block, class: 'js-edit-article-block' do
-      i.fa.fa-edit
-      '
-      | 編集
+.card-footer.text-right
+  = edit_block_button article, article_block, class: "js-edit-article-block" do
+    i.fa.fa-edit.mr-1
+    | 編集

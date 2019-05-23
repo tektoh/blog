@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Admin::Articles::PublishesController < ApplicationController
+class Admin::Articles::PublishesController < AdminController
   include ArticleBuilder
 
   layout "admin"
@@ -14,6 +14,8 @@ class Admin::Articles::PublishesController < ApplicationController
         article.body = build_article_body(article)
         article.save!
       end
+
+      clear_articles_cache
 
       flash[:notice] = "記事を公開しました"
 
@@ -34,4 +36,14 @@ class Admin::Articles::PublishesController < ApplicationController
       @article
     end
     helper_method :article
+
+    def clear_articles_cache
+      Rails.cache.delete_matched("views/*/index")
+      Rails.cache.delete_matched("views/*/#{article.category_slug}")
+      Rails.cache.delete_matched("views/*/#{article.category_slug}/*")
+      Rails.cache.delete_matched("views/*/authors/#{article.author_slug}") if article.author.present?
+      article.tags.each do |tag|
+        Rails.cache.delete_matched("views/*/tags/#{tag.slug}")
+      end
+    end
 end

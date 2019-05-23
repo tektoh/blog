@@ -1,7 +1,6 @@
-= content_for 'content-header' do
+= content_for "content-header" do
   | カテゴリー編集
 
 - breadcrumb :edit_admin_category, @category
 
-= render 'form', category: @category
-
+= render "form", category: @category

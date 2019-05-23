@@ -4,7 +4,7 @@ class EmbedDecorator < Draper::Decorator
   delegate_all
 
   def box_header_icon
-    h.content_tag "i", nil, class: %w[fa fa-youtube-play]
+    h.content_tag "i", nil, class: %w[fab fa-youtube]
   end
 
   def box_title

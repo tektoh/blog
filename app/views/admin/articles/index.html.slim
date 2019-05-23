@@ -5,11 +5,12 @@
 
 .card
   .card-header
-    = form_with model: @search_articles_form, scope: :q, url: admin_articles_path, method: :get, data: { remote: false }, html: { class: "form-inline" } do |f|
+    = form_with model: @search_articles_form, scope: :q, url: admin_articles_path, method: :get,
+      data: { remote: false }, html: { class: "form-inline" } do |f|
       .container
         .form-row.align-items-center
           .col-auto
-            = f.select :category_id, Category.pluck(:name, :id) , { prompt: "カテゴリー" }, class: "form-control"
+            = f.select :category_id, Category.pluck(:name, :id), { prompt: "カテゴリー" }, { class: "form-control" }
           .col-auto
             = f.search_field :title, class: "form-control"
           .col-auto
@@ -35,25 +36,22 @@
             div = article.title
             div
               - if policy(article).edit?
-                => link_to edit_admin_article_path(article.uuid), class: %w[btn btn-default btn-xs btn-flat]
-                  i.fa.fa-edit
-                  '
+                => link_to edit_admin_article_path(article.uuid), class: "btn btn-outline-primary btn-sm"
+                  i.fa.fa-edit.mr-1
                   | 編集
-              => link_to admin_article_preview_path(article.uuid), class: %w[btn btn-default btn-xs btn-flat], target: "_blank"
-                i.fa.fa-eye
-                '
+              => link_to admin_article_preview_path(article.uuid), class: "btn btn-outline-primary btn-sm", target: "_blank"
+                i.fa.fa-eye.mr-1
                 | プレビュー
               - if policy(article).destroy?
-                => link_to admin_article_path(article.uuid), class: %w[btn btn-link btn-xs btn-flat], method: :delete, data: { confirm: "#{article.title}を削除してもよろしいですか？" } do
-                  i.fa.fa-trash
-                  '
+                => link_to admin_article_path(article.uuid), class: "btn btn-link btn-sm", method: :delete,
+                  data: { confirm: "#{article.title}を削除してもよろしいですか？" } do
+                  i.fa.fa-trash.mr-1
                   | 削除
           td = article.category_name
           td
             - article.tags.each do |tag|
-              span.label.label-info
+              span.label.label-info.mx-1
                 = tag.name
-              '
           td = article.author_name
           td
             div

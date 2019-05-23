@@ -3,20 +3,17 @@
 - if taxonomy?
   - if taxonomy.category?
     h3.pb-3.mb-4.font-italic.border-bottom
-      | Category :
-      '
+      span.mr-1 Category:
       = taxonomy.name
 
   - if taxonomy.tag?
     h3.pb-3.mb-4.font-italic.border-bottom
-      | Tag :
-      '
+      span.mr-1 Tag:
       = "##{taxonomy.name}"
 
   - if taxonomy.author?
     h3.pb-3.mb-4.font-italic.border-bottom
-      | Author :
-      '
+      span.mr-1 Author:
       = taxonomy.name
 
-= render partial: 'shared/article', collection: articles
+= render partial: "shared/article", collection: articles

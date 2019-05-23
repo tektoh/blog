@@ -1,7 +1,6 @@
-= content_for 'content-header' do
+= content_for "content-header" do
   | 著者編集
 
 - breadcrumb :edit_admin_author, @author
 
-= render 'form', author: @author
-
+= render "form", author: @author

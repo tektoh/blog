@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Admin::Articles::ArticleBlocksController < ApplicationController
+class Admin::Articles::ArticleBlocksController < AdminController
   layout false
 
   def index; end
@@ -53,15 +53,15 @@ class Admin::Articles::ArticleBlocksController < ApplicationController
   end
 
   def swap_level
-    article_block1 = @article.article_blocks.find(params[:article_block_id])
+    article_block1 = article.article_blocks.find(params[:article_block_id])
 
     level = article_block_params[:level]
 
-    if level.blank? || level.to_i.negative? || level.to_i >= @article.article_blocks.count
+    if level.blank? || level.to_i.negative? || level.to_i >= article.article_blocks.count
       return head :bad_request
     end
 
-    article_block2 = @article.article_blocks.find_by!(level: level)
+    article_block2 = article.article_blocks.find_by!(level: level)
 
     if article_block1 == article_block2
       return head :bad_request
@@ -91,7 +91,7 @@ class Admin::Articles::ArticleBlocksController < ApplicationController
     helper_method :article_blocks
 
     def article_block
-      @article_block ||= article.article_blocks.find(params[:id])
+      @article_block ||= article.article_blocks.find(params[:id]).decorate
     end
     helper_method :article_block
 

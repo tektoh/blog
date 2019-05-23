@@ -1,4 +1,4 @@
-= content_for 'content-header' do
+= content_for "content-header" do
   | ユーザーの作成
 
 - breadcrumb :new_admin_user
@@ -10,4 +10,4 @@
   = f.input :avatar, as: :file
   = f.input :password
   = f.input :password_confirmation
-  = f.button :submit, class: %w[btn btn-primary]
+  = f.button :submit, class: "btn btn-primary"

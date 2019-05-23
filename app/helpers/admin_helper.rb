@@ -3,7 +3,7 @@
 module AdminHelper
   def insert_block_button(article, level, blockable_type, opts = {}, &block)
     default_opts = {
-      class: %w[btn btn-app btn-default],
+      class: %w[btn btn-outline-primary btn-block p-4],
       data: {
         remote: true,
         disable: true,
@@ -28,7 +28,7 @@ module AdminHelper
 
   def swap_block_button(article, article_block, level, opts = {}, &block)
     default_opts = {
-      class: %w[btn btn-sm btn-default],
+      class: %w[btn btn-sm btn-outline-secondary],
       data: {
         remote: true,
         disable: true,
@@ -67,7 +67,7 @@ module AdminHelper
 
   def edit_block_button(article, article_block, opts = {}, &block)
     default_opts = {
-      class: %w[btn btn-default],
+      class: %w[btn btn-outline-primary],
       data: {
         remote: true,
         disable: true

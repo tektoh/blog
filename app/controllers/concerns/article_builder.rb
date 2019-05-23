@@ -5,7 +5,7 @@ module ArticleBuilder
 
   def build_article_body(article)
     article.article_blocks.decorate.inject("") do |result, article_block|
-      result << if article_block.sentence?
+      result + if article_block.sentence?
         sentence = article_block.blockable
         render_to_string("shared/_sentence", locals: { sentence: sentence }, layout: false)
       elsif article_block.medium?

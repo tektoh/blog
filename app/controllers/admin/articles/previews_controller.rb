@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
-class Admin::Articles::PreviewsController < ApplicationController
+class Admin::Articles::PreviewsController < AdminController
   include ArticleBuilder
 
   skip_before_action :require_login
 
   before_action :preview!
+
+  layout "application"
 
   def show; end
 

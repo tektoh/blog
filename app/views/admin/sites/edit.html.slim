@@ -1,4 +1,4 @@
-= content_for 'content-header' do
+= content_for "content-header" do
   | サイトの設定
 
 - breadcrumb :edit_admin_site
@@ -10,26 +10,23 @@
       = f.input :name
       = f.input :subtitle
       = f.input :description, as: :text
-      = f.input :favicon, as: :file, hint: 'PNG (32x32)'
+      = f.input :favicon, as: :file, hint: "PNG (32x32)"
 
       - if @site.favicon?
-        = image_tag @site.favicon.x32.url
-        br
-        br
+        .mb-3
+          = image_tag @site.favicon.x32.url
 
-      = f.input :cover_image, as: :file, hint: 'JPEG/PNG (1200x630)'
+      = f.input :cover_image, as: :file, hint: "JPEG/PNG (1200x630)"
 
       - if @site.cover_image?
-        = image_tag @site.cover_image.url, class: 'img-responsive'
-        br
-        br
+        .mb-3
+          = image_tag @site.cover_image.url, class: "img-responsive"
 
-      = f.input :og_image, as: :file, hint: 'JPEG/PNG (1200x630)'
+      = f.input :og_image, as: :file, hint: "JPEG/PNG (1200x630)"
 
       - if @site.og_image?
-        = image_tag @site.og_image.url, class: 'img-responsive'
-        br
-        br
+        .mb-3
+          = image_tag @site.og_image.url, class: "img-responsive"
 
     .box-footer
-      = f.button :submit, '保存', class: %w[btn btn-primary]
+      = f.button :submit, "保存", class: "btn btn-primary"

@@ -1,7 +1,6 @@
-= content_for 'content-header' do
+= content_for "content-header" do
   | タグ編集
 
 - breadcrumb :edit_admin_tag, @tag
 
-= render 'form', tag: @tag
-
+= render "form", tag: @tag

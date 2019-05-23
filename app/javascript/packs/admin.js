@@ -104,6 +104,7 @@ $(() => {
 
     $root.on('click', '.js-cancel-article-block', function (event) {
       event.preventDefault();
+      console.log(111);
       reload();
     });
 

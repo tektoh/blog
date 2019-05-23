@@ -1,34 +1,33 @@
 .insert-block.text-center
-  a.btn.btn-default.btn-block[href="#" data-toggle="modal" data-target="#insert-block-modal-#{level}"]
-    i.fa.fa-plus
-    '
+  a.btn.btn-outline-primary.btn-block[href="#" data-toggle="modal" data-target="#insert-block-modal-#{level}"]
+    i.fa.fa-plus.mr-1
     | ブロックを追加する
 
 .modal.fade[id="insert-block-modal-#{level}"]
   .modal-dialog
     .modal-content
       .modal-header
-        h4.modal-title ブロックの追加
+        h5.modal-title ブロックの追加
       .modal-body
-        = insert_block_button(article, level, 'sentence', class: 'js-insert-article-block') do
-          i.fa.fa-edit
-          '
-          | 文章
-
-        = insert_block_button(article, level, 'medium', class: 'js-insert-article-block') do
-          i.fa.fa-image
-          '
-          | メディア
-
-        = insert_block_button(article, level, 'embed', class: 'js-insert-article-block') do
-          i.fa.fa-youtube-play
-          '
-          | 埋め込み
-
-        = insert_block_button(article, level, 'code', class: 'js-insert-article-block') do
-          i.fa.fa-code
-          '
-          | コード
+        .container
+          .row
+            .col-6.mb-3
+              = insert_block_button(article, level, "sentence", class: "js-insert-article-block") do
+                i.fa.fa-edit.mr-1
+                | 文章
+            .col-6
+              = insert_block_button(article, level, "medium", class: "js-insert-article-block") do
+                i.fa.fa-image.mr-1
+                | メディア
+          .row
+            .col-6
+              = insert_block_button(article, level, "embed", class: "js-insert-article-block") do
+                i.fab.fa-youtube.mr-1
+                | 埋め込み
+            .col-6
+              = insert_block_button(article, level, "code", class: "js-insert-article-block") do
+                i.fa.fa-code.mr-1
+                | コード
 
       .modal-footer
-        button.btn.btn-default[data-dismiss="modal"] 閉じる
+        button.btn.btn-link[data-dismiss="modal"] 閉じる

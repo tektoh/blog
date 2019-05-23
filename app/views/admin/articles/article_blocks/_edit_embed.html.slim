@@ -1,8 +1,7 @@
-= simple_blockable_form_for article, article_block, embed, class: 'js-update-article-block' do |f|
-  .box-body
+= simple_blockable_form_for article, article_block, embed, class: "js-update-article-block" do |f|
+  .card-body
     = f.input :embed_type, collect: Embed.embed_types_i18n.invert, include_blank: false
     = f.input :identifier
-  .box-footer
-    .pull-right
-      => link_to 'キャンセル', '#', class: %w[btn btn-default js-cancel-article-block]
-      => f.button :submit, class: %[btn btn-primary]
+  .card-footer.text-right
+    => link_to "キャンセル", "#", class: "btn btn-secondary js-cancel-article-block"
+    => f.button :submit, class: "btn btn-primary"
