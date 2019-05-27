@@ -5,6 +5,7 @@ source "https://rubygems.org"
 gem "rails", "5.2.1"
 
 gem "bootsnap", require: false
+gem "bundler-audit"
 gem "sdoc", "~> 0.4.0", group: :doc
 gem "therubyracer"
 
