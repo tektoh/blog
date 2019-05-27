@@ -11,7 +11,9 @@
 #
 
 class Sentence < ApplicationRecord
-  has_one :article_block, as: :blockable, dependent: :destroy
+  include ArticleBlockable
+
+  has_one :article_block, as: :blockable, inverse_of: :blockable, dependent: :destroy
   has_one :article, through: :article_block
 
   def empty?

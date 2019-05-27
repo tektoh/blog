@@ -13,6 +13,7 @@
 
 class Code < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
+  include ArticleBlockable
 
   belongs_to_active_hash :code_mode, foreign_key: :mode
 

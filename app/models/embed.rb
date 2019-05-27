@@ -12,6 +12,8 @@
 #
 
 class Embed < ApplicationRecord
+  include ArticleBlockable
+
   has_one :article_block, as: :blockable, dependent: :destroy
   has_one :article, through: :article_block
 

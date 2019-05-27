@@ -1,0 +1,19 @@
+attributes:
+  - content
+  - foreign_key
+  - inheritance
+disconnected: true
+filename: erd
+filetype: png
+indirect: false
+inheritance: true
+notation: simple
+orientation: vertical
+polymorphism: true
+sort: true
+warn: true
+title: ERD
+exclude:
+  - ApplicationRecord
+only: null
+prepend_primary: false

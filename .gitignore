@@ -80,3 +80,6 @@ Session.vim
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+erd.png
+erd.pdf

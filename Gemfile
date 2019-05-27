@@ -145,6 +145,7 @@ group :development, :test do
   # Table/Schema
   gem "annotate"
   gem "migration_comments"
+  gem "rails-erd"
 end
 
 group :test do

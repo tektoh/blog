@@ -32,15 +32,17 @@
 class Article < ApplicationRecord
   mount_uploader :eye_cache, ImageUploader
 
-  belongs_to :category
   belongs_to :author
+  belongs_to :category
 
+  has_many :article_blocks, -> { order(:level) }
   has_many :article_tags
-  has_many :tags, through: :article_tags
-  has_many :article_blocks, -> { order(:level) }, inverse_of: :article
-  has_many :sentences, through: :article_blocks, source: :blockable, source_type: "Sentence"
-  has_many :media, through: :article_blocks, source: :blockable, source_type: "Medium"
+
+  has_many :codes, through: :article_blocks, source: :blockable, source_type: "Code"
   has_many :embeds, through: :article_blocks, source: :blockable, source_type: "Embed"
+  has_many :media, through: :article_blocks, source: :blockable, source_type: "Medium"
+  has_many :sentences, through: :article_blocks, source: :blockable, source_type: "Sentence"
+  has_many :tags, through: :article_tags
 
   enum state: %i[draft published]
 

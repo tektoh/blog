@@ -7,7 +7,9 @@ section.blog-article
           | /
       br
 
-    = link_to article.title, article_path(article.category_slug, article.slug), class: "text-dark text-break"
+    = link_to article.title,
+      article.category.present? ? article_path(article.category_slug, article.slug) : "#",
+      class: "text-dark text-break"
 
   .blog-article-meta
     = l(article.published_at? ? article.published_at.to_date : Time.current.to_date, format: "%Y年%-m月%-d日")
