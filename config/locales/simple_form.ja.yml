@@ -41,6 +41,7 @@ ja:
         favicon: 'ファビコン'
         cover_image: 'カバー画像'
         og_image: 'og:image'
+        gtag: 'グローバルサイトタグ'
       category:
         name: 'カテゴリー名'
         slug: 'スラッグ'

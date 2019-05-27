@@ -6,7 +6,7 @@ class SitePolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    %i[name subtitle description favicon cover_image og_image]
+    %i[name subtitle description favicon cover_image og_image gtag]
   end
 
   class Scope < Scope

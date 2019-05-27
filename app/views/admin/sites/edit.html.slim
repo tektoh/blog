@@ -28,5 +28,7 @@
         .mb-3
           = image_tag @site.og_image.url, class: "img-responsive"
 
+      = f.input :gtag, placeholder: gtag_placeholder, input_html: { rows: 10 }
+
     .box-footer
       = f.button :submit, "保存", class: "btn btn-primary"

@@ -1,6 +1,19 @@
 # frozen_string_literal: true
 
 module AdminHelper
+  def gtag_placeholder
+    <<~TEXT
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXXXX-X"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-XXXXXXXXX-X');
+    </script>
+    TEXT
+  end
   def insert_block_button(article, level, blockable_type, opts = {}, &block)
     default_opts = {
       class: %w[btn btn-outline-primary btn-block p-4],

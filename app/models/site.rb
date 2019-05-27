@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: sites
@@ -13,6 +12,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  cover_image :string
+#  gtag        :text
 #
 
 class Site < ApplicationRecord
