@@ -11,7 +11,7 @@ class CodeMode < ActiveHash::Base
     { id: :php,        label: "PHP",        brace: :php,        rouge: :php },
     { id: :python,     label: "Python",     brace: :python,     rouge: :python },
     { id: :ruby,       label: "Ruby",       brace: :ruby,       rouge: :ruby },
-    { id: :sql,        label: "SQL",        brace: :sql,        rouge: :sql },
+    { id: :sql,        label: "SQL",        brace: :sql,        rouge: :s_q_l },
     { id: :sh,         label: "Shell",      brace: :sh,         rouge: :shell },
   ]
 end
