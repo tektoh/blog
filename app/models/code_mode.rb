@@ -2,7 +2,7 @@
 
 class CodeMode < ActiveHash::Base
   self.data = [
-    { id: :plaintext,  label: "Plain Text", brace: :plain_text, rouge: :plain_text },
+    { id: :plain_text, label: "Plain Text", brace: :plain_text, rouge: :plain_text },
     { id: :c_cpp,      label: "C",          brace: :c_cpp,      rouge: :c },
     { id: :javascript, label: "JavaScript", brace: :javascript, rouge: :javascript },
     { id: :html,       label: "HTML",       brace: :html,       rouge: :html },
@@ -12,6 +12,6 @@ class CodeMode < ActiveHash::Base
     { id: :python,     label: "Python",     brace: :python,     rouge: :python },
     { id: :ruby,       label: "Ruby",       brace: :ruby,       rouge: :ruby },
     { id: :sql,        label: "SQL",        brace: :sql,        rouge: :sql },
-    { id: :shell,      label: "Shell",      brace: :sh,         rouge: :shell },
+    { id: :sh,         label: "Shell",      brace: :sh,         rouge: :shell },
   ]
 end

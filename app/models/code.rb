@@ -20,6 +20,8 @@ class Code < ApplicationRecord
   has_one :article_block, as: :blockable, inverse_of: :blockable, dependent: :destroy
   has_one :article, through: :article_block
 
+  before_create -> { self.mode = "plain_text" if mode.blank? }
+
   def empty?
     body.blank?
   end
