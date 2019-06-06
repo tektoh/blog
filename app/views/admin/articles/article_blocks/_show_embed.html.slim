@@ -1,4 +1,7 @@
 .card-body
+  - if embed.html?
+    - if embed.body?
+      = render "shared/embed_html", embed: embed
   - if embed.youtube?
     - if embed.identifier?
       = render "shared/embed_youtube", embed: embed, width: 560, height: 315

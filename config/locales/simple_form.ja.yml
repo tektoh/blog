@@ -68,3 +68,4 @@ ja:
       embed:
         embed_type: '埋め込みタイプ'
         identifier: 'ID'
+        body: 'BODY'

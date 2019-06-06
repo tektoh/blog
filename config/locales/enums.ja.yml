@@ -19,4 +19,5 @@ ja:
         image: '画像'
     embed:
       embed_type:
+        html: 'HTML'
         youtube: 'YouTube'

@@ -120,7 +120,7 @@ class Admin::Articles::ArticleBlocksController < AdminController
     end
 
     def embed_params
-      params.require(:embed).permit(:embed_type, :identifier)
+      params.require(:embed).permit(:embed_type, :identifier, :body)
     end
 
     def code_params

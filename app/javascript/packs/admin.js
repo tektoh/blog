@@ -41,6 +41,7 @@ $(() => {
           $root.html(data);
           $root.find('.js-article-block-sentence-editor').sentenceEditor();
           $root.find('.js-article-block-code-editor').codeEditor();
+          $root.find('.js-article-block-embed-form').embedForm();
         })
         .fail(() => {
           alert('エラーが発生しました')
@@ -86,6 +87,7 @@ $(() => {
       $content.html(event.detail[0].body.innerHTML);
       $content.find('.js-article-block-sentence-editor').sentenceEditor();
       $content.find('.js-article-block-code-editor').codeEditor();
+      $content.find('.js-article-block-embed-form').embedForm();
     });
 
     $root.on('ajax:success', '.js-update-article-block', function (event) {
@@ -104,10 +106,36 @@ $(() => {
 
     $root.on('click', '.js-cancel-article-block', function (event) {
       event.preventDefault();
-      console.log(111);
       reload();
     });
 
     reload();
-  })
+  });
+
+  $.fn.embedForm = function () {
+    this.each((i, elm) => {
+      const $embedType = $(elm).find('.js-embed-type');
+      const $embedIdentifier = $(elm).find('.js-embed-identifier');
+      const $embedBody = $(elm).find('.js-embed-body');
+
+      const changeEmbedTypeHandler = function () {
+        const embedType = $embedType.val();
+        if (embedType === 'html') {
+          $embedIdentifier.hide();
+          $embedIdentifier.find('input').val('');
+          $embedBody.show();
+        }
+        else {
+          $embedIdentifier.show();
+          $embedBody.hide();
+          $embedBody.find('textarea').val('');
+        }
+      };
+
+      $embedType.on('change', changeEmbedTypeHandler);
+
+      changeEmbedTypeHandler();
+      autosize($embedBody.find('.js-autosize'));
+    });
+  };
 });

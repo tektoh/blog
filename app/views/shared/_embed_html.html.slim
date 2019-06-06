@@ -1,0 +1,5 @@
+ruby:
+  embed = local_assigns[:embed]
+
+section.embed-html.mb-4(id="mbed_#{embed.id}")
+  = embed.body.html_safe
