@@ -29,10 +29,13 @@ section.blog-article
       = image_tag article.eye_cache.lg.url, class: "img-fluid"
 
   - if controller.action_name == "show"
-    article.blog-article-body
+    article.blog-article-body.mb-5
       == article.body
 
+    // Author
     - if article.author.present?
+      hr
+
       section.author.my-5
         h4.font-italic Author
         .media

@@ -4,20 +4,10 @@ html
     - if current_site.gtag?
       == current_site.gtag
     = render "layouts/meta_tags"
-    link[href="https://fonts.googleapis.com/css?family=Sawarabi+Mincho" rel="stylesheet"]
-    link[href="https://fonts.googleapis.com/css?family=Sawarabi+Gothic" rel="stylesheet"]
-    link[rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    ]
-    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track": true
+    = stylesheet_pack_tag "application", media: "all", "data-turbolinks-track": true
     - if preview?
       = stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.2/gh-fork-ribbon.min.css"
-    script[src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.2.0/turbolinks.js"
-      integrity="sha256-iM4Yzi/zLj/IshPWMC1IluRxTtRjMqjPGd97TZ9yYpU="
-      crossorigin="anonymous"
-    ]
+    = javascript_pack_tag "application", "data-turbolinks-track": true
   body
     - if preview?
       a.github-fork-ribbon[href="" data-ribbon="Preview"]

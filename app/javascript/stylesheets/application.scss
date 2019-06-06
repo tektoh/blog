@@ -1,0 +1,182 @@
+@import url("https://fonts.googleapis.com/css?family=Sawarabi+Mincho");
+@import url("https://fonts.googleapis.com/css?family=Sawarabi+Gothic");
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/root";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/type";
+@import "~bootstrap/scss/images";
+@import "~bootstrap/scss/code";
+@import "~bootstrap/scss/grid";
+// @import "~bootstrap/scss/tables";
+// @import "~bootstrap/scss/forms";
+// @import "~bootstrap/scss/buttons";
+// @import "~bootstrap/scss/transitions";
+// @import "~bootstrap/scss/dropdown";
+// @import "~bootstrap/scss/button-group";
+// @import "~bootstrap/scss/input-group";
+// @import "~bootstrap/scss/custom-forms";
+@import "~bootstrap/scss/nav";
+@import "~bootstrap/scss/navbar";
+// @import "~bootstrap/scss/card";
+// @import "~bootstrap/scss/breadcrumb";
+@import "~bootstrap/scss/pagination";
+// @import "~bootstrap/scss/badge";
+// @import "~bootstrap/scss/jumbotron";
+// @import "~bootstrap/scss/alert";
+// @import "~bootstrap/scss/progress";
+@import "~bootstrap/scss/media";
+// @import "~bootstrap/scss/list-group";
+// @import "~bootstrap/scss/close";
+// @import "~bootstrap/scss/toasts";
+// @import "~bootstrap/scss/modal";
+// @import "~bootstrap/scss/tooltip";
+// @import "~bootstrap/scss/popover";
+// @import "~bootstrap/scss/carousel";
+// @import "~bootstrap/scss/spinners";
+@import "~bootstrap/scss/utilities";
+@import "~bootstrap/scss/print";
+
+@import "highlight";
+
+.font-italic {
+  font-family: "Sawarabi Mincho";
+}
+
+.border-bottom {
+  border-bottom: 1px solid #dee2e6 !important;
+}
+
+.blog-header {
+  line-height: 1;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.blog-header-logo {
+  font-family: "Sawarabi Mincho";
+  font-size: 2.25rem;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.blog-article-title {
+  font-family: "Sawarabi Mincho";
+
+  a:hover {
+    text-decoration: none;
+  }
+}
+
+.blog-article-meta {
+  margin-bottom: 1.25rem;
+  color: #999;
+}
+
+.blog-article-body {
+  font-family: "Sawarabi Gothic";
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Sawarabi Mincho";
+  }
+}
+
+.article-title {
+  margin-bottom: 0;
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.blog-description {
+  font-size: 1.1rem;
+  color: #999;
+}
+
+.nav-scroller {
+  position: relative;
+  z-index: 2;
+  height: 2.75rem;
+  overflow-y: hidden;
+
+  .nav {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    padding-bottom: 1rem;
+    margin-top: -1px;
+    overflow-x: auto;
+    text-align: center;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .nav-link {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    font-size: .875rem;
+  }
+}
+
+.page-content {
+  padding-bottom: 80px;
+}
+
+.article-content {
+  padding-bottom: 60px;
+  max-width: 800px;
+}
+
+.published-at {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.category, .tags, .author {
+  margin-top: 20px;
+}
+
+.article {
+  max-width: 680px;
+  margin: 3rem auto 1rem;
+
+  h1,
+  h2,
+  h3 {
+    margin: 2rem 0 1rem;
+  }
+}
+
+.medium-image {
+  position: relative;
+  width: 100%;
+  margin: 2rem auto;
+
+  img {
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.embed-youtube {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  margin: 2rem auto;
+
+  iframe {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+.img-icon {
+  max-width: 128px;
+}
