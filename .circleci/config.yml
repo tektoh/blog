@@ -68,7 +68,7 @@ jobs:
             - ~/.cache/yarn
       - run:
           name: Audit Yarn
-          command: audit-ci -m
+          command: yarn audit-ci -m
 
      # Setup DB
       - run:
