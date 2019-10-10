@@ -2,6 +2,8 @@
 
 ブログ
 
+[![CircleCI](https://circleci.com/gh/tektoh/blog.svg?style=svg)](https://circleci.com/gh/tektoh/blog)
+
 ## アーキテクチャ
 
 - Ruby on Rails
