@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  test:
     working_directory: ~/blog
     parallelism: 1
     shell: /bin/bash --login
@@ -44,8 +44,8 @@ jobs:
             - rails-bundle-{{ checksum "Gemfile.lock" }}
             - rails-bundle-
       - run:
-        name: Bundle Install
-        command: bundle check --path vendor/bundle || bundle install --deployment
+          name: Bundle Install
+          command: bundle check --path vendor/bundle || bundle install --deployment
       - save_cache:
           key: rails-bundle-{{ checksum "Gemfile.lock" }}
           paths:
@@ -111,3 +111,19 @@ jobs:
       - store_artifacts:
           path: coverage
           destination: coverage
+
+workflows:
+  version: 2
+  test_workflow:
+    jobs:
+      - test
+  daily_workflow:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - test
