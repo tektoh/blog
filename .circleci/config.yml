@@ -6,8 +6,6 @@ jobs:
     shell: /bin/bash --login
     environment:
       TZ: /usr/share/zoneinfo/Asia/Tokyo
-      CIRCLE_ARTIFACTS: /tmp/circleci-artifacts
-      CIRCLE_TEST_REPORTS: /tmp/circleci-test-results
     docker:
       - image: circleci/ruby:2.6.3-node-browsers
         environment:
@@ -16,6 +14,8 @@ jobs:
           POSTGRES_USERNAME: postgres
           POSTGRES_PASSWORD: ""
           REDIS_URL: redis://localhost:6379
+          BUNDLE_JOBS: 3
+          BUNDLE_RETRY: 3
           BUNDLE_PATH: vendor/bundle
           YARN_CACHE_FOLDER: ~/.cache/yarn
           DISABLE_SPRING: true
@@ -28,38 +28,86 @@ jobs:
       - image: circleci/redis:3.2.11-alpine
     steps:
       - checkout
-      - run: mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS
+
+      # Setup bundler
       - run:
+          name: Configure Bundler
           command: |
-            sudo gem update --system
-            sudo gem uninstall bundler
-            sudo rm /usr/local/bin/bundle
-            sudo rm /usr/local/bin/bundler
-            sudo gem install bundler
-      - run: bundle -v
+            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
+            source $BASH_ENV
+            gem install bundler
+      - run:
+          name: Which bundler?
+          command: bundle -v
       - restore_cache:
           keys:
             - rails-bundle-{{ checksum "Gemfile.lock" }}
             - rails-bundle-
-      - run: bundle check || bundle install
+      - run:
+        name: Bundle Install
+        command: bundle check --path vendor/bundle || bundle install --deployment
       - save_cache:
           key: rails-bundle-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
+      - run:
+          name: Audit Bundler
+          command: bundle exec bundle audit check --update
+
+      # Setup yarn
       - restore_cache:
           keys:
             - rails-yarn-{{ checksum "yarn.lock" }}
             - rails-yarn-
-      - run: yarn install
+      - run:
+          name: Yarn Install
+          command: yarn install --cache-folder ~/.cache/yarn
       - save_cache:
           key: rails-yarn-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
-      - run: dockerize -wait tcp://localhost:5432 -timeout 1m
-      - run: bundle exec bundle audit check --update
-      - run: bundle exec rails db:create db:schema:load --trace
-      - run: bundle exec rails spec
+      - run:
+          name: Audit Yarn
+          command: audit-ci -m
+
+     # Setup DB
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Database setup
+          command: bundle exec rails db:create db:schema:load --trace
+
+      # Compiling Assets
+      - restore_cache:
+          keys:
+            - asset-cache-{{ arch }}-{{ .Branch }}
+            - asset-cache-
+      - run:
+          name: Compiling Assets
+          command: bundle exec rails assets:precompile
+      - save_cache:
+          key: asset-cache-{{ arch }}-{{ .Branch }}-{{ epoch }}
+          paths:
+            - public/assets
+            - public/packs
+            - tmp/cache/assets/sprockets
+
+      # Run Specs
+      - run:
+          name: Run Specs
+          command: |
+            echo "--format progress --format RspecJunitFormatter --out tmp/test-results/rspec/rspec.xml" > .rspec
+            bundle exec rspec --format progress --format RspecJunitFormatter --out tmp/test-results/rspec/rspec.xml
+
+      # Save test results
       - store_test_results:
-          path: /tmp/circleci-test-results
+          path: tmp/test-results
+
+      # Save artifacts
       - store_artifacts:
-          path: /tmp/circleci-artifacts
+          path: tmp/screenshots
+          destination: screenshots
+      - store_artifacts:
+          path: coverage
+          destination: coverage

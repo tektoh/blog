@@ -115,6 +115,7 @@ group :development, :test do
   # Test
   gem "factory_bot_rails"
   gem "faker"
+  gem "rspec_junit_formatter"
   gem "rspec-rails"
   gem "simplecov", require: false
 
