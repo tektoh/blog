@@ -7,7 +7,7 @@ jobs:
     environment:
       TZ: /usr/share/zoneinfo/Asia/Tokyo
     docker:
-      - image: circleci/ruby:2.6.3-node-browsers
+      - image: circleci/ruby:2.6.5-node-browsers
         environment:
           RAILS_ENV: test
           POSTGRES_HOST: localhost
@@ -25,7 +25,6 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_DB: blog_test
           POSTGRES_PASSWORD: ""
-      - image: circleci/redis:3.2.11-alpine
     steps:
       - checkout
 
