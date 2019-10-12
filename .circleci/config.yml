@@ -20,7 +20,7 @@ jobs:
           YARN_CACHE_FOLDER: ~/.cache/yarn
           DISABLE_SPRING: true
           COVERAGE: true
-      - image: circleci/postgres:9.6-alpine
+      - image: circleci/postgres:11-alpine
         environment:
           POSTGRES_USER: postgres
           POSTGRES_DB: blog_test
