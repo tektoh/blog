@@ -35,14 +35,14 @@ volumes:
 
 services:
   db:
-    image: postgres:9.6
+    image: postgres:11
     volumes:
       - db-data:/var/lib/postgresql/data
     ports:
       - '5432:5432'
 
   cache:
-    image: redis:3.2
+    image: redis:4.0
     volumes:
       - cache-data:/data
     ports:
