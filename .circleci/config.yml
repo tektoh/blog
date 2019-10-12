@@ -60,7 +60,10 @@ jobs:
             - rails-yarn-
       - run:
           name: Yarn Install
-          command: yarn install --cache-folder ~/.cache/yarn
+          command: yarn install --check-files --cache-folder ~/.cache/yarn
+      - run:
+          name: Check Yarn Integrity
+          command: yarn check --integrity
       - save_cache:
           key: rails-yarn-{{ checksum "yarn.lock" }}
           paths:
