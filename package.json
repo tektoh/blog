@@ -5,7 +5,8 @@
     "start": "./bin/webpack-dev-server",
     "build": "./bin/webpack",
     "lint": "eslint app/javascript",
-    "test": "jest"
+    "test": "jest",
+    "audit": "audit-ci -m"
   },
   "repository": {
     "type": "git",
@@ -51,7 +52,7 @@
     "coffeescript": "1.12.7",
     "compression-webpack-plugin": "^2.0.0",
     "core-js": "3",
-    "css-loader": "^0.28.4",
+    "css-loader": "^3.2.0",
     "eonasdan-bootstrap-datetimepicker": "^4.17.47",
     "extract-text-webpack-plugin": "4.0.0-beta.0",
     "file-loader": "^3.0.1",
