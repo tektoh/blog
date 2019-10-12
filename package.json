@@ -34,6 +34,7 @@
     "@rails/webpacker": "^4.0.2",
     "autoprefixer": "^7.1.2",
     "autosize": "^4.0.0",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "bootstrap": "4.3.1",
     "eonasdan-bootstrap-datetimepicker": "^4.17.47",
     "google-fonts-plugin": "^4.1.0",
