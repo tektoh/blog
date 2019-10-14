@@ -1,6 +1,6 @@
 version: '3.7'
 
-x-defaults: &defaults
+x-app: &app
   build: .
   environment: &default-environments
     TZ: Asia/Tokyo
@@ -49,8 +49,8 @@ services:
       - '6379:6379'
 
   rails:
-    <<: *defaults
-    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    <<: *app
+    command: bundle exec rails server -p 3000 -b '0.0.0.0'
     ports:
       - '3000:3000'
     tty: true
@@ -63,7 +63,7 @@ services:
 #    stdin_open: true
 
   webpack-dev-server:
-    <<: *defaults
+    <<: *app
     environment:
       <<: *default-environments
       WEBPACKER_DEV_SERVER_HOST: 0.0.0.0
@@ -71,15 +71,8 @@ services:
     ports:
       - '3035:3035'
 
-  spring:
-    <<: *defaults
-    command: bundle exec spring server
-      - db
-      - cache
-
-  guard:
-    <<: *defaults
-    command: bundle exec guard -i
-    depends_on:
-      - db
-      - cache
+  runner:
+    <<: *app
+    command: /bin/bash
+    stdin_open: true
+    tty: true

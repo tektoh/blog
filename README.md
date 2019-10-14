@@ -32,8 +32,7 @@ cp -v .env{.example,}
 - cache: キャッシュサーバー(Redis)
 - rails: Railsサーバー(Puma)
 - webpack-dev-server: JavaScriptのコンパイル
-- spring: Rails CLI の受付
-- guard: spec, linter の自動実行
+- runner: 作業コンテナ(bash)
 
 ### Dockerコンテナのビルド
 
@@ -57,10 +56,28 @@ docker-compose stop
 
 ### 初期設定
 
-コンテナが起動した状態で以下を実行してください
+```bash
+docker-compose run runner
+# bundle install
+# yarn install
+```
+
+### Dockerコンテナの起動
 
 ```bash
-docker-compose exec spring rails db:setup
+docker-compose up
+```
+
+初回起動時はDBの初期設定を実行してください
+
+```bash
+docker-compose run runner rails db:setup
+```
+
+### Dockerコンテナの停止
+
+```bash
+docker-compose stop
 ```
 
 ### その他の操作
@@ -72,27 +89,31 @@ docker-compose stop
 docker-compose up
 ```
 
-`rails` コマンドは spring のコンテナで実行してください
+`rails` コマンドは runner コンテナで実行してください
 
 ```bash
-docker-compose exec spring rails db:migrate
+# generate
+docker-compose run runner rails g model
+
+# migration
+docker-compose run runner rails db:migrate
+
+# spec
+docker-compose run runner rails spec
+
+# rubocop
+docker-compose run runner rubocp -a
+
+# guard
+docker-compose run runner guard -i
 ```
 
-binding.pry する場合は `docker-compose ps` で Rails サーバーのイメージ名を確認し、 `docker attach [イメージ名]` でコンテナにアタッチしてください。
-
-各コンテナはvolumeで bundler や node_modules を共有しています。
-bundle install や yarn install が競合しないようにロックファイルを作成して制御しています。
-コンテナを起動中に強制終了するとロックファイルがvolumeに残ってしまうことがあります。
-コンテナが起動しなくなった場合はロックファイルを削除してみてください。
-
-[FIXME] 誰かもっとイケてる感じにしてほしい => docker-entrypoint.sh
-
+コンテナへのログイン
 ```bash
-dc exec spring rm /usr/local/bundle/.wait
-dc exec spring rm /app/node_modules/.wait
+docker-compose run runner
 ```
 
-bundle update
+binding.pry する場合は `docker-compose ps` で Rails サーバーのコンテナ名を確認し、 `docker attach [Railsコンテナ名]` でコンテナにアタッチしてください。
 
 ```bash
 docker-compose run rails bundle update
@@ -103,7 +124,7 @@ docker-compose run rails bundle update
 rbenv, bundler, nodenv, yarn, postgresql, redis が必要です。
 
 
-.env に以下の環境変数を追加してください
+.env ファイルを作成し、以下の環境変数を追加してください
 
 ```
 POSTGRES_HOST=localhost
@@ -125,12 +146,6 @@ Railsの起動
 
 ```bash
 bundle exec rails s
-```
-
-Resqueの起動
-
-```bash
-bundle exec rails resque:work
 ```
 
 webpack-dev-serverの起動
