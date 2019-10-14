@@ -115,6 +115,7 @@ group :development, :test do
   # Test
   gem "factory_bot_rails"
   gem "faker"
+  gem "database_cleaner"
   gem "rspec_junit_formatter"
   gem "rspec-rails"
   gem "simplecov", require: false
@@ -151,11 +152,11 @@ end
 
 group :test do
   gem "capybara"
-  gem "database_cleaner"
   gem "fuubar"
   gem "launchy"
   gem "selenium-webdriver"
   gem "shoulda-matchers"
   gem "simplecov", require: false
   gem "timecop"
+  gem "webdrivers"
 end
