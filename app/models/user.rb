@@ -20,16 +20,8 @@
 #
 
 class User < ApplicationRecord
-  include UserName
-  include CryptedPassword
-  include Role
+  include UserName, UserRole, CryptedPassword, HasAvatar
 
-  mount_uploader :avatar, AvatarUploader
-
-  authenticates_with_sorcery!
   acts_as_paranoid
-
-  validates :avatar,
-            file_size: { less_than_or_equal_to: 10.megabytes },
-            file_content_type: { allow: %w[image/jpeg image/png] }
+  authenticates_with_sorcery!
 end

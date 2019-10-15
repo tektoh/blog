@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
-class ImageUploader < CarrierWave::Uploader::Base
+class IconUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
-
-  process :save_content_type_and_size_in_model
 
   version :icon do
     process resize_to_fill: [128, 128]
@@ -11,14 +9,6 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   version :sm do
     process resize_to_limit: [300, 300]
-  end
-
-  version :md do
-    process resize_to_limit: [800, 800]
-  end
-
-  version :lg do
-    process resize_to_limit: [1200, 800]
   end
 
   def store_dir
@@ -29,16 +19,14 @@ class ImageUploader < CarrierWave::Uploader::Base
     "#{secure_token}.#{file.extension}" if original_filename.present?
   end
 
+  def default_url
+    ActionController::Base.helpers.asset_path("icon.png")
+  end
+
   private
 
     def secure_token
       var = :"@#{mounted_as}_secure_token"
       model.instance_variable_get(var) || model.instance_variable_set(var, SecureRandom.uuid)
-    end
-
-    def save_content_type_and_size_in_model
-      return self unless file && model && model.has_attribute?(:content_type)
-      model.content_type = file.content_type if file.content_type
-      model.file_size = file.size
     end
 end

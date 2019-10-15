@@ -30,29 +30,25 @@
 #
 
 class Article < ApplicationRecord
-  mount_uploader :eye_cache, ImageUploader
+  include HasUuid, HasEyeCache
 
   belongs_to :author
   belongs_to :category
 
   has_many :article_blocks, -> { order(:level) }
   has_many :article_tags
-
   has_many :codes, through: :article_blocks, source: :blockable, source_type: "Code"
   has_many :embeds, through: :article_blocks, source: :blockable, source_type: "Embed"
   has_many :media, through: :article_blocks, source: :blockable, source_type: "Medium"
   has_many :sentences, through: :article_blocks, source: :blockable, source_type: "Sentence"
   has_many :tags, through: :article_tags
 
-  enum state: %i[draft published]
+  enum state: { draft: 0, published: 1 }
 
   validates :slug, slug_format: true, uniqueness: true, length: { maximum: 255 }, allow_blank: true
   validates :title, presence: true, uniqueness: true, length: { maximum: 255 }
   validates :description, length: { maximum: 1000 }, allow_blank: true
   validates :state, presence: true
-  validates :eye_cache,
-            file_size: { less_than_or_equal_to: 10.megabytes },
-            file_content_type: { allow: %w[image/jpeg image/png] }
 
   with_options if: :published? do |v|
     v.validates :slug, slug_format: true, presence: true, length: { maximum: 255 }
@@ -64,8 +60,6 @@ class Article < ApplicationRecord
   delegate :slug, to: :category, prefix: true, allow_nil: true
   delegate :name, to: :author, prefix: true, allow_nil: true
   delegate :slug, to: :author, prefix: true, allow_nil: true
-
-  before_create -> { self.uuid = SecureRandom.uuid }
 
   scope :viewable, -> { published.where("published_at < ?", Time.current) }
   scope :new_arrivals, -> { viewable.order(published_at: :desc) }

@@ -3,8 +3,6 @@
 class CoverImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
-  storage Settings.carrierwave.storage.to_sym
-
   process resize_to_limit: [1200, 630]
 
   def store_dir

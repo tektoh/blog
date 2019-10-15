@@ -52,7 +52,7 @@ ja:
         name: '著者名'
         slug: 'スラッグ'
         description: 'プロフィール'
-        avatar: 'アバター'
+        icon: 'アイコン'
       article:
         title: 'タイトル'
         slug: 'スラッグ'
