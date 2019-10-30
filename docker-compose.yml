@@ -2,10 +2,11 @@ version: '3.7'
 
 x-app: &app
   build: .
-  environment: &default-environments
+  environment: &app-environments
     TZ: Asia/Tokyo
     EDITOR: vi
     APP_PATH: /app
+    HISTFILE: /app/log/.bash_history
     RAILS_ENV: development
     POSTGRES_HOST: db
     POSTGRES_USERAME: postgres
@@ -20,18 +21,20 @@ x-app: &app
     WEBPACKER_DEV_SERVER_PORT: 3035
     WEBPACKER_DEV_SERVER_PUBLIC: localhost:3035
   volumes:
-    - .:/app
+    - .:/app:cached
     - /app/tmp/cache
     - /app/tmp/pids
     - /app/.git
     - bundler-data:/usr/local/bundle
     - yarn-data:/app/node_modules
+    - packs-data:/app/public/packs
 
 volumes:
   bundler-data:
   yarn-data:
   db-data:
   cache-data:
+  packs-data:
 
 services:
   db:
@@ -65,7 +68,7 @@ services:
   webpack-dev-server:
     <<: *app
     environment:
-      <<: *default-environments
+      <<: *app-environments
       WEBPACKER_DEV_SERVER_HOST: 0.0.0.0
     command: bin/webpack-dev-server
     ports:
