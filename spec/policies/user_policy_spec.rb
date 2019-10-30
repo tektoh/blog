@@ -7,106 +7,51 @@ RSpec.describe UserPolicy do
 
   context 'for a writer' do
     let(:current_user) { create :user, :writer }
+    permissions(:index?)   { it { is_expected.to permit(current_user, user) } }
+    permissions(:show?)    { it { is_expected.to permit(current_user, user) } }
+    permissions(:new?)     { it { is_expected.not_to permit(current_user, user) } }
+    permissions(:create?)  { it { is_expected.not_to permit(current_user, user) } }
+    permissions(:edit?)    { it { is_expected.not_to permit(current_user, user) } }
+    permissions(:update?)  { it { is_expected.not_to permit(current_user, user) } }
+    permissions(:destroy?) { it { is_expected.not_to permit(current_user, user) } }
 
-    permissions :index? do
-      it { expect(subject).to permit(current_user, user) }
-    end
-
-    permissions :show? do
-      it { expect(subject).to permit(current_user, user) }
-    end
-
-    permissions :new? do
-      it { expect(subject).not_to permit(current_user, user) }
-    end
-
-    permissions :create? do
-      it { expect(subject).not_to permit(current_user, user) }
-    end
-
-    permissions :edit? do
-      it { expect(subject).not_to permit(current_user, user) }
-      it { expect(subject).to permit(current_user, current_user) }
-    end
-
-    permissions :update? do
-      it { expect(subject).not_to permit(current_user, user) }
-      it { expect(subject).to permit(current_user, current_user) }
-    end
-
-    permissions :destroy? do
-      it { expect(subject).not_to permit(current_user, user) }
-      it { expect(subject).not_to permit(current_user, current_user) }
-    end
+    permissions(:show?)    { it { is_expected.to permit(current_user, current_user) } }
+    permissions(:edit?)    { it { is_expected.to permit(current_user, current_user) } }
+    permissions(:update?)  { it { is_expected.to permit(current_user, current_user) } }
+    permissions(:destroy?) { it { is_expected.not_to permit(current_user, current_user) } }
   end
 
   context 'for a editor' do
     let(:current_user) { create :user, :editor }
 
-    permissions :index? do
-      it { expect(subject).to permit(current_user, user) }
-    end
+    permissions(:index?)   { it { is_expected.to permit(current_user, user) } }
+    permissions(:show?)    { it { is_expected.to permit(current_user, user) } }
+    permissions(:new?)     { it { is_expected.not_to permit(current_user, user) } }
+    permissions(:create?)  { it { is_expected.not_to permit(current_user, user) } }
+    permissions(:edit?)    { it { is_expected.not_to permit(current_user, user) } }
+    permissions(:update?)  { it { is_expected.not_to permit(current_user, user) } }
+    permissions(:destroy?) { it { is_expected.not_to permit(current_user, user) } }
 
-    permissions :show? do
-      it { expect(subject).to permit(current_user, user) }
-    end
-
-    permissions :new? do
-      it { expect(subject).not_to permit(current_user, user) }
-    end
-
-    permissions :create? do
-      it { expect(subject).not_to permit(current_user, user) }
-    end
-
-    permissions :edit? do
-      it { expect(subject).not_to permit(current_user, user) }
-      it { expect(subject).to permit(current_user, current_user) }
-    end
-
-    permissions :update? do
-      it { expect(subject).not_to permit(current_user, user) }
-      it { expect(subject).to permit(current_user, current_user) }
-    end
-
-    permissions :destroy? do
-      it { expect(subject).not_to permit(current_user, user) }
-      it { expect(subject).not_to permit(current_user, current_user) }
-    end
+    permissions(:show?)    { it { is_expected.to permit(current_user, current_user) } }
+    permissions(:edit?)    { it { is_expected.to permit(current_user, current_user) } }
+    permissions(:update?)  { it { is_expected.to permit(current_user, current_user) } }
+    permissions(:destroy?) { it { is_expected.not_to permit(current_user, current_user) } }
   end
 
   context 'for a admin' do
     let(:current_user) { create :user, :admin }
 
-    permissions :index? do
-      it { expect(subject).to permit(current_user, user) }
-    end
+    permissions(:index?)   { it { is_expected.to permit(current_user, user) } }
+    permissions(:show?)    { it { is_expected.to permit(current_user, user) } }
+    permissions(:new?)     { it { is_expected.to permit(current_user, user) } }
+    permissions(:create?)  { it { is_expected.to permit(current_user, user) } }
+    permissions(:edit?)    { it { is_expected.to permit(current_user, user) } }
+    permissions(:update?)  { it { is_expected.to permit(current_user, user) } }
+    permissions(:destroy?) { it { is_expected.to permit(current_user, user) } }
 
-    permissions :show? do
-      it { expect(subject).to permit(current_user, user) }
-    end
-
-    permissions :new? do
-      it { expect(subject).to permit(current_user, user) }
-    end
-
-    permissions :create? do
-      it { expect(subject).to permit(current_user, user) }
-    end
-
-    permissions :edit? do
-      it { expect(subject).to permit(current_user, user) }
-      it { expect(subject).to permit(current_user, current_user) }
-    end
-
-    permissions :update? do
-      it { expect(subject).to permit(current_user, user) }
-      it { expect(subject).to permit(current_user, current_user) }
-    end
-
-    permissions :destroy? do
-      it { expect(subject).to permit(current_user, user) }
-      it { expect(subject).not_to permit(current_user, current_user) }
-    end
+    permissions(:show?)    { it { is_expected.to permit(current_user, current_user) } }
+    permissions(:edit?)    { it { is_expected.to permit(current_user, current_user) } }
+    permissions(:update?)  { it { is_expected.to permit(current_user, current_user) } }
+    permissions(:destroy?) { it { is_expected.not_to permit(current_user, current_user) } }
   end
 end
