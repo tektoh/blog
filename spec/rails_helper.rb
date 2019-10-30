@@ -44,27 +44,6 @@ RSpec.configure do |config|
   # Include custom login macros
   # config.include LoginMacros
 
-  # Configure DatabaseCleaner to reset data between tests
-  config.before(:suite) do
-    DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with :truncation
-    require Rails.root.join 'db', 'seeds'
-  end
-
-  config.before :all do
-    FactoryBot.reload
-  end
-
-  config.around(:each) do |example|
-    DatabaseCleaner.cleaning do
-      example.run
-    end
-  end
-
-  config.after(:each) do
-    DatabaseCleaner.clean
-  end
-
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
   # `post` in specs under `spec/controllers`.

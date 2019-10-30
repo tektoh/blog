@@ -151,7 +151,6 @@ end
 
 group :test do
   gem "capybara"
-  gem "database_cleaner"
   gem "fuubar"
   gem "launchy"
   gem "selenium-webdriver"
