@@ -148,6 +148,9 @@ GEM
       deep_merge (~> 1.2.1)
       dry-validation (>= 0.10.4)
     crass (1.0.5)
+    debase (0.2.4.1)
+      debase-ruby_core_source (>= 0.10.2)
+    debase-ruby_core_source (0.10.7)
     debug_inspector (0.0.3)
     deep_merge (1.2.1)
     descendants_tracker (0.0.4)
@@ -461,6 +464,8 @@ GEM
     rubocop-rails_config (0.2.5)
       railties (>= 3.0)
       rubocop (~> 0.56)
+    ruby-debug-ide (0.7.0)
+      rake (>= 0.8.1)
     ruby-graphviz (1.2.4)
     ruby-progressbar (1.10.0)
     ruby_dep (1.5.0)
@@ -610,6 +615,7 @@ DEPENDENCIES
   coffee-rails
   coffeelint
   config
+  debase
   dotenv-rails
   draper
   enum_help
@@ -658,6 +664,7 @@ DEPENDENCIES
   rspec_junit_formatter
   rubocop (= 0.62)
   rubocop-rails_config
+  ruby-debug-ide
   sass-rails
   scss_lint
   sdoc (~> 0.4.0)
