@@ -79,29 +79,29 @@ commands:
           command: bundle exec rails db:create db:schema:load --trace
 
   audit_gem:
-    - description: Audit RubyGems
-    - steps:
+    description: Audit RubyGems
+    steps:
       - run:
           name: Audit RubyGems
           command: bundle exec bundle audit check --update
 
   audit_npm:
-    - description: Audit npm
-    - steps:
+    description: Audit npm
+    steps:
       - run:
           name: Audit npm
           command: yarn audit-ci -m
 
   rubocop:
-    - description: Rubocop
-    - steps:
+    description: Rubocop
+    steps:
       - run:
           name: Run Rubocop
           command: bundle exec rubocop
 
   eslint:
-    - description: ESLint
-    - steps:
+    description: ESLint
+    steps:
       - run:
           name: Run ESLint
           command: yarn eslint app/javascript
@@ -178,6 +178,7 @@ jobs:
       - eslint
 
   spec:
+    executor: app
     steps:
       - checkout
       - setup_bundler
