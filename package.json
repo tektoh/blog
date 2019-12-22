@@ -20,6 +20,7 @@
   "homepage": "https://github.com/startup-technology/start-dash#readme",
   "devDependencies": {
     "audit-ci": "^2.4.0",
+    "babel-eslint": "^10.0.3",
     "eslint": "^5.15.1",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.16.0",

@@ -191,12 +191,12 @@ jobs:
 
 workflows:
   version: 2
-  test_workflow:
+  commit:
     jobs:
       - lint_ruby
       - lint_javascript
       - spec
-  daily_workflow:
+  daily:
     triggers:
       - schedule:
           cron: "0 0 * * *"
