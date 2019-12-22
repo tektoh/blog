@@ -186,7 +186,8 @@ jobs:
       - setup_db
       - compiling_assets
       - rspec
-      - savte_test_results
+      - save_test_results
+      - save_artifacts
 
 workflows:
   version: 2
@@ -204,4 +205,4 @@ workflows:
     jobs:
       - audit_gem
       - audit_npm
-      - test
+      - spec
