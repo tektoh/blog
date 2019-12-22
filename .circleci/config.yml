@@ -193,6 +193,8 @@ workflows:
   version: 2
   test_workflow:
     jobs:
+      - lint_ruby
+      - lint_javascript
       - spec
   daily_workflow:
     triggers:
