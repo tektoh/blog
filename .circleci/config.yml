@@ -132,7 +132,7 @@ commands:
             echo "--format progress --format RspecJunitFormatter --out tmp/test-results/rspec/rspec.xml" > .rspec
             bundle exec rspec --format progress --format RspecJunitFormatter --out tmp/test-results/rspec/rspec.xml
 
-  seve_test_results:
+  save_test_results:
     description: Save test results
     steps:
       - store_test_results:
