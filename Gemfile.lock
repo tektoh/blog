@@ -147,8 +147,10 @@ GEM
       activesupport (>= 3.0)
       deep_merge (~> 1.2.1)
       dry-validation (>= 0.10.4)
-    crass (1.0.4)
-    database_cleaner (1.7.0)
+    crass (1.0.5)
+    debase (0.2.4.1)
+      debase-ruby_core_source (>= 0.10.2)
+    debase-ruby_core_source (0.10.7)
     debug_inspector (0.0.3)
     deep_merge (1.2.1)
     descendants_tracker (0.0.4)
@@ -283,7 +285,7 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
-    loofah (2.3.0)
+    loofah (2.3.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     lumberjack (1.0.13)
@@ -312,7 +314,7 @@ GEM
     mustermann (1.0.3)
     nenv (0.3.0)
     nio4r (2.3.1)
-    nokogiri (1.10.4)
+    nokogiri (1.10.7)
       mini_portile2 (~> 2.4.0)
     notiffany (0.1.1)
       nenv (~> 0.1)
@@ -345,10 +347,11 @@ GEM
     pry-rails (0.3.6)
       pry (>= 0.10.4)
     public_suffix (3.0.3)
-    puma (3.12.0)
+    puma (4.3.1)
+      nio4r (~> 2.0)
     pundit (2.0.0)
       activesupport (>= 3.0.0)
-    rack (2.0.7)
+    rack (2.0.8)
     rack-protection (2.0.4)
       rack
     rack-proxy (0.6.5)
@@ -462,6 +465,8 @@ GEM
     rubocop-rails_config (0.2.5)
       railties (>= 3.0)
       rubocop (~> 0.56)
+    ruby-debug-ide (0.7.0)
+      rake (>= 0.8.1)
     ruby-graphviz (1.2.4)
     ruby-progressbar (1.10.0)
     ruby_dep (1.5.0)
@@ -615,7 +620,7 @@ DEPENDENCIES
   coffee-rails
   coffeelint
   config
-  database_cleaner
+  debase
   dotenv-rails
   draper
   enum_help
@@ -664,6 +669,7 @@ DEPENDENCIES
   rspec_junit_formatter
   rubocop (= 0.62)
   rubocop-rails_config
+  ruby-debug-ide
   sass-rails
   scss_lint
   sdoc (~> 0.4.0)
@@ -692,4 +698,4 @@ DEPENDENCIES
   whenever
 
 BUNDLED WITH
-   2.0.1
+   2.0.2

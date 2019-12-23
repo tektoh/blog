@@ -118,7 +118,6 @@ group :development, :test do
   gem "database_cleaner"
   gem "rspec_junit_formatter"
   gem "rspec-rails"
-  gem "simplecov", require: false
 
   # Code analyze
   gem "brakeman", require: false
@@ -135,10 +134,12 @@ group :development, :test do
   gem "better_errors"
   gem "binding_of_caller"
   gem "byebug"
+  gem "debase"
   gem "pry"
   gem "pry-byebug"
   gem "pry-doc"
   gem "pry-rails"
+  gem "ruby-debug-ide"
 
   # Print debug
   gem "awesome_print"

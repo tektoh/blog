@@ -82,13 +82,6 @@ docker-compose stop
 
 ### その他の操作
 
-Gemfile, package.json を変更した場合はコンテナを再起動してください
-
-```bash
-docker-compose stop
-docker-compose up
-```
-
 `rails` コマンドは runner コンテナで実行してください
 
 ```bash

@@ -8,96 +8,36 @@ RSpec.describe TaxonomyPolicy do
   context 'for a writer' do
     let(:user) { create :user, :writer }
 
-    permissions :index? do
-      it { expect(subject).not_to permit(user, taxonomy) }
-    end
-
-    permissions :show? do
-      it { expect(subject).not_to permit(user, taxonomy) }
-    end
-
-    permissions :new? do
-      it { expect(subject).not_to permit(user, taxonomy) }
-    end
-
-    permissions :create? do
-      it { expect(subject).not_to permit(user, taxonomy) }
-    end
-
-    permissions :edit? do
-      it { expect(subject).not_to permit(user, taxonomy) }
-    end
-
-    permissions :update? do
-      it { expect(subject).not_to permit(user, taxonomy) }
-    end
-
-    permissions :destroy? do
-      it { expect(subject).not_to permit(user, taxonomy) }
-    end
+    permissions(:index?)   { it { is_expected.not_to permit(user, taxonomy) } }
+    permissions(:show?)    { it { is_expected.not_to permit(user, taxonomy) } }
+    permissions(:new?)     { it { is_expected.not_to permit(user, taxonomy) } }
+    permissions(:create?)  { it { is_expected.not_to permit(user, taxonomy) } }
+    permissions(:edit?)    { it { is_expected.not_to permit(user, taxonomy) } }
+    permissions(:update?)  { it { is_expected.not_to permit(user, taxonomy) } }
+    permissions(:destroy?) { it { is_expected.not_to permit(user, taxonomy) } }
   end
 
   context 'for an editor' do
     let(:user) { create :user, :editor }
 
-    permissions :index? do
-      it { expect(subject).to permit(user, taxonomy) }
-    end
-
-    permissions :show? do
-      it { expect(subject).not_to permit(user, taxonomy) }
-    end
-
-    permissions :new? do
-      it { expect(subject).to permit(user, taxonomy) }
-    end
-
-    permissions :create? do
-      it { expect(subject).to permit(user, taxonomy) }
-    end
-
-    permissions :edit? do
-      it { expect(subject).to permit(user, taxonomy) }
-    end
-
-    permissions :update? do
-      it { expect(subject).to permit(user, taxonomy) }
-    end
-
-    permissions :destroy? do
-      it { expect(subject).to permit(user, taxonomy) }
-    end
+    permissions(:index?)   { it { is_expected.to permit(user, taxonomy) } }
+    permissions(:show?)    { it { is_expected.not_to permit(user, taxonomy) } }
+    permissions(:new?)     { it { is_expected.to permit(user, taxonomy) } }
+    permissions(:create?)  { it { is_expected.to permit(user, taxonomy) } }
+    permissions(:edit?)    { it { is_expected.to permit(user, taxonomy) } }
+    permissions(:update?)  { it { is_expected.to permit(user, taxonomy) } }
+    permissions(:destroy?) { it { is_expected.to permit(user, taxonomy) } }
   end
 
   context 'for an admin' do
     let(:user) { create :user, :admin }
 
-    permissions :index? do
-      it { expect(subject).to permit(user, taxonomy) }
-    end
-
-    permissions :show? do
-      it { expect(subject).not_to permit(user, taxonomy) }
-    end
-
-    permissions :new? do
-      it { expect(subject).to permit(user, taxonomy) }
-    end
-
-    permissions :create? do
-      it { expect(subject).to permit(user, taxonomy) }
-    end
-
-    permissions :edit? do
-      it { expect(subject).to permit(user, taxonomy) }
-    end
-
-    permissions :update? do
-      it { expect(subject).to permit(user, taxonomy) }
-    end
-
-    permissions :destroy? do
-      it { expect(subject).to permit(user, taxonomy) }
-    end
+    permissions(:index?)   { it { is_expected.to permit(user, taxonomy) } }
+    permissions(:show?)    { it { is_expected.not_to permit(user, taxonomy) } }
+    permissions(:new?)     { it { is_expected.to permit(user, taxonomy) } }
+    permissions(:create?)  { it { is_expected.to permit(user, taxonomy) } }
+    permissions(:edit?)    { it { is_expected.to permit(user, taxonomy) } }
+    permissions(:update?)  { it { is_expected.to permit(user, taxonomy) } }
+    permissions(:destroy?) { it { is_expected.to permit(user, taxonomy) } }
   end
 end
