@@ -39,7 +39,6 @@ class Admin::InvitationsController < AdminController
   end
 
   private
-
     def invitation_params
       params.require(:invitation).permit(:name, :role)
     end

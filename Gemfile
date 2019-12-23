@@ -125,7 +125,8 @@ group :development, :test do
   gem "coffeelint"
   gem "rails_best_practices"
   gem "reek"
-  gem "rubocop", "0.62"
+  gem "rubocop"
+  gem "rubocop-performance"
   gem "rubocop-rails_config"
   gem "scss_lint", require: false
   gem "slim_lint"

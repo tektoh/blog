@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
   before_action :initialize_site, if: -> { current_site.blank? }
 
   private
-
     def not_authenticated
       redirect_to admin_login_identifier_path
     end

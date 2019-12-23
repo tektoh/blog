@@ -48,7 +48,6 @@ class Admin::AuthorsController < AdminController
   end
 
   private
-
     def author_params
       params.require(:author).permit(:name, :slug, :description, :icon)
     end

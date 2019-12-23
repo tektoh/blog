@@ -12,7 +12,6 @@ class Admin::Articles::PreviewsController < AdminController
   def show; end
 
   private
-
     def article
       return @article if defined?(@article)
       @article = Article.find_by!(uuid: params[:article_uuid]).decorate
