@@ -12,7 +12,6 @@ executors:
           POSTGRES_HOST: localhost
           POSTGRES_USERNAME: postgres
           POSTGRES_PASSWORD: ""
-          REDIS_URL: redis://localhost:6379
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
           BUNDLE_PATH: vendor/bundle
