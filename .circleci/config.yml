@@ -44,7 +44,6 @@ commands:
       - run:
           name: Bundle Config
           command: |
-            bundle config set path 'vendor/bundle'
             bundle config set deployment 'true'
       - run:
           name: Bundle Install
