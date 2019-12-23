@@ -148,6 +148,7 @@ GEM
       deep_merge (~> 1.2.1)
       dry-validation (>= 0.10.4)
     crass (1.0.5)
+    database_cleaner (1.7.0)
     debase (0.2.4.1)
       debase-ruby_core_source (>= 0.10.2)
     debase-ruby_core_source (0.10.7)
@@ -620,6 +621,7 @@ DEPENDENCIES
   coffee-rails
   coffeelint
   config
+  database_cleaner
   debase
   dotenv-rails
   draper
