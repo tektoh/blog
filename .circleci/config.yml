@@ -1,8 +1,7 @@
-version: 2
-jobs:
-  test:
+version: 2.1
+executors:
+  app:
     working_directory: ~/blog
-    parallelism: 1
     shell: /bin/bash --login
     environment:
       TZ: /usr/share/zoneinfo/Asia/Tokyo
@@ -13,7 +12,6 @@ jobs:
           POSTGRES_HOST: localhost
           POSTGRES_USERNAME: postgres
           POSTGRES_PASSWORD: ""
-          REDIS_URL: redis://localhost:6379
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
           BUNDLE_PATH: vendor/bundle
@@ -25,10 +23,11 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_DB: blog_test
           POSTGRES_PASSWORD: ""
-    steps:
-      - checkout
 
-      # Setup bundler
+commands:
+  setup_bundler:
+    description: Setup bundler
+    steps:
       - run:
           name: Configure Bundler
           command: |
@@ -49,11 +48,10 @@ jobs:
           key: rails-bundle-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
-      - run:
-          name: Audit Bundler
-          command: bundle exec bundle audit check --update
 
-      # Setup yarn
+  setup_yarn:
+    description: Setup Yarn
+    steps:
       - restore_cache:
           keys:
             - rails-yarn-{{ checksum "yarn.lock" }}
@@ -68,11 +66,10 @@ jobs:
           key: rails-yarn-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
-      - run:
-          name: Audit Yarn
-          command: yarn audit-ci -m
 
-     # Setup DB
+  setup_db:
+    description: Setup DB
+    steps:
       - run:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
@@ -80,7 +77,37 @@ jobs:
           name: Database setup
           command: bundle exec rails db:create db:schema:load --trace
 
-      # Compiling Assets
+  audit_gem:
+    description: Audit RubyGems
+    steps:
+      - run:
+          name: Audit RubyGems
+          command: bundle exec bundle audit check --update
+
+  audit_npm:
+    description: Audit npm
+    steps:
+      - run:
+          name: Audit npm
+          command: yarn audit-ci -m
+
+  rubocop:
+    description: Rubocop
+    steps:
+      - run:
+          name: Run Rubocop
+          command: bundle exec rubocop
+
+  eslint:
+    description: ESLint
+    steps:
+      - run:
+          name: Run ESLint
+          command: yarn eslint app/javascript
+
+  compiling_assets:
+    description: Compiling Assets
+    steps:
       - restore_cache:
           keys:
             - asset-cache-{{ arch }}-{{ .Branch }}
@@ -95,18 +122,24 @@ jobs:
             - public/packs
             - tmp/cache/assets/sprockets
 
-      # Run Specs
+  rspec:
+    description: Run Specs
+    steps:
       - run:
           name: Run Specs
           command: |
             echo "--format progress --format RspecJunitFormatter --out tmp/test-results/rspec/rspec.xml" > .rspec
             bundle exec rspec --format progress --format RspecJunitFormatter --out tmp/test-results/rspec/rspec.xml
 
-      # Save test results
+  save_test_results:
+    description: Save test results
+    steps:
       - store_test_results:
           path: tmp/test-results
 
-      # Save artifacts
+  save_artifacts:
+    description: Save artifacts
+    steps:
       - store_artifacts:
           path: tmp/screenshots
           destination: screenshots
@@ -114,12 +147,55 @@ jobs:
           path: coverage
           destination: coverage
 
+jobs:
+  audit_gem:
+    executor: app
+    steps:
+      - checkout
+      - setup_bundler
+      - audit_gem
+
+  audit_npm:
+    executor: app
+    steps:
+      - checkout
+      - setup_yarn
+      - audit_npm
+
+  lint_ruby:
+    executor: app
+    steps:
+      - checkout
+      - setup_bundler
+      - rubocop
+
+  lint_javascript:
+    executor: app
+    steps:
+      - checkout
+      - setup_yarn
+      - eslint
+
+  spec:
+    executor: app
+    steps:
+      - checkout
+      - setup_bundler
+      - setup_yarn
+      - setup_db
+      - compiling_assets
+      - rspec
+      - save_test_results
+      - save_artifacts
+
 workflows:
   version: 2
-  test_workflow:
+  commit:
     jobs:
-      - test
-  daily_workflow:
+      - lint_ruby
+      - lint_javascript
+      - spec
+  daily:
     triggers:
       - schedule:
           cron: "0 0 * * *"
@@ -128,4 +204,6 @@ workflows:
               only:
                 - master
     jobs:
-      - test
+      - audit_gem
+      - audit_npm
+      - spec
