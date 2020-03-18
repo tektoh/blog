@@ -3,8 +3,6 @@
 class FaviconUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
-  storage Settings.carrierwave.storage.to_sym
-
   version :x16 do
     process resize_to_fill: [16, 16]
   end

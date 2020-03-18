@@ -20,13 +20,5 @@
 #
 
 class Author < Taxonomy
-  mount_uploader :icon, AvatarUploader
-
   has_many :articles
-
-  alias_attribute :avatar, :icon
-
-  validates :avatar,
-            file_size: { less_than_or_equal_to: 10.megabytes },
-            file_content_type: { allow: %w[image/jpeg image/png] }
 end

@@ -3,7 +3,8 @@
   = f.input :name
   = f.input :slug
   = f.input :description
-  = f.input :avatar, as: :file
-  - if author.avatar?
-    = image_tag author.avatar.icon.url
+  = f.input :icon, as: :file
+  - if author.icon?
+    div
+      = image_tag author.icon_url(:sm)
   = f.button :submit, class: %w[btn btn-primary]

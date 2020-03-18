@@ -22,28 +22,15 @@
 #
 
 class Invitation < ApplicationRecord
-  include UserName
-  include Role
+  include UserName, UserRole, HasUuid
 
   belongs_to :user
 
   delegate :name, to: :user, prefix: true, allow_nil: true
 
-  validate :valid_unique_username?
-
-  before_create -> { self.uuid = SecureRandom.uuid }
   before_create -> { self.expires_at = 1.day.since }
 
   scope :validity, -> { where("expires_at > ?", Time.zone.now) }
-
-  def valid_unique_username?
-    if User.exists?(name: name)
-      errors.add(:name, "は登録されています")
-      false
-    else
-      true
-    end
-  end
 
   def expired?
     expires_at <= Time.zone.now

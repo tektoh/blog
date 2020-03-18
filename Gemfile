@@ -77,6 +77,7 @@ group :development, :test do
   gem "spring-commands-rspec"
   gem "factory_bot_rails"
   gem "faker"
+  gem "database_cleaner"
   gem "rspec_junit_formatter"
   gem "rspec-rails"
   gem "brakeman", require: false
@@ -85,6 +86,7 @@ group :development, :test do
   gem "rails_best_practices"
   gem "reek"
   gem "rubocop"
+  gem "rubocop-performance"
   gem "rubocop-rails_config"
   gem "scss_lint", require: false
   gem "slim_lint"
@@ -112,4 +114,5 @@ group :test do
   gem "shoulda-matchers"
   gem "simplecov", require: false
   gem "timecop"
+  gem "webdrivers"
 end

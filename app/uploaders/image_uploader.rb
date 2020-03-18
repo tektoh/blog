@@ -3,8 +3,6 @@
 class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
-  storage Settings.carrierwave.storage.to_sym
-
   process :save_content_type_and_size_in_model
 
   version :icon do

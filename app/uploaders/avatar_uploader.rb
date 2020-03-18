@@ -3,8 +3,6 @@
 class AvatarUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
-  storage Settings.carrierwave.storage.to_sym
-
   version :icon do
     process resize_to_fill: [128, 128]
   end

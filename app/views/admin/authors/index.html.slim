@@ -19,7 +19,7 @@
         - @authors.each do |author|
           tr
             td = author.id
-            td = image_tag author.avatar.icon.url, class: "image-icon-xs"
+            td = image_tag author.icon_url(:icon), class: "image-icon-xs"
             td = author.name
             td = author.slug
             td = l(author.created_at)

@@ -49,7 +49,7 @@ class Admin::AuthorsController < AdminController
 
   private
     def author_params
-      params.require(:author).permit(:name, :slug, :description, :avatar)
+      params.require(:author).permit(:name, :slug, :description, :icon)
     end
 
     def set_author
