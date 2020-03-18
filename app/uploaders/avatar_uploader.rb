@@ -30,7 +30,6 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   private
-
     def secure_token
       var = :"@#{mounted_as}_secure_token"
       model.instance_variable_get(var) || model.instance_variable_set(var, SecureRandom.uuid)

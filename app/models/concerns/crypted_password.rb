@@ -15,7 +15,6 @@ module CryptedPassword
   end
 
   protected
-
     def new_record_or_changes_password
       new_record? || changes[:crypted_password]
     end

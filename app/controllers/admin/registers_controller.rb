@@ -26,7 +26,6 @@ class Admin::RegistersController < ApplicationController
   end
 
   private
-
     def invitation_params
       ActionController::Parameters.new(@invitation.attributes)
     end
