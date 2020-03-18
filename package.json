@@ -1,23 +1,22 @@
 {
-  "name": "start-dash",
+  "name": "blog",
   "version": "1.0.0",
   "scripts": {
     "start": "./bin/webpack-dev-server",
     "build": "./bin/webpack",
     "lint": "eslint app/javascript",
-    "test": "jest",
-    "audit": "audit-ci -m"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/startup-technology/start-dash.git"
+    "url": "git+https://github.com/tektoh/blog.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/startup-technology/start-dash/issues"
+    "url": "https://github.com/tektoh/blog.git/issues"
   },
-  "homepage": "https://github.com/startup-technology/start-dash#readme",
+  "homepage": "https://github.com/tektoh/blog.git#readme",
   "devDependencies": {
     "audit-ci": "^2.4.0",
     "babel-eslint": "^10.0.3",
