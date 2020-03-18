@@ -115,6 +115,7 @@ group :development, :test do
   # Test
   gem "factory_bot_rails"
   gem "faker"
+  gem "database_cleaner"
   gem "rspec_junit_formatter"
   gem "rspec-rails"
 
@@ -124,7 +125,8 @@ group :development, :test do
   gem "coffeelint"
   gem "rails_best_practices"
   gem "reek"
-  gem "rubocop", "0.62"
+  gem "rubocop"
+  gem "rubocop-performance"
   gem "rubocop-rails_config"
   gem "scss_lint", require: false
   gem "slim_lint"
@@ -158,4 +160,5 @@ group :test do
   gem "shoulda-matchers"
   gem "simplecov", require: false
   gem "timecop"
+  gem "webdrivers"
 end

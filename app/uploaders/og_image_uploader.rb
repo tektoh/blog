@@ -3,8 +3,6 @@
 class OgImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
-  storage Settings.carrierwave.storage.to_sym
-
   process resize_to_limit: [1200, 630]
 
   def store_dir
@@ -16,7 +14,6 @@ class OgImageUploader < CarrierWave::Uploader::Base
   end
 
   private
-
     def secure_token
       var = :"@#{mounted_as}_secure_token"
       model.instance_variable_get(var) || model.instance_variable_set(var, SecureRandom.uuid)

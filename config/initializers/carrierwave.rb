@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-if Rails.env.development? || Rails.env.test?
+if Settings.carrierwave.storage == "file"
   CarrierWave.configure do |config|
     config.storage = :file
   end
-elsif Rails.env.production?
+elsif Settings.carrierwave.storage == "aws"
   CarrierWave.configure do |config|
     config.storage = :aws
     config.aws_bucket = Settings.carrierwave.aws_bucket

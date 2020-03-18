@@ -3,8 +3,6 @@
 class AvatarUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
-  storage Settings.carrierwave.storage.to_sym
-
   version :icon do
     process resize_to_fill: [128, 128]
   end
@@ -30,7 +28,6 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   private
-
     def secure_token
       var = :"@#{mounted_as}_secure_token"
       model.instance_variable_get(var) || model.instance_variable_set(var, SecureRandom.uuid)

@@ -79,7 +79,6 @@ class Admin::Articles::ArticleBlocksController < AdminController
   end
 
   private
-
     def article
       @article ||= Article.find_by!(uuid: params[:article_uuid]).decorate
     end
@@ -102,7 +101,7 @@ class Admin::Articles::ArticleBlocksController < AdminController
     end
 
     def blockable_params
-      type = ArticleBlock.blockable_types.map(&:underscore).find { |type| params.key?(type) }
+      type = ArticleBlock.blockable_types.map(&:underscore).find { |t| params.key?(t) }
 
       if type.blank?
         raise ActionController::ParameterMissing.new(:blockable)

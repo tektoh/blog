@@ -53,7 +53,6 @@ class Admin::ArticlesController < AdminController
   end
 
   private
-
     def article_params
       params.require(:article).permit(
         :title, :description, :slug, :state, :published_at, :eye_cache, :category_id, :author_id, tag_ids: []

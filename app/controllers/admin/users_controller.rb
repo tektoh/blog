@@ -52,7 +52,6 @@ class Admin::UsersController < AdminController
   end
 
   private
-
     def user_params
       params.require(:user).permit(policy(:user).permitted_attributes)
     end

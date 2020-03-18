@@ -3,8 +3,6 @@
 class FaviconUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
-  storage Settings.carrierwave.storage.to_sym
-
   version :x16 do
     process resize_to_fill: [16, 16]
   end
@@ -34,7 +32,6 @@ class FaviconUploader < CarrierWave::Uploader::Base
   end
 
   private
-
     def secure_token
       var = :"@#{mounted_as}_secure_token"
       model.instance_variable_get(var) || model.instance_variable_set(var, SecureRandom.uuid)

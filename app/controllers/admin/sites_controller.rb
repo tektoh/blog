@@ -52,7 +52,6 @@ class Admin::SitesController < AdminController
   end
 
   private
-
     def create_site_params
       params.require(:site).permit(
         SitePolicy.new(User.new(role: :admin), :site).permitted_attributes

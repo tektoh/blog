@@ -12,7 +12,6 @@ class ArticlesController < ApplicationController
   def show; end
 
   private
-
     Taxonomy.taxonomy_types.map(&:underscore).each do |taxonomy|
       method_name = :"#{taxonomy}?"
       define_method(method_name) { params[:"#{taxonomy}_slug"].present? }
