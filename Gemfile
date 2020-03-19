@@ -72,7 +72,6 @@ group :development, :test do
   gem "byebug"
   gem "factory_bot_rails"
   gem "faker"
-  gem "letter_opener_web"
   gem "migration_comments"
   gem "pry"
   gem "pry-byebug"

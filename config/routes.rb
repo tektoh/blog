@@ -1,13 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  namespace :admin do
-    namespace :articles do
-    end
-  end
   if Rails.env.development?
     get "/login_as/:user_id", to: "development/sessions#login_as"
-    mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
 
   namespace :admin do
