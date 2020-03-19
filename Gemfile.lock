@@ -93,6 +93,9 @@ GEM
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
+    barnes (0.0.8)
+      multi_json (~> 1)
+      statsd-ruby (~> 1.1)
     bcrypt (3.1.13)
     better_errors (2.6.0)
       coderay (>= 1.0.0)
@@ -482,6 +485,7 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     sqlite3 (1.4.2)
+    statsd-ruby (1.4.0)
     tapp (1.5.1)
       thor
     temple (0.8.2)
@@ -540,6 +544,7 @@ DEPENDENCIES
   active_hash
   annotate
   awesome_print
+  barnes
   better_errors
   binding_of_caller
   bootsnap

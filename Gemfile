@@ -10,6 +10,7 @@ gem "dotenv-rails", require: "dotenv/rails-now"
 
 gem "actionpack-action_caching"
 gem "active_hash"
+gem "barnes"
 gem "bootsnap", require: false
 gem "bootstrap-sass"
 gem "bootstrap4-kaminari-views"
