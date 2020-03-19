@@ -9,10 +9,7 @@ Rails.application.configure do
   config.cache_classes = false
 
   # Session
-  config.session_store :redis_session_store,
-                       key: Settings.session_store.key,
-                       serializer: Settings.session_store.serializer.to_sym,
-                       redis: Settings.session_store.redis.to_h
+  config.session_store :cookie_store, key: "_session", expire_after: 1.day
 
   # Do not eager load code on boot.
   config.eager_load = false
