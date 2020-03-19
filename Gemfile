@@ -54,7 +54,6 @@ gem "mini_magick"
 gem "faraday"
 gem "mime-types"
 gem "puma"
-gem "resque"
 gem "whenever", require: false
 
 group :production do
