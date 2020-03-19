@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  include HostRedirect, BasicAuthentication
+
+  before_action :redirect_to_site_host
+  before_action :authenticate_http_basic
   before_action :require_login
 
   before_action :initialize_site, if: -> { current_site.blank? }

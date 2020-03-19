@@ -1,9 +1,5 @@
-sitename: Blog
-site:
-  name: Blog
-  page_title: Blog
-  page_description: Blog
-  meta:
-    ogp:
-      type: website
-      image_path: https://dummyimage.com/1200x630/888/fff
+host: <%= ENV.fetch("WWW_HOST") { "" } %>
+basic_authentication:
+  user: <%= ENV.fetch("BASIC_AUTHENTICATION_USER") { "" } %>
+  password: <%= ENV.fetch("BASIC_AUTHENTICATION_PASSWORD") { "" } %>
+  allow_user_agent: <%= ENV.fetch("BASIC_AUTHENTICATION_ALLOW_USER_AGENT") { "" } %>
