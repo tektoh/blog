@@ -38,7 +38,7 @@
     "bootstrap": "4.3.1",
     "eonasdan-bootstrap-datetimepicker": "^4.17.47",
     "google-fonts-plugin": "^4.1.0",
-    "moment": "^2.21.0",
+    "moment": "^2.29.4",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-ace": "^6.5.0",
